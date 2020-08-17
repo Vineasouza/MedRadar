@@ -1,6 +1,8 @@
-# MedRadar
+# MedRadar - Conectando Você à sua Saúde!
 
-Repositório para a criação de uma aplicação para a matéria de Oficina de Integração
-
-
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<div align="center">
+    <img src="main.png" alt="MedRadar" width="400"/>
+    <h2>Projeto de Oficina de Integração (EC36G/C51)</h2>
+    <h3>Engenharia de Computação</h3>
+    <a href=http://www.utfpr.edu.br/campus/cornelioprocopio >UTFPR - Campus Cornélio Procópio</a>   
+<div>
