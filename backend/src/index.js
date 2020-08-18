@@ -5,6 +5,7 @@ const routes = require('./routes');
 
 const app = express();
 
+// sudo service mongod start | status | stop | restart
 mongoose.connect('mongodb://localhost/medradar', { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
