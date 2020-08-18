@@ -8,7 +8,7 @@ const app = express();
 
 // sudo service mongod start | status | stop | restart
 mongoose.connect(
-  "mongodb+srv://Admin:medradar@cluster0-zdjph.mongodb.net/MedRadar",
+  mongodb_link: process.env.MONGODB_LINK,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
