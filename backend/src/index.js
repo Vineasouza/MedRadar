@@ -6,15 +6,13 @@ const routes = require('./routes');
 const app = express();
 
 // sudo service mongod start | status | stop | restart
-mongoose.connect('mongodb://localhost/medradar', { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-})
-.then(response => console.log('Conected to Database..'))
-.catch(error => console.log('error ->', error.message));
-mongoose.Promise = global.Promise;
+mongoose.connect(
+  "mongodb+srv://Admin:medradar@cluster0-zdjph.mongodb.net/MedRadar",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 app.use(cors());
 // json deve vir antes de routes
