@@ -26,7 +26,7 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    phone: {
+    telefone: {
         type: String,
         validate: {
           validator: function(v) {
