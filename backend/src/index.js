@@ -8,17 +8,20 @@ const app = express();
 
 // sudo service mongod start | status | stop | restart
 mongoose.connect(
-  process.env.MONGO_LINK,
+  process.env.MONGODB_LINK,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true
   }
-);
+)
+.then(response => console.log('Conected to Database..'))
+.catch(error => console.log('error ->', error.message));
 
 app.use(cors());
 // json deve vir antes de routes
 app.use(express.json());
 app.use(routes);
 
-// porta de acesso http://localhost:3333/
-app.listen(3332);
+// porta de acesso http://localhost:3332/
+app.listen(3333);
