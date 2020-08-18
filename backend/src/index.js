@@ -8,7 +8,7 @@ const app = express();
 
 // sudo service mongod start | status | stop | restart
 mongoose.connect(
-  process.env.MONGODB_LINK,
+  process.env.MONGO_LINK,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

@@ -1,15 +1,12 @@
-const { Router} = require('express');
+const { Router } = require('express');
 
+const MedController = require('./controllers/MedController');
 const routes = Router();
 
-// GET method route
-routes.get('/home', function (req, res) {
-    res.json("Hi there, this is a GET method!");
+routes.get('/', (request, response) => {
+    return response.send("API no AR!!");
 });
 
-// POST method route
-routes.post('/home', function (req, res) {
-    res.json("Hi there, this is a POST method!");
-});
+routes.post('/cadastro', MedController.create);
 
 module.exports = routes;

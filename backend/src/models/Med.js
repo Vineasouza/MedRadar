@@ -6,7 +6,7 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    especialidade:{
+    especialidade: {
         type: String,
         require: true,
     },
@@ -29,10 +29,10 @@ const MedSchema = new mongoose.Schema({
     telefone: {
         type: String,
         validate: {
-          validator: function(v) {
-            return /\(?\d{2,3}\)?\d{4,5}-?\d{4}/.test(v);
-          },
-          message: '{VALUE} is not a valid phone number!'
+            validator: function (v) {
+                return /\(?\d{2,3}\)?\d{4,5}-?\d{4}/.test(v);
+            },
+            message: '{VALUE} is not a valid phone number!'
         },
         required: [true, 'User phone number required']
     },
@@ -41,11 +41,11 @@ const MedSchema = new mongoose.Schema({
         unique: true,
         required: true,
         lowercase: true,
-    }, 
+    },
     location: {
         type: PointSchema,
         index: '2dsphere'
     },
 });
 
-module.exports = mongoose.model('Med', DevSchema);
+module.exports = mongoose.model('Med', MedSchema);
