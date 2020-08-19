@@ -1,9 +1,14 @@
 const Med = require('../models/Med');
 const parseStringAsArray = require('../utils/parseStringAsArray'); /* para os convênio */
+const { request, response } = require('express');
 
 
 module.exports = {
-
+    /* Lista Médicos cadastrados */
+    list: async (request, response) => {
+        const meds = await Med.find();
+        return response.json(meds);
+    },
     /*Criando médicos */
     create: async (request, response) => {
 

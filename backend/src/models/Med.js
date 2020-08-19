@@ -30,7 +30,7 @@ const MedSchema = new mongoose.Schema({
         type: String,
         validate: {
             validator: function (v) {
-                return /\(?\d{2,3}\)?\d{4,5}-?\d{4}/.test(v);
+                return /\(?[0]?\d{2}\)?[9]?\d{4}-?\d{4}/.test(v);
             },
             message: '{VALUE} is not a valid phone number!'
         },
