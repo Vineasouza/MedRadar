@@ -9,6 +9,7 @@ const MedSchema = new mongoose.Schema({
     especialidade: {
         type: String,
         require: true,
+        lowercase: true,
     },
     convenio: {
         type: [String],
