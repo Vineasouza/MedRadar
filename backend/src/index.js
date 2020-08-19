@@ -15,13 +15,13 @@ mongoose.connect(
     useCreateIndex: true
   }
 )
-.then(response => console.log('Conected to Database..'))
-.catch(error => console.log('error ->', error.message));
+  .then(response => console.log('Conected to Database..'))
+  .catch(error => console.log('error ->', error.message));
 
 app.use(cors());
 // json deve vir antes de routes
 app.use(express.json());
 app.use(routes);
 
-// porta de acesso http://localhost:3332/
+
 app.listen(3030);

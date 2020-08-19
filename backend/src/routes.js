@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
-const MedController = require('./controllers/MedController');
-const SearchController = require('./controllers/SearchController');
+const MedController = require('./controllers/Med/controller');
+const SearchController = require('./controllers/Search/controller');
 const routes = Router();
 
 routes.get('/', (request, response) => {
