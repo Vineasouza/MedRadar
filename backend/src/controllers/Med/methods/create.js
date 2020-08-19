@@ -16,7 +16,7 @@ module.exports = async function create(request, response) {
         longitude
     } = request.body;
 
-    const convenioFormatado = parseStringAsArray(convenio);
+    const convArray = parseStringAsArray(convenio);
 
     /* Criando tipo location com a longitude e latitude */
     const location = {
@@ -25,10 +25,10 @@ module.exports = async function create(request, response) {
     };
 
     /* Criando novo médico */
-    const novoMedico = await Med.create({
+    const newMed = await Med.create({
         nome,
         especialidade,
-        convenio: convenioFormatado,
+        convenio: convArray,
         uf,
         cidade,
         endereço,
@@ -38,15 +38,15 @@ module.exports = async function create(request, response) {
     }).catch((e) => {
         // Caso de erro
         return null;
-    }).then((novoMedicoCriado) => {
+    }).then((newMedCreated) => {
         // Caso de sucesso na criação
-        return novoMedicoCriado;
+        return newMedCreated;
     });
 
     /* Resposta da requisição*/
-    if (!novoMedico) {
+    if (!newMed) {
         return response.status(409).send();
     }
 
-    return response.status(201).json(novoMedico);
+    return response.status(201).json(newMed);
 }

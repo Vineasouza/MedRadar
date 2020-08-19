@@ -54,7 +54,7 @@ module.exports = async function find(request, response) {
 
     if (!resultSearch) {
         return response.status(404).json({
-            msg: "Datas weren't found, try again!!"
+            msg: "Data not found, try again!!"
         })
     }
 
