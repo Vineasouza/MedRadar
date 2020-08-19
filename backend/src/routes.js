@@ -11,6 +11,5 @@ routes.get('/', (request, response) => {
 routes.get('/cadastro', MedController.list);
 routes.post('/cadastro', MedController.create);
 
-routes.get('/procurar', SearchController.find);
-routes.get('/procurarr', SearchController.findRadius)
+routes.get('/procurar', SearchController.find)
 module.exports = routes;
