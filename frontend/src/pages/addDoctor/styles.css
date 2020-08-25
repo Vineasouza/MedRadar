@@ -1,0 +1,39 @@
+.main-doctor {
+    /* Online Doctor-bro 1 */
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 0px;
+    bottom: 0px;
+}
+
+.doctor-logo {
+    /* MedradarLogo */
+    position: absolute;
+    left: 40%;
+    top: 5%;
+    width: 400px;
+    height: 92px;
+}
+
+.forms-block {
+    left: 40%;
+    top: 25%;
+    display: flex;
+    position: fixed;
+    font-size: 20px;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
+    color: #08082D;
+}
+
+.forms-block input {
+    border-color: #08082D;
+    background-color: #F4F4F4;
+    border: 2px solid #08082D;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 5px;
+}
