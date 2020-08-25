@@ -8,10 +8,6 @@ import { Link } from 'react-router-dom';
 function Main() {
 
 
-    function handleSearch() {
-
-    }
-
     return (
         <div id="main-initial">
             <header className="main-content">
