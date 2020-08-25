@@ -20,6 +20,10 @@
     height: 50px;
     border-radius: 8px;
     font-size: 20px;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
     color: #08082D;
     border-style: solid;
     border-width: 1px;
@@ -44,12 +48,12 @@
 }
 
 .main-content img {
-    width: 400px;
+    width: 285px;
     height: 285px;
 }
 
 .main-content :nth-child(2) {
-    width: 740px;
-    height: 170px;
+    width: 650px;
+    height: 149px;
 }
 
