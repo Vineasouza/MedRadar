@@ -20,7 +20,33 @@ function AddDoctor() {
                 Especialidade
                 <input type="text" name="especialidade" placeholder="Neurologista"/>
                 </label>
+                <label className="convenio">
+                Convênio
+                <input type="text" name="convenio" placeholder="sulAmerica"/>
+                </label>
+                <div>
+                    <label className="uf">
+                    UF
+                    <input type="text" name="uf" placeholder="SP"/>
+                    </label>
+                    <label className="cidade">
+                    Cidade
+                    <input type="text" name="cidade"             placeholder="São José dos Campos"/>
+                    </label>
+                </div>
+                <label className="endereco">
+                Endereço
+                <input type="text" name="cidade" placeholder="Avenida Cidade Jardim, 9999, Bosque dos Eucaliptos"/>
+                </label>
+                <label className="email">
+                E-mail
+                <input type="text" name="email" placeholder="email@email.com.br"/>
+                </label>
             </form>
+            <section className="add-actions">
+                    <button>Cancelar</button>
+                    <button>Cadastrar</button>
+            </section>
         </main>
     );
 }
