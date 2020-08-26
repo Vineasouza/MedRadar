@@ -1,7 +1,7 @@
 import React from 'react';
+import { Map, TileLayer } from 'react-leaflet'
 
 import './styles.css';
-
 import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
 
@@ -26,7 +26,12 @@ function Search() {
                     </div>
                 </section>
                 <section className="search-map">
-
+                    <Map center={[-23.4444548, -50.5653303]} zoom={15}>
+                        <TileLayer
+                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                    </Map>
                 </section>
             </main>
         </div>
