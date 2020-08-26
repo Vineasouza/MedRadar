@@ -6,6 +6,7 @@ import MainInitial from './pages/main-initial/index';
 import Main from './pages/main/index';
 import Search from './pages/search/index';
 import AddDoctor from './pages/addDoctor/index';
+import Success from './pages/success/index';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/main-initial" component={MainInitial}/>
       <Route path="/search" component={Search} />
       <Route path="/add" component={AddDoctor} />
+      <Route path="/success" component={Success} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
