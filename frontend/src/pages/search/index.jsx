@@ -1,5 +1,8 @@
 import React from 'react';
-import { Map, TileLayer } from 'react-leaflet'
+import { Map, TileLayer } from 'react-leaflet';
+import { FiArrowLeft, FiSearch } from 'react-icons/fi';
+import { FaFilter } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 import logo from '../../assets/images/simple-only-logo.png';
@@ -11,12 +14,17 @@ function Search() {
         <div id="search-page">
             <header>
                 <section className="search-intro">
-                    <img src={logo} alt="logo do MedRadar"></img>
+                    <div>
+                        <Link to="/main-initial">
+                            <FiArrowLeft />
+                        </Link>
+                        <img src={logo} alt="logo MedRadar" />
+                    </div>
                     <img src={healthTeam} alt="grupo de profissionais"></img>
                 </section>
                 <section className="search-actions">
-                    <button>Pesquisar</button>
-                    <button>Filtrar</button>
+                    <button>Pesquisar <FiSearch /></button>
+                    <button>Filtrar busca<FaFilter /> </button>
                 </section>
             </header>
 
