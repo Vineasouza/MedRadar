@@ -4,6 +4,7 @@ import { Map, TileLayer } from 'react-leaflet'
 import './styles.css';
 import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
+import Doctor from './components/doctor';
 
 function Search() {
     return (
@@ -22,7 +23,24 @@ function Search() {
             <main id="search-main">
                 <section className="search-result">
                     <div>
-
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
                     </div>
                 </section>
                 <section className="search-map">
