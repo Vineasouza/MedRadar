@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 
@@ -65,7 +66,7 @@ function AddDoctor() {
                 </div>
                 <label className="endereco">
                 Endereço
-                <input type="text" name="cidade" placeholder="Rua/Avenida, Número, Bairro"/>
+                <input type="text" name="cidade" placeholder="Rua/Av., N°, Comp, Bairro"/>
                 </label>
                 <label className="telefone">
                 Telefone
@@ -77,8 +78,12 @@ function AddDoctor() {
                 </label>
             </form>
             <section className="add-actions">
-                    <button>Cancelar</button>
-                    <button>Cadastrar</button>
+                    <Link to="/main-initial">
+                        <button>Cancelar</button>
+                    </Link>
+                    <Link to="/success">
+                        <button>Cadastrar</button>
+                    </Link>
             </section>
         </main>
     );
