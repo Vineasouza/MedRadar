@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
@@ -12,6 +12,17 @@ import DoctorMarker from './components/doctorMarker';
 import doctorIcon from './components/iconDoctor/Icon';
 
 function Search() {
+
+    const [initialPosition, setInitialPosition] = useState([0, 0]);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setInitialPosition([latitude, longitude]);
+        })
+    }, [])
+
+
     return (
         <div id="search-page">
 
@@ -59,7 +70,7 @@ function Search() {
 
                 { /* Part of MAP*/}
                 <section className="search-map">
-                    <Map center={[-23.4444548, -50.5653303]} zoom={15}>
+                    <Map center={initialPosition} zoom={15}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
