@@ -9,6 +9,7 @@ import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
 import DoctorMarker from './components/doctorMarker';
+import doctorIcon from './components/iconDoctor/Icon';
 
 function Search() {
     return (
@@ -63,7 +64,7 @@ function Search() {
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[-23.4444548, -50.5653303]} draggable={false}>
+                        <Marker position={[-23.4444548, -50.5653303]} draggable={false} icon={doctorIcon}>
                             <Popup>
                                 <DoctorMarker
                                     name="Dr. Joana"
