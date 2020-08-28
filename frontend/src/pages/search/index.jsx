@@ -45,7 +45,7 @@ function Search() {
                         {
                             isFilter &&
                             <Filters>
-                                <h1>Hello</h1>
+                                <button>Raio</button>
                             </Filters>
                         }
                     </div>

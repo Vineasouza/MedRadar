@@ -1,8 +1,11 @@
 #filters-container{
     position: absolute;
+    top: 18px;
     width: 100%;
     background-color: whitesmoke;
     border-radius: 8px;
     transform: translateY(50%);
     overflow: hidden;
+    z-index: 999;
+    border: #08082D solid 1px;
 }
