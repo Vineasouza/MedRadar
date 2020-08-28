@@ -27,7 +27,7 @@
     justify-content: center;
     padding-left: 35%;
     padding-top: 30px;
-    
+    max-width: 500px;
 }
 
 .forms-block label{
@@ -42,7 +42,7 @@
     justify-content: flex-end;
 }
 
-.forms-block input {
+.forms-block input,select,option {
     border-color: #08082D;
     background-color: #F4F4F4;
     border: 2px solid #08082D;
@@ -59,32 +59,46 @@
     width: 400px;
 }
 
+.forms-block input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
 ::-webkit-input-placeholder {
     text-align: center;
 }
 
-.uf input {
-    width: 64px;
-}
-
 .nome input {
-    width: 400px;
+    width: 399px;
 }
 
 .especialidade input {
-    width: 302px;
+    width: 303px;
 }
 
 .convenio input {
-    width: 355px;
+    width: 357px;
+}
+
+.uf select {
+    width: 64px;
+    border-radius: 4px;
+}
+
+.uf select:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
 }
 
 .cidade input {
-    width: 252px;
+    width: 254px;
 }
 
 .endereco input {
     width: 355px;
+}
+
+.telefone input{
+    width: 367px;
 }
 
 .email input {
@@ -117,5 +131,10 @@
 
 .add-actions button:hover{
     opacity: 70%;
+}
+
+.add-actions button:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
 }
 
