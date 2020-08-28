@@ -10,10 +10,12 @@ import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
 import DoctorMarker from './components/doctorMarker';
 import doctorIcon from './components/iconDoctor/Icon';
+import Filters from './components/filters';
 
 function Search() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
+    const [isFilter, setIsFilter] = useState(false);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -38,7 +40,15 @@ function Search() {
                 </section>
                 <section className="search-actions">
                     <button>Pesquisar <FiSearch /></button>
-                    <button>Filtrar busca<FaFilter /> </button>
+                    <div className="search-filters">
+                        <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
+                        {
+                            isFilter &&
+                            <Filters>
+                                <h1>Hello</h1>
+                            </Filters>
+                        }
+                    </div>
                 </section>
             </header>
 
@@ -47,6 +57,24 @@ function Search() {
 
                     {/* Part of resutlts */}
                     <div>
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
+                        <Doctor
+                            name="Dr. Roberta"
+                            specialty="Dermatologista"
+                            distance="5 Km"
+                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        />
                         <Doctor
                             name="Dr. Roberta"
                             specialty="Dermatologista"

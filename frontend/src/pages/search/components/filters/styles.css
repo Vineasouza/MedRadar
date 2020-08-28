@@ -1,0 +1,8 @@
+#filters-container{
+    position: absolute;
+    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    transform: translateY(50%);
+    overflow: hidden;
+}
