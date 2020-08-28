@@ -26,7 +26,7 @@
     margin-bottom: 10px;
 }
 .search-intro div a{
-    width: 40px;
+    width: 32px;
 }
 
 .search-intro div a svg{
@@ -60,18 +60,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 217px;
+    width: 285px;
     height: 30px;
     border-radius: 8px;
     border-color: #08082D;
-    border-width: 1px;
+    border-width: 2px;
     color: #08082D;
     background-color: whitesmoke;
     font-size: 18px;
     font-family: Archivo, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
     cursor: pointer;
     transition: opacity 0.2s;
-    margin-left: 40px;
+    margin-left: 0px;
 }
 
 .search-actions  button:hover{
