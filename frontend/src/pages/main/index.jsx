@@ -1,11 +1,20 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctors from '../../assets/images/Doctors-bro.png';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
 function Main() {
+
+    let history = useHistory();
+
+    useEffect(() => {
+        setTimeout(() => {
+            history.push('/main-initial')
+        }, 2000)
+    }, []);
+
     return (
         <div className="main">
             <header className="main-header">
