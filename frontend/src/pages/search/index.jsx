@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
@@ -8,10 +8,12 @@ import './styles.css';
 import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
+import DoctorMarker from './components/doctorMarker';
 
 function Search() {
     return (
         <div id="search-page">
+
             <header>
                 <section className="search-intro">
                     <div>
@@ -30,6 +32,8 @@ function Search() {
 
             <main id="search-main">
                 <section className="search-result">
+
+                    {/* Part of resutlts */}
                     <div>
                         <Doctor
                             name="Dr. Roberta"
@@ -51,14 +55,26 @@ function Search() {
                         />
                     </div>
                 </section>
+
+                { /* Part of MAP*/}
                 <section className="search-map">
                     <Map center={[-23.4444548, -50.5653303]} zoom={15}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
+                        <Marker position={[-23.4444548, -50.5653303]} draggable={false}>
+                            <Popup>
+                                <DoctorMarker
+                                    name="Dr. Joana"
+                                    specialty="Cardiologista"
+                                    image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                />
+                            </Popup>
+                        </Marker>
                     </Map>
                 </section>
+
             </main>
         </div>
     )

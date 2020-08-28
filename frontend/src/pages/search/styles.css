@@ -125,3 +125,8 @@
     border-color: #08082D;
     border-width: 1px;
 }
+
+.leaflet-popup-content-wrapper{
+    border: #08082D solid 1px;
+    background-color: whitesmoke;
+}
