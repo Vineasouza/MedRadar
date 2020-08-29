@@ -1,6 +1,6 @@
 #filters-container{
     position: absolute;
-    top: 18px;
+    top: -25px;
     width: 100%;
     background-color: whitesmoke;
     border-radius: 8px;
@@ -8,4 +8,7 @@
     overflow: hidden;
     z-index: 999;
     border: #08082D solid 1px;
+
+    display: flex;
+    flex-direction: column;
 }

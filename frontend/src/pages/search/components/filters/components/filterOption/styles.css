@@ -1,0 +1,32 @@
+#filter-option{
+    display: flex;
+    flex-direction: column;
+}
+
+.option{
+    margin-top: 5px;
+    display: flex;
+    border-bottom: #08082D solid 1px;
+}
+
+.option p{
+    font: normal 22px Archivo;
+    letter-spacing: 1px;
+    margin: 0;
+    width: 80%;
+    text-align: center;
+}
+
+.option button{
+    margin-right: 5px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 1px;
+    width: 20%;
+    transition: opactity 0.2s;
+}
+
+.option button:hover{
+    background-color: #79A0B7;
+    opacity: 70%;
+}
