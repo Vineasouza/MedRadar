@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import { Link } from 'react-router-dom';
-import './styles.css';
+import './success.css';
 
 
 function AddDoctor() {
