@@ -3,19 +3,21 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
 import './styles.css';
 import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
+import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
 import doctorIcon from './components/iconDoctor/Icon';
-import Filters from './components/filters';
 
 function Search() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
     const [isFilter, setIsFilter] = useState(false);
+    const [radius, setRadius] = useState(10);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -24,6 +26,18 @@ function Search() {
         })
     }, [])
 
+
+    function handleRadius(operation) {
+
+        let newRadius;
+        if (operation === "sum") {
+            newRadius = radius + 1;
+        } else {
+            newRadius = radius - 1;
+        }
+
+        setRadius(newRadius);
+    }
 
     return (
         <div id="search-page">
@@ -43,10 +57,19 @@ function Search() {
                     <div className="search-filters">
                         <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
                         {
+                            // Starting the filter
                             isFilter &&
-                            <Filters>
-                                <button>Raio</button>
-                            </Filters>
+                            <div id="filters-container">
+                                <FilterOption title="Raio">
+                                    <div className="input-radius">
+                                        <button name="sum" onClick={() => { handleRadius('sub') }}><FaMinus /></button>
+                                        <p>{radius} Km</p>
+                                        <button name="sub" onClick={() => { handleRadius('sum') }}><FaPlus /></button>
+                                    </div>
+                                </FilterOption>
+                                <FilterOption title="Especialidade" />
+                                <FilterOption title="Cidade" />
+                            </div>
                         }
                     </div>
                 </section>
