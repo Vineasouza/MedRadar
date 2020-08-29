@@ -39,6 +39,7 @@
 
 #main-initial main .link:hover{
     opacity: 70%;
+    color: #102751;
 }
 
 .main-content{

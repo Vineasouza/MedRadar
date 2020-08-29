@@ -119,6 +119,7 @@
 
 .add-actions button:hover{
     opacity: 70%;
+    color: #102751;
 }
 
 .add-actions button:focus {
