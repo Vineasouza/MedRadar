@@ -22,24 +22,32 @@
 
 .forms-block { 
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
     justify-content: center;
-    padding-left: 35%;
-    padding-top: 30px;
-    max-width: 500px;
+    width: 450px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.forms-block label, input, select {
+    display: inline-block;
+}
+
+.forms-block input {
+    width: 100%;
 }
 
 .forms-block label{
+    color: #08082D;
     font-family: Archivo, Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal;
+    font-size: 20px;   
     letter-spacing: 0.05em;
-    font-size: 24px;   
-    line-height: 22px;
-    color: #08082D;
-    padding: 12px;
-    justify-content: flex-end;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: left;
 }
 
 .forms-block input,select,option {
@@ -48,86 +56,66 @@
     border: 2px solid #08082D;
     box-sizing: border-box;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
     font-family: Archivo, Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal;
     letter-spacing: 0.05em;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
-    margin-left: 8px;
-    width: 400px;
+}
+
+.forms-city {
+    width: 100%;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+}
+.forms-city select {
+    width: 100%;
+}
+
+.forms-city .cidade {
+    width: 100%;
+    padding-left: 20px;
 }
 
 .forms-block input:focus {
     box-shadow: 0 0 0 0;
     outline: 0;
 }
-::-webkit-input-placeholder {
-    text-align: center;
-}
 
-.nome input {
-    width: 399px;
-}
-
-.especialidade input {
-    width: 303px;
-}
-
-.convenio input {
-    width: 357px;
-}
-
-.uf select {
-    width: 64px;
-    border-radius: 4px;
-}
 
 .uf select:focus {
     box-shadow: 0 0 0 0;
     outline: 0;
 }
 
-.cidade input {
-    width: 254px;
-}
-
-.endereco input {
-    width: 355px;
-}
-
-.telefone input{
-    width: 367px;
-}
-
-.email input {
-    width: 392px;
-}
-
 .add-actions {
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: center;
     padding-top: 24px;
+    width: 450px;
+    margin: 0 auto;
 }
 
 .add-actions button {
+    background-color: whitesmoke;
+    border-color: #08082D;
+    border-radius: 8px;
+    color: #08082D;
     font-family: Archivo, Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal;
-    letter-spacing: 0.05em;
     font-size: 18px;
+    letter-spacing: 0.05em;
     line-height: 20px;
-    width: 174px;
-    border-radius: 8px;
-    border-color: #08082D;
-    color: #08082D;
-    background-color: whitesmoke;
     height: 30px;
-    margin-left: 40px;
-}
+    width: 205px;
+    margin: 0 20px;
+}   
 
 .add-actions button:hover{
     opacity: 70%;
@@ -150,3 +138,18 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+}
+ 
+::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+}
+ 
+:-ms-input-placeholder {  
+    text-align: center; 
+}

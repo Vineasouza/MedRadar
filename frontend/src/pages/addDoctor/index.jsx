@@ -13,19 +13,15 @@ function AddDoctor() {
                 <img src={mainDoctor} className="main-doctor" alt="doctor" />
             </header>
             <form className="forms-block">
-                <label className="nome">
-                Nome
+                <label className="nome">Nome</label>
                 <input type="text" name="nome" placeholder="Nome completo"/>
-                </label>
-                <label className="especialidade">
-                Especialidade
+                
+                <label className="especialidade">Especialidade</label>
                 <input type="text" name="especialidade" placeholder="Especialidade"/>
-                </label>
-                <label className="convenio">
-                Convênio
+
+                <label className="convenio">Convênio</label>
                 <input type="text" name="convenio" placeholder="sulAmerica, Unimed"/>
-                </label>
-                <div>
+                <div className="forms-city">
                     <label className="uf">
                     UF
                     <select name="estados-brasil">
@@ -59,23 +55,19 @@ function AddDoctor() {
                         <option value="TO">TO</option>
                     </select>
                     </label>
-                    <label className="cidade">
-                    Cidade
-                    <input type="text" name="cidade"             placeholder="Nome da Cidade"/>
+                    <label className="cidade">Cidade
+                    <input type="text" name="cidade" placeholder="Nome da Cidade"/>
                     </label>
                 </div>
-                <label className="endereco">
-                Endereço
+                <label className="endereco">Endereço</label>
                 <input type="text" name="cidade" placeholder="Rua/Av., N°, Comp, Bairro"/>
-                </label>
-                <label className="telefone">
-                Telefone
+                
+                <label className="telefone">Telefone</label>
                 <input type="number" name="telefone" placeholder="(xxx)xxxxx-xxxx"/>
-                </label>
-                <label className="email">
-                E-mail
-                <input type="text" name="email" placeholder="email@email.com.br"/>
-                </label>
+                
+                <label className="email">E-mail</label>
+                <input type="email" name="email" placeholder="email@email.com.br"/>
+                
             </form>
             <section className="add-actions">
                     <Link to="/main-initial">

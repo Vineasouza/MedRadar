@@ -13,7 +13,7 @@ function Main() {
         setTimeout(() => {
             history.push('/main-initial')
         }, 2000)
-    }, []);
+    }, [history]);
 
     return (
         <div className="main">
