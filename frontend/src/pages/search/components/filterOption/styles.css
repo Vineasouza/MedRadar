@@ -18,6 +18,7 @@
 }
 
 .option button{
+    outline: 0;
     margin-right: 5px;
     border-radius: 10px;
     border: 0;

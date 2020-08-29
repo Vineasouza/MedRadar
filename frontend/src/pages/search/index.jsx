@@ -52,8 +52,10 @@ function Search() {
                     </div>
                     <img src={healthTeam} alt="grupo de profissionais"></img>
                 </section>
+
                 <section className="search-actions">
                     <button>Pesquisar <FiSearch /></button>
+
                     <div className="search-filters">
                         <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
                         {
@@ -67,11 +69,19 @@ function Search() {
                                         <button name="sub" onClick={() => { handleRadius('sum') }}><FaPlus /></button>
                                     </div>
                                 </FilterOption>
-                                <FilterOption title="Especialidade" />
+                                <FilterOption title="Especialidade">
+                                    <div id="input-specialty">
+                                        <select id="specialty">
+                                            <option value="Dermatologista"> Dermatologista</option>
+                                            <option value="Cardiologista"> Cardiologista</option>
+                                        </select>
+                                    </div>
+                                </FilterOption>
                                 <FilterOption title="Cidade" />
                             </div>
                         }
                     </div>
+
                 </section>
             </header>
 
