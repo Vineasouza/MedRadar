@@ -157,12 +157,24 @@
     border-radius: 8px;
     overflow: hidden;
     z-index: 999;
-    border: #08082D solid 1px;
+    border: #08082D solid 2px;
 
     display: flex;
     flex-direction: column;
 }
 
+#filters-container > button{
+    background-color: #08082D;
+    border:0;
+    border-radius: 0;
+    color: whitesmoke;
+    font: bold 20px Archivo;
+    transition: opacity 0.2s;
+}
+
+#filters-container > button:hover{
+    opacity: 70%;
+}
 .input-radius{
     height: 50px;
     display: flex;

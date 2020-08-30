@@ -9,6 +9,7 @@
 }
 
 .doctor-image {
+    margin-left: 10px;
     width: 40%;
     display: flex;
     align-items: center;
@@ -28,6 +29,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    margin-left: 10px;
 }
 
 .doctor-info h1, p {

@@ -91,6 +91,7 @@ function Search() {
                                         </select>
                                     </div>
                                 </FilterOption>
+                                <button>Aplicar filtro</button>
                             </div>
                         }
                     </div>
