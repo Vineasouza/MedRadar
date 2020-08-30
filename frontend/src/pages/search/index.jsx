@@ -77,7 +77,20 @@ function Search() {
                                         </select>
                                     </div>
                                 </FilterOption>
-                                <FilterOption title="Cidade" />
+                                <FilterOption title="Cidade" >
+                                    <div id="input-city">
+                                        <select id="city">
+                                            <option value="" selected hidden >Cidade</option>
+                                            <option value="Chicago"> Chicago</option>
+                                            <option value="Boston"> Boston</option>
+                                        </select>
+                                        <select id="uf">
+                                            <option value="" selected hidden className="first-option" >UF</option>
+                                            <option value="PR"> PR</option>
+                                            <option value="SP"> SP</option>
+                                        </select>
+                                    </div>
+                                </FilterOption>
                             </div>
                         }
                     </div>
@@ -149,7 +162,7 @@ function Search() {
                 </section>
 
             </main>
-        </div>
+        </div >
     )
 }
 
