@@ -9,7 +9,11 @@ const FilterResult = ({ data, handleClick }) => {
         <div id="filter-result-container">
             <button><FaTimes /></button>
             <p>
-                {data}
+                {
+                    data.type === "radius"
+                        ? `${data.value} km`
+                        : data.value
+                }
             </p>
         </div>
     )

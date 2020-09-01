@@ -20,6 +20,9 @@ function Search() {
     const [isFilter, setIsFilter] = useState(false);
     const [isApplyFilter, setIsApplyFilter] = useState(false);
     const [radius, setRadius] = useState(10);
+    const [specialty, setSpecialty] = useState("")
+    const [city, setCity] = useState("");
+
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -65,7 +68,28 @@ function Search() {
 
                     <div className="search-filters-results">
                         {
-                            isApplyFilter && <FilterResult data={radius} />
+                            isApplyFilter && <FilterResult data={
+                                {
+                                    type: "radius",
+                                    value: radius
+                                }
+                            } />
+                        }
+                        {
+                            isApplyFilter && specialty !== "" && < FilterResult data={
+                                {
+                                    type: "specialty",
+                                    value: specialty
+                                }
+                            } />
+                        }
+                        {
+                            isApplyFilter && city !== "" && < FilterResult data={
+                                {
+                                    type: "city",
+                                    value: city
+                                }
+                            } />
                         }
                     </div>
 
@@ -85,7 +109,7 @@ function Search() {
                                 </FilterOption>
                                 <FilterOption title="Especialidade">
                                     <div id="input-specialty">
-                                        <select id="specialty">
+                                        <select id="specialty" onChange={(e) => { setSpecialty(e.target.value) }}>
                                             <option value="Dermatologista"> Dermatologista</option>
                                             <option value="Cardiologista"> Cardiologista</option>
                                         </select>
@@ -93,12 +117,12 @@ function Search() {
                                 </FilterOption>
                                 <FilterOption title="Cidade" >
                                     <div id="input-city">
-                                        <select id="city">
+                                        <select id="city" onChange={(e) => { setCity(e.target.value) }} defaultValue="">
                                             <option value="" selected hidden >Cidade</option>
                                             <option value="Chicago"> Chicago</option>
                                             <option value="Boston"> Boston</option>
                                         </select>
-                                        <select id="uf">
+                                        <select id="uf" defaultValue="">
                                             <option value="" selected hidden className="first-option" >UF</option>
                                             <option value="PR"> PR</option>
                                             <option value="SP"> SP</option>
