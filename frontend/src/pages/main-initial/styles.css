@@ -59,3 +59,28 @@
     height: 126px;
 }
 
+@media(max-width: 700px){
+
+    #main-initial{
+        width: 100vw;
+        height: 100vh;
+    }
+    #main-initial main {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        justify-content: center;
+        align-items: center;
+    }
+    #main-initial main .link + .link{
+        margin-top: 20px;
+    }
+    .main-content img {
+        width: 200px;
+        height: 200px;
+    }
+    .main-content :nth-child(2) {
+        width: 220px;
+        height: 50px;
+    }
+}
