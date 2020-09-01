@@ -11,12 +11,14 @@ import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
 import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
+import FilterResult from './components/filterResult';
 import doctorIcon from './components/iconDoctor/Icon';
 
 function Search() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
     const [isFilter, setIsFilter] = useState(false);
+    const [isApplyFilter, setIsApplyFilter] = useState(false);
     const [radius, setRadius] = useState(10);
 
     useEffect(() => {
@@ -39,6 +41,11 @@ function Search() {
         setRadius(newRadius);
     }
 
+    function hanleApplyFilter() {
+        setIsFilter(false);
+        setIsApplyFilter(true);
+    }
+
     return (
         <div id="search-page">
 
@@ -55,6 +62,13 @@ function Search() {
 
                 <section className="search-actions">
                     <button>Pesquisar <FiSearch /></button>
+
+                    <div className="search-filters-results">
+                        {
+                            isApplyFilter && <FilterResult data={radius} />
+                        }
+                    </div>
+
 
                     <div className="search-filters">
                         <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
@@ -91,7 +105,7 @@ function Search() {
                                         </select>
                                     </div>
                                 </FilterOption>
-                                <button>Aplicar filtro</button>
+                                <button onClick={hanleApplyFilter}>Aplicar filtro</button>
                             </div>
                         }
                     </div>

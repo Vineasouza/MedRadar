@@ -92,6 +92,10 @@
     display: flex;
 }
 
+.search-filters-results{
+    display: flex;
+}
+
 #search-main{
     margin-top: 25px;
     display: grid;

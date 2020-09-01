@@ -1,0 +1,19 @@
+#filter-result-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid #08082D;
+    width: 100px;
+    background-color: whitesmoke;
+}
+
+#filter-result-container button{
+    width: 35%;
+    border: 0;
+    outline: 0;
+}
+
+#filter-result-container p{
+    font: 500 20px Archivo;
+}
