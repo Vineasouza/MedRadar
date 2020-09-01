@@ -46,9 +46,9 @@
 }
 
 .search-intro img{
-    width: 120px;
-    height: 120px;
-    margin-right: 25px;
+    width: 128px;
+    height: 128px;
+    margin-right: 70px;
 }
 
 .search-actions {
@@ -157,7 +157,7 @@
     border-radius: 8px;
     overflow: hidden;
     z-index: 999;
-    border: #08082D solid 1px;
+    border: #08082D solid 2px;
 
     display: flex;
     flex-direction: column;
