@@ -1,10 +1,10 @@
-.main-doctor {
+.main-doctor-2 {
     /* Online Doctor-bro 1 */
     position: absolute;
     width: 250px;
     height: 250px;
     left: 0px;
-    bottom: 0px;
+    bottom: 10px;
 }
 
 .doctor-logo-2 {
@@ -72,3 +72,23 @@
     color: #102751;
 }
 
+@media screen and (max-width: 830px) {
+    .main-doctor-2 {
+        /* Online Doctor-bro 1 */
+        width: 200px;
+        height: 200px;
+        left: 0px;
+        /* bottom: 0px; */
+    }
+    .doctor-logo-2 {
+        /* MedradarLogo */
+        /*4.3478*/
+        width: 450px;
+        height: 103.5px;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 200px; 
+        align-content: center;
+    }
+}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './index.css';
 import MainInitial from './pages/main-initial/index';
-import Main from './pages/main/index';
+import Main from './pages/main/main';
 import Search from './pages/search/index';
 import AddDoctor from './pages/addDoctor/index';
 import Success from './pages/success/index';

@@ -1,10 +1,11 @@
 .main-doctor {
     /* Online Doctor-bro 1 */
-    position: absolute;
+    position: fixed;
     width: 250px;
     height: 250px;
     left: 0px;
-    bottom: 0px;
+    bottom: 10px;
+    z-index: -10000;
 }
 
 .doctor-logo {
@@ -153,4 +154,14 @@ input[type=number] {
  
 :-ms-input-placeholder {  
     text-align: center; 
+}
+
+@media screen and (max-width: 830px) {
+    .main-doctor {
+        /* Online Doctor-bro 1 */
+        width: 0px;
+        height: 0px;
+        left: 0px;
+        /* bottom: 0px; */
+    }
 }

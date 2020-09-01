@@ -10,7 +10,7 @@ function AddDoctor() {
         <main>
             <header className="main-header">
                 <img src={logo} className="doctor-logo-2" alt="logo" />
-                <img src={mainDoctor} className="main-doctor" alt="doctor" />
+                <img src={mainDoctor} className="main-doctor-2" alt="doctor" />
             </header>
             <section className="back-section">
                 <p>Cadastro Efetuado!</p>
