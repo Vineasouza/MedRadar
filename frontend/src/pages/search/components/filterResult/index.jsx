@@ -7,7 +7,7 @@ const FilterResult = ({ data, handleClick }) => {
 
     return (
         <div id="filter-result-container">
-            <button><FaTimes /></button>
+            <button onClick={() => { handleClick(data.type) }}><FaTimes /></button>
             <p>
                 {
                     data.type === "radius"

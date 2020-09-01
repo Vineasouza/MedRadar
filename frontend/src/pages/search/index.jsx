@@ -45,8 +45,27 @@ function Search() {
     }
 
     function hanleApplyFilter() {
+
         setIsFilter(false);
+        if (radius === 10 && specialty === "" && city === "") {
+            return;
+        }
+
         setIsApplyFilter(true);
+    }
+
+    function handleDeleleFilterOption(type) {
+        switch (type) {
+            case "radius":
+                setRadius(10);
+                break;
+            case "specialty":
+                setSpecialty("");
+                break;
+            case "city":
+                setCity("");
+                break;
+        }
     }
 
     return (
@@ -68,28 +87,37 @@ function Search() {
 
                     <div className="search-filters-results">
                         {
-                            isApplyFilter && <FilterResult data={
-                                {
-                                    type: "radius",
-                                    value: radius
+                            isApplyFilter && radius !== 10 && <FilterResult
+                                data={
+                                    {
+                                        type: "radius",
+                                        value: radius
+                                    }
                                 }
-                            } />
+                                handleClick={handleDeleleFilterOption}
+                            />
                         }
                         {
-                            isApplyFilter && specialty !== "" && < FilterResult data={
-                                {
-                                    type: "specialty",
-                                    value: specialty
+                            isApplyFilter && specialty !== "" && < FilterResult
+                                data={
+                                    {
+                                        type: "specialty",
+                                        value: specialty
+                                    }
                                 }
-                            } />
+                                handleClick={handleDeleleFilterOption}
+                            />
                         }
                         {
-                            isApplyFilter && city !== "" && < FilterResult data={
-                                {
-                                    type: "city",
-                                    value: city
+                            isApplyFilter && city !== "" && < FilterResult
+                                data={
+                                    {
+                                        type: "city",
+                                        value: city
+                                    }
                                 }
-                            } />
+                                handleClick={handleDeleleFilterOption}
+                            />
                         }
                     </div>
 
