@@ -65,6 +65,8 @@ function Search() {
             case "city":
                 setCity("");
                 break;
+            default:
+                return;
         }
     }
 
