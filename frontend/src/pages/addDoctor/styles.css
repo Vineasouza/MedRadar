@@ -164,4 +164,38 @@ input[type=number] {
         left: 0px;
         /* bottom: 0px; */
     }
+    .forms-block { 
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        width: 260px;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .doctor-logo {
+        /* MedradarLogo */
+        /*position: absolute;
+        /*4.3478*/
+        top: 10%;
+        width: 250px;
+        height: 57.5px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10px; 
+    }
+    .add-actions {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 24px;
+        width: 260px;
+        margin: 0 auto;
+    }
+    .add-actions button {
+        width: 260px;
+        margin: 5px 0px;
+    } 
 }

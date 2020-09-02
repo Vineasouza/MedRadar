@@ -12,7 +12,7 @@ function Main() {
     useEffect(() => {
         setTimeout(() => {
             history.push('/main-initial')
-        }, 1500)
+        }, 1000000000)
     }, [history]);
 
     return (

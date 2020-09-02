@@ -40,3 +40,34 @@
     width: 60%;
     margin-top: 30%;
 }
+
+@media screen and (max-width: 700px) {
+    .left {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .left img {
+        width: 85%;
+        margin-top: 34%;
+    }
+
+    .left .main-h2{
+        width: 85%;
+        font-size: 16px;
+        text-align: center;
+        padding-top: 15px;
+
+    }
+
+    .right {
+        /* background-color: black; */
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+}
