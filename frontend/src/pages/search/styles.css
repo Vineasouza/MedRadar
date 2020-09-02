@@ -286,4 +286,12 @@
     .search-actions div, button{
         margin-top: 4px;
     }
+    .search-filters-results{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .leaflet-top{
+        top: 350px;
+    }
 }   

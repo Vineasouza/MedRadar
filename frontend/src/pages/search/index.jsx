@@ -123,7 +123,6 @@ function Search() {
                         }
                     </div>
 
-
                     <div className="search-filters">
                         <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
                         {

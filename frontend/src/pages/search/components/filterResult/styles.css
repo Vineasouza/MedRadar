@@ -29,3 +29,9 @@
     margin: 0 10px;
     font: 500 20px Archivo;
 }
+
+@media(max-width: 700px){
+    #filter-result-container{
+        margin-top: 5px;
+    }
+}
