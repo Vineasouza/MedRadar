@@ -14,10 +14,18 @@ function AddDoctor() {
             </header>
             <form className="forms-block">
                 <label className="nome">Nome</label>
-                <input type="text" name="nome" placeholder="Nome completo"/>
+                <input 
+                    type="text" 
+                    name="nome" 
+                    placeholder="Nome completo"
+                />
                 
                 <label className="especialidade">Especialidade</label>
-                <input type="text" name="especialidade" placeholder="Especialidade"/>
+                <input 
+                    type="text" 
+                    name="especialidade" 
+                    placeholder="Especialidade"
+                />
 
                 <label className="convenio">Convênio</label>
                 <input type="text" name="convenio" placeholder="sulAmerica, Unimed"/>
@@ -56,17 +64,33 @@ function AddDoctor() {
                     </select>
                     </label>
                     <label className="cidade">Cidade
-                    <input type="text" name="cidade" placeholder="Nome da Cidade"/>
+                    <input 
+                        type="text" 
+                        name="cidade" 
+                        placeholder="Nome da Cidade"
+                    />
                     </label>
                 </div>
                 <label className="endereco">Endereço</label>
-                <input type="text" name="cidade" placeholder="Rua/Av., N°, Comp, Bairro"/>
+                <input 
+                    type="text" 
+                    name="endereco" 
+                    placeholder="Rua/Av., N°, Comp, Bairro"
+                />
                 
                 <label className="telefone">Telefone</label>
-                <input type="number" name="telefone" placeholder="(xxx)xxxxx-xxxx"/>
+                <input 
+                    type="number" 
+                    name="telefone" 
+                    placeholder="(xxx)xxxxx-xxxx"
+                />
                 
                 <label className="email">E-mail</label>
-                <input type="email" name="email" placeholder="email@email.com.br"/>
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="email@email.com.br"
+                />
                 
             </form>
             <section className="add-actions">
@@ -74,7 +98,7 @@ function AddDoctor() {
                         <button>Cancelar</button>
                     </Link>
                     <Link to="/success">
-                        <button>Cadastrar</button>
+                        <button type="submit">Cadastrar</button>
                     </Link>
             </section>
         </main>
