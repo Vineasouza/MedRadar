@@ -13,7 +13,7 @@ const Doctor = ({ name, specialty, distance, image }) => {
             <section className="doctor-info">
                 <h1>{name}</h1>
                 <p>{specialty}</p>
-                <p>{distance}</p>
+                <p>{distance} km</p>
             </section>
         </div>
     );

@@ -20,6 +20,9 @@
     margin: 0;
     font: bold 20px Archivo;
 }
+#doctor-marker-container section p::first-letter{
+    text-transform:capitalize;
+}
 
 #doctor-marker-container section p + p{
     margin-top: 4px;
