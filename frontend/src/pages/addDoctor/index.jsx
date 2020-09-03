@@ -3,7 +3,7 @@ import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import { Link } from 'react-router-dom';
 import './styles.css';
-
+// import axios from 'axios';
 
 function AddDoctor({ onSubmit }) {
     const [nome, setNome] = useState('');
@@ -29,8 +29,13 @@ function AddDoctor({ onSubmit }) {
             email,
         });
 
-        // setGithubUsername('');
-        // setTechs('');
+        // axios.post(`https://my-json-server.typicode.com/typicode/demo/posts`, {  })
+        // .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        // }, (error) => {
+        //     console.log(error);
+        // });
     }
 
     return (
@@ -161,16 +166,15 @@ function AddDoctor({ onSubmit }) {
                     value={email} 
                     onChange={e => setEmail(e.target.value)} 
                 />
-                
-            </form>
-            <section className="add-actions">
+                <section className="add-actions">
                     <Link to="/main-initial">
                         <button>Cancelar</button>
                     </Link>
-                    <Link to="/success">
+                    {/* <Link to="/success"> */}
                         <button type="submit">Cadastrar</button>
-                    </Link>
-            </section>
+                    {/* </Link> */}
+                </section>
+            </form>
         </main>
     );
 }
