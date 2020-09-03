@@ -70,8 +70,9 @@
     width: 100%;
     align-items: flex-start;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
 }
+
 .forms-city select {
     width: 100%;
 }

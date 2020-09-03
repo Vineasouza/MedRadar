@@ -4,9 +4,10 @@ import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import api from '../../services/api';
+import axios from 'axios';
 
 import './styles.css';
+import api from '../../services/api';
 import logo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-bro.png';
 import Doctor from './components/doctor';
@@ -24,7 +25,12 @@ function Search() {
     const [radius, setRadius] = useState(10);
     const [specialty, setSpecialty] = useState("");
     const [city, setCity] = useState("");
+    const [uf, setUf] = useState("");
     const [doctors, setDoctors] = useState([]);
+
+    // Datas from IBGE
+    const [ufs, setUfs] = useState([]);
+    const [cities, setCities] = useState([]);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -32,6 +38,13 @@ function Search() {
             setInitialPosition([latitude, longitude]);
             setCenterMap([latitude, longitude]);
         });
+
+        axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados").then(
+            (resp) => {
+                setUfs([...resp.data]);
+            }
+        );
+
     }, []);
 
     /* 
@@ -50,6 +63,13 @@ function Search() {
         });
     }, [initialPosition])
 
+    useEffect(() => {
+        axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`).then(
+            (resp) => {
+                setCities([...resp.data]);
+            }
+        );
+    }, [uf])
 
     function handleRadius(operation) {
 
@@ -165,15 +185,47 @@ function Search() {
                                 </FilterOption>
                                 <FilterOption title="Cidade" >
                                     <div id="input-city">
-                                        <select id="city" onChange={(e) => { setCity(e.target.value) }} defaultValue="">
-                                            <option value="" selected hidden >Cidade</option>
-                                            <option value="Chicago"> Chicago</option>
-                                            <option value="Boston"> Boston</option>
+                                        <select
+                                            id="city"
+                                            defaultValue=" "
+                                            onChange={(e) => { setCity(e.target.value) }}
+                                        >
+                                            <option value=" " disabled hidden >Cidade</option>
+                                            {
+                                                cities.map(
+                                                    (city) => {
+                                                        return (
+                                                            <option
+                                                                key={city.id}
+                                                                value={city.nome}
+                                                            >
+                                                                {city.nome}
+                                                            </option>
+                                                        )
+                                                    }
+                                                )
+                                            }
                                         </select>
-                                        <select id="uf" defaultValue="">
-                                            <option value="" selected hidden className="first-option" >UF</option>
-                                            <option value="PR"> PR</option>
-                                            <option value="SP"> SP</option>
+                                        <select
+                                            id="uf"
+                                            defaultValue=" "
+                                            onChange={(e) => { setUf(e.target.value) }}
+                                        >
+                                            <option value=" " disabled hidden >UF</option>
+                                            {
+                                                ufs.map(
+                                                    (uf) => {
+                                                        return (
+                                                            <option
+                                                                key={uf.id}
+                                                                value={uf.sigla}
+                                                            >
+                                                                {uf.sigla}
+                                                            </option>
+                                                        )
+                                                    }
+                                                )
+                                            }
                                         </select>
                                     </div>
                                 </FilterOption>
