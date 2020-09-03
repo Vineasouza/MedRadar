@@ -104,7 +104,7 @@ function Search() {
                 </section>
 
                 <section className="search-actions">
-                    <button onClick={() => { console.log(doctors) }}>Pesquisar <FiSearch /></button>
+                    <button>Pesquisar <FiSearch /></button>
 
                     <div className="search-filters-results">
                         {
