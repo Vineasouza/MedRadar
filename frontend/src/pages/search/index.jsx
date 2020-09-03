@@ -4,6 +4,7 @@ import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import api from '../../services/api';
 
 import './styles.css';
 import logo from '../../assets/images/simple-only-logo.png';
@@ -23,13 +24,24 @@ function Search() {
     const [specialty, setSpecialty] = useState("")
     const [city, setCity] = useState("");
 
-
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             setInitialPosition([latitude, longitude]);
-        })
-    }, [])
+        });
+    }, []);
+
+    useEffect(() => {
+        api.get("/procurar", {
+            params: {
+                latitude: initialPosition[0],
+                longitude: initialPosition[1]
+            }
+        }
+        ).then(resp => {
+            console.log(resp.data);
+        });
+    }, [initialPosition])
 
 
     function handleRadius(operation) {
