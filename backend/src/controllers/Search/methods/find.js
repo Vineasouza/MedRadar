@@ -1,23 +1,38 @@
 const Med = require('../../../models/Med');
 
-const formatToSearch = (query) => {
-    delete query.latitude;
-    delete query.longitude;
-    delete query.raio;
-}
-
 module.exports = async function find(request, response) {
 
     let resultSearch;
 
-    if (request.query.hasOwnProperty('latitude') && request.query.hasOwnProperty('longitude') && request.query.hasOwnProperty('raio')) {
+    console.log(request.query);
 
-        const { latitude, longitude, raio } = request.query;
+    const {
+        latitude,
+        longitude,
+        specialty,
+        city,
+    } = request.query;
+
+    let query = {};
+    if (specialty != undefined) {
+        query.especialidade = specialty;
+    }
+    if (city != undefined) {
+        query.cidade = city
+    }
 
 
-        formatToSearch(request.query);
+    if (latitude != undefined && longitude != undefined) {
 
-        if (request.query == {}) {
+        /* 
+            Option where the user are looking for
+            doctors only by Radius
+        */
+        let radius;
+        if (request.query.radius === undefined) radius = 10; // Default to radius!
+        else radius = request.query.radius
+
+        if (query == {}) {
             resultSearch = await Med.find({
                 location: {
                     $near: {
@@ -25,20 +40,27 @@ module.exports = async function find(request, response) {
                             type: 'Point',
                             coordinates: [longitude, latitude],
                         },
-                        $maxDistance: 10000,
+                        $maxDistance: radius * 1000, // Converting from km to m
                     },
                 }
             });
+
+            /* 
+                Option where the user are looking for
+                doctors only by Radius, city or specialty
+            */
         } else {
+
             resultSearch = await Med.find({
-                ...request.query,
+                ...query
+                ,
                 location: {
                     $near: {
                         $geometry: {
                             type: 'Point',
                             coordinates: [longitude, latitude],
                         },
-                        $maxDistance: 10000,
+                        $maxDistance: radius * 1000,
                     },
                 }
             });
@@ -46,10 +68,11 @@ module.exports = async function find(request, response) {
 
 
     } else {
-
-        formatToSearch(request.query);
-
-        resultSearch = await Med.find(request.query);
+        /* 
+            Here, the User are looking for doctors using
+            specialty, city, or two together  
+        */
+        resultSearch = await Med.find(query);
     }
 
     if (!resultSearch) {
