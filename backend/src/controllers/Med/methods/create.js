@@ -3,6 +3,8 @@ const parseStringAsArray = require('../../../utils/parseStringAsArray');
 
 module.exports = async function create(request, response) {
 
+    console.log(request.body);
+
     const {
         nome,
         especialidade,

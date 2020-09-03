@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import { Link } from 'react-router-dom';
-import './styles.css';
 import axios from 'axios';
+import api from '../../services/api';
+import './styles.css';
 
-function AddDoctor({ onSubmit }) {
+
+function AddDoctor() {
     const [nome, setNome] = useState('');
     const [especialidade, setEspecialidade] = useState('');
     const [convenio, setConvenio] = useState('');
@@ -40,7 +42,7 @@ function AddDoctor({ onSubmit }) {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await onSubmit({
+        await api.post("/cadastro", {
             nome,
             especialidade,
             convenio,
@@ -49,15 +51,11 @@ function AddDoctor({ onSubmit }) {
             endereco,
             telefone,
             email,
-        });
-
-        // axios.post(`https://my-json-server.typicode.com/typicode/demo/posts`, {  })
-        // .then(res => {
-        //     console.log(res);
-        //     console.log(res.data);
-        // }, (error) => {
-        //     console.log(error);
-        // });
+            latitude: -23.4337991, // Latitude e Longitude is Default to Nova Fátima, but can change
+            longitude: -50.5644485
+        }).then(
+            response => console.log(response.status)
+        );
     }
 
     return (
