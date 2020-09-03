@@ -18,19 +18,26 @@ import doctorIcon from './components/iconDoctor/Icon';
 function Search() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
+    const [centerMap, setCenterMap] = useState([0, 0]); // Center position of Map
     const [isFilter, setIsFilter] = useState(false);
     const [isApplyFilter, setIsApplyFilter] = useState(false);
     const [radius, setRadius] = useState(10);
-    const [specialty, setSpecialty] = useState("")
+    const [specialty, setSpecialty] = useState("");
     const [city, setCity] = useState("");
+    const [doctors, setDoctors] = useState([]);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             setInitialPosition([latitude, longitude]);
+            setCenterMap([latitude, longitude]);
         });
     }, []);
 
+    /* 
+        Call the API when get the 
+        current position of User
+    */
     useEffect(() => {
         api.get("/procurar", {
             params: {
@@ -39,7 +46,7 @@ function Search() {
             }
         }
         ).then(resp => {
-            console.log(resp.data);
+            setDoctors(resp.data);
         });
     }, [initialPosition])
 
@@ -97,7 +104,7 @@ function Search() {
                 </section>
 
                 <section className="search-actions">
-                    <button>Pesquisar <FiSearch /></button>
+                    <button onClick={() => { console.log(doctors) }}>Pesquisar <FiSearch /></button>
 
                     <div className="search-filters-results">
                         {
@@ -183,61 +190,51 @@ function Search() {
 
                     {/* Part of resutlts */}
                     <div>
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
-                        <Doctor
-                            name="Dr. Roberta"
-                            specialty="Dermatologista"
-                            distance="5 Km"
-                            image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        />
+                        {
+                            doctors.map((doctor, index) => {
+                                return (
+                                    <Doctor
+                                        key={index}
+                                        name={doctor.nome}
+                                        specialty={doctor.especialidade}
+                                        distance={radius}
+                                        image="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                    />
+                                )
+                            })
+                        }
                     </div>
                 </section>
 
                 { /* Part of MAP*/}
                 <section className="search-map">
-                    <Map center={initialPosition} zoom={15}>
+                    <Map center={centerMap} zoom={15}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[-23.4444548, -50.5653303]} draggable={false} icon={doctorIcon}>
-                            <Popup>
-                                <DoctorMarker
-                                    name="Dr. Joana"
-                                    specialty="Cardiologista"
-                                    image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                />
-                            </Popup>
-                        </Marker>
+                        {
+                            doctors.map((doctor, index) => {
+
+                                const positionDoctorInMap = doctor.location.coordinates;
+
+                                return (
+                                    <Marker
+                                        key={index}
+                                        position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
+                                        draggable={false}
+                                        icon={doctorIcon}>
+                                        <Popup>
+                                            <DoctorMarker
+                                                name={doctor.nome}
+                                                specialty={doctor.especialidade}
+                                                image="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                            />
+                                        </Popup>
+                                    </Marker>
+                                );
+                            })
+                        }
                     </Map>
                 </section>
 
