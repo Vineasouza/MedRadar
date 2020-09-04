@@ -17,6 +17,7 @@
 }
 
 #doctor-marker-container section p{
+    text-align: center;
     margin: 0;
     font: bold 20px Archivo;
 }
@@ -26,6 +27,7 @@
 
 #doctor-marker-container section p + p{
     margin-top: 4px;
+    margin-bottom: 4px;
     font: 500 15px Archivo;
 }
 
