@@ -3,7 +3,7 @@ const Med = require('../../../models/Med');
 module.exports = async function find(request, response) {
 
     let resultSearch;
-
+    console.log(request.query)
     const {
         latitude,
         longitude,

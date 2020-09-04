@@ -71,6 +71,37 @@ function Search() {
         );
     }, [uf])
 
+    useEffect(() => {
+
+        var query = {};
+
+        if (city === "" && specialty === "") {
+            setIsApplyFilter(false);
+            query.latitude = initialPosition[0];
+            query.longitude = initialPosition[1];
+        }
+
+        if (isApplyFilter) {
+
+            if (specialty !== "") {
+                query.specialty = specialty;
+            }
+
+            if (city !== "") {
+                query.city = city;
+            }
+
+        }
+
+        // Calling API to get datas with FILTER
+        api.get("/procurar", {
+            params: query
+        }).then((response) => {
+            setDoctors(response.data);
+        })
+
+    }, [isApplyFilter, city, specialty]);
+
     function handleRadius(operation) {
 
         let newRadius;
@@ -109,6 +140,10 @@ function Search() {
         }
     }
 
+    function handleClickToDoFilter() {
+        setIsFilter(!isFilter);
+        setUf("");
+    }
     return (
         <div id="search-page">
 
@@ -163,7 +198,7 @@ function Search() {
                     </div>
 
                     <div className="search-filters">
-                        <button onClick={() => { setIsFilter(!isFilter) }}>Filtrar busca<FaFilter /> </button>
+                        <button onClick={handleClickToDoFilter}>Filtrar busca<FaFilter /> </button>
                         {
                             // Starting the filter
                             isFilter &&
