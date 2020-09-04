@@ -212,7 +212,12 @@ function Search() {
                                 </FilterOption>
                                 <FilterOption title="Especialidade">
                                     <div id="input-specialty">
-                                        <select id="specialty" onChange={(e) => { setSpecialty(e.target.value) }}>
+                                        <select
+                                            id="specialty"
+                                            defaultValue=" "
+                                            onChange={(e) => { setSpecialty(e.target.value) }}
+                                        >
+                                            <option value=" " disabled hidden > Selecione uma especialidade</option>
                                             <option value="Dermatologista"> Dermatologista</option>
                                             <option value="Cardiologista"> Cardiologista</option>
                                         </select>
