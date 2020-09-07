@@ -157,6 +157,12 @@ input[type=number] {
     text-align: center; 
 }
 
+select {
+    font-size: 16px;
+    text-align: center;
+    color: #5c5c5c;
+}
+
 @media screen and (max-width: 830px) {
     .main-doctor {
         /* Online Doctor-bro 1 */

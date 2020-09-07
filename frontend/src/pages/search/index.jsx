@@ -100,7 +100,7 @@ function Search() {
             setDoctors(response.data);
         })
 
-    }, [isApplyFilter, city, specialty]);
+    }, [isApplyFilter, city, specialty, initialPosition]);
 
     function handleRadius(operation) {
 

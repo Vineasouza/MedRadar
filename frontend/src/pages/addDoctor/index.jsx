@@ -108,7 +108,7 @@ function AddDoctor() {
                             onChange={e => setUf(e.target.value)}
                             defaultValue=" "
                         >
-                            <option value=" " disabled hidden > Selecione um UF</option>
+                            <option value=" " disabled hidden >UF</option>
                             {
                                 ufs.map(
                                     (uf) => {
