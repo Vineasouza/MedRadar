@@ -7,6 +7,7 @@ import Main from './pages/main/main';
 import Search from './pages/search/index';
 import AddDoctor from './pages/addDoctor/index';
 import Success from './pages/success/index';
+import Geolocator from './pages/geolocator/index';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Route path="/search" component={Search} />
       <Route path="/add" component={AddDoctor} />
       <Route path="/success" component={Success} />
+      <Route path="/geo" component={Geolocator} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
