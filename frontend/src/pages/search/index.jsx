@@ -14,7 +14,7 @@ import Doctor from './components/doctor';
 import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
 import FilterResult from './components/filterResult';
-import doctorIcon from './components/iconDoctor/Icon';
+import { manDoctor, womanDoctor } from './components/icons/doctor';
 
 function Search() {
 
@@ -226,27 +226,6 @@ function Search() {
                                 <FilterOption title="Cidade" >
                                     <div id="input-city">
                                         <select
-                                            id="city"
-                                            defaultValue=" "
-                                            onChange={(e) => { setCity(e.target.value) }}
-                                        >
-                                            <option value=" " disabled hidden >Cidade</option>
-                                            {
-                                                cities.map(
-                                                    (city) => {
-                                                        return (
-                                                            <option
-                                                                key={city.id}
-                                                                value={city.nome}
-                                                            >
-                                                                {city.nome}
-                                                            </option>
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        </select>
-                                        <select
                                             id="uf"
                                             defaultValue=" "
                                             onChange={(e) => { setUf(e.target.value) }}
@@ -261,6 +240,27 @@ function Search() {
                                                                 value={uf.sigla}
                                                             >
                                                                 {uf.sigla}
+                                                            </option>
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                        </select>
+                                        <select
+                                            id="city"
+                                            defaultValue=" "
+                                            onChange={(e) => { setCity(e.target.value) }}
+                                        >
+                                            <option value=" " disabled hidden >Cidade</option>
+                                            {
+                                                cities.map(
+                                                    (city) => {
+                                                        return (
+                                                            <option
+                                                                key={city.id}
+                                                                value={city.nome}
+                                                            >
+                                                                {city.nome}
                                                             </option>
                                                         )
                                                     }
@@ -315,7 +315,7 @@ function Search() {
                                         key={index}
                                         position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
                                         draggable={false}
-                                        icon={doctorIcon}>
+                                        icon={manDoctor}>
                                         <Popup>
                                             <DoctorMarker
                                                 name={doctor.nome}
