@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../assets/images/simple-only-logo.png';
-import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import logo from '../../assets/images/simple-only-logo.png';
+import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import './styles.css';
 
@@ -37,10 +37,11 @@ function AddDoctor() {
                 setCities([...resp.data]);
             }
         );
-    }, [uf])
+    }, [uf]);
 
     async function handleSubmit(e) {
         e.preventDefault();
+
 
         await api.post("/cadastro", {
             nome,
@@ -75,6 +76,26 @@ function AddDoctor() {
                     value={nome}
                     onChange={e => setNome(e.target.value)}
                 />
+                <div className="gender-types">
+                    <div className="gender-types-div">
+                        <input 
+                            type="radio" 
+                            name="masculino" 
+                            id="masculino" 
+                            // value={}
+                        />
+                        <label className="masculino">Masculino</label>
+                    </div>
+                    <div className="gender-types-div">
+                        <input 
+                            type="radio" 
+                            name="feminino" 
+                            id="feminino" 
+                            // value={}
+                        />
+                        <label className="feminino">Feminino</label>
+                    </div>
+                </div>
 
                 <label className="especialidade">Especialidade</label>
                 <input
@@ -159,7 +180,44 @@ function AddDoctor() {
                     value={endereco}
                     onChange={e => setEndereco(e.target.value)}
                 />
-
+                 <div className="adress-types">
+                    <div className="adress-types-div">
+                        <input 
+                            type="radio" 
+                            id="consultorio" 
+                            name="consultorio" 
+                            // value={}
+                        />
+                        <label className="consultorio">Consultorio</label>
+                    </div>
+                    <div className="adress-types-div">
+                        <input 
+                            type="radio" 
+                            id="clinica" 
+                            name="clinica" 
+                            // value={}
+                        />
+                        <label className="clinica">Clínica</label>
+                    </div>
+                    <div className="adress-types-div">
+                        <input 
+                            type="radio" 
+                            id="hospital" 
+                            name="hospital" 
+                            // value={}
+                        />
+                        <label className="hospital">Hospital</label>
+                    </div>
+                    <div className="adress-types-div">
+                        <input 
+                            type="radio" 
+                            id="laboratorio" 
+                            name="laboratorio" 
+                            // value={}
+                        />
+                        <label className="laboratorio">Laboratório</label>
+                    </div>
+                </div>
                 <label className="telefone">Telefone</label>
                 <input
                     type="number"
