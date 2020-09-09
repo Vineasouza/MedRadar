@@ -1,8 +1,9 @@
 .main-doctor {
     /* Online Doctor-bro 1 */
     position: fixed;
-    width: 250px;
-    height: 250px;
+    /* width: 250px;
+    height: 250px; */
+    width: 20%;
     left: 0px;
     bottom: 10px;
     z-index: -10000;
@@ -13,12 +14,13 @@
     /*position: absolute;
     left: 40%;*/
     top: 10%;
-    width: 400px;
-    height: 92px;
+    /* width: 400px;
+    height: 92px; */
+    width: 25%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 10px; 
+    padding-top: 5px; 
 }
 
 .forms-block { 
@@ -91,6 +93,56 @@
 .uf select:focus {
     box-shadow: 0 0 0 0;
     outline: 0;
+}
+
+.gender-types {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.gender-types label {
+    font-size: 16px;
+}
+
+.gender-types-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.gender-types input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 1em;
+    margin-left: 0px;
+}
+
+/**/
+
+.adress-types {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.adress-types label {
+    font-size: 16px;
+}
+
+.adress-types-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.adress-types input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 1em;
+    margin-left: 0px;
 }
 
 .add-actions {
@@ -192,6 +244,46 @@ select {
         margin-right: auto;
         padding-top: 10px; 
     }
+
+    .gender-types{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .gender-types input[type=radio] {
+        border: 0px;
+        width: 100%;
+        height: 1em;
+        margin-right: 10px;
+    }
+
+    .gender-types-div{
+        display: flex;
+        flex-direction: row;
+        /* margin-right: 100%; */
+    }
+
+    .adress-types {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .adress-types input[type=radio] {
+        border: 0px;
+        width: 100%;
+        height: 1em;
+        margin-right: 10px;
+    }
+
+    .adress-types-div{
+        margin-right: 100%;
+    }
+
+    .adress-types label {
+        text-align: cente;
+    }
+
     .add-actions {
         align-items: flex-start;
         display: flex;
