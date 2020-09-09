@@ -1,6 +1,6 @@
 import Geocode from "react-geocode";
 import React from  'react';
-require('dotenv').config()
+require('dotenv').config();
 
 Geocode.setApiKey(process.env.REACT_APP_API);
 Geocode.enableDebug();

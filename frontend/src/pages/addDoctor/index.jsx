@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Geocode from "react-geocode";
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import './styles.css';
+require('dotenv').config();
 
 
 function AddDoctor() {
@@ -22,6 +24,7 @@ function AddDoctor() {
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
     const [cities, setCities] = useState([]);
+
 
     useEffect(() => {
         axios.get(
@@ -41,9 +44,24 @@ function AddDoctor() {
         );
     }, [uf]);
 
+    // getting latitude and longitude with the Google API, using react-geocode
+    Geocode.setApiKey(process.env.REACT_APP_API);
+    Geocode.enableDebug();
+    const fullAdress = `${endereco}, ${cidade}, ${uf}`;
+    // Get latidude & longitude from address.
+    Geocode.fromAddress(fullAdress).then(
+        response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(`${lat}, ${lng}`);
+        },
+        error => {
+        console.error(error);
+        }
+    );
+    
+
     async function handleSubmit(e) {
         e.preventDefault();
-
 
         await api.post("/cadastro", {
             nome,
@@ -60,7 +78,6 @@ function AddDoctor() {
             response => console.log(response.status)
         );
     }
-
 
     return (
         <main>

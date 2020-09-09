@@ -14,7 +14,7 @@ import Doctor from './components/doctor';
 import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
 import FilterResult from './components/filterResult';
-import { manDoctor, womanDoctor } from './components/icons/doctor';
+import { manDoctor } from './components/icons/doctor';
 
 function Search() {
 

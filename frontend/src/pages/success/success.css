@@ -1,8 +1,9 @@
 .main-doctor-2 {
     /* Online Doctor-bro 1 */
     position: absolute;
-    width: 250px;
-    height: 250px;
+    /* width: 250px;
+    height: 250px; */
+    width: 20%;
     left: 0px;
     bottom: 10px;
 }
