@@ -39,6 +39,7 @@ module.exports = async function create(request, response) {
         location
     }).catch((e) => {
         // Caso de erro
+        console.log(e);
         return null;
     }).then((newMedCreated) => {
         // Caso de sucesso na criação
