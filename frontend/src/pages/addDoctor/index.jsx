@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
-import { getLatLong } from './service/geocode';
+import { getLatLong } from './services/geocode';
 import './styles.css';
 
 function AddDoctor() {
@@ -240,7 +239,7 @@ function AddDoctor() {
                     id="telefone"
                     required
                     pattern="\(?[0]?\d{2}\)?[9]?\d{4}-?\d{4}"
-                    title="Invalid input"
+                    title="Preencha este campo."
                     placeholder="(xxx)xxxxx-xxxx"
                     value={telefone}
                     onChange={e => setTelefone(e.target.value)}
@@ -253,18 +252,14 @@ function AddDoctor() {
                     id="email"
                     required
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    title="Invalid input"
+                    title="Preencha este campo."
                     placeholder="email@email.com.br"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
                 <section className="add-actions">
-                    <Link to="/main-initial">
-                        <button>Cancelar</button>
-                    </Link>
-                    {/* <Link to="/success"> */}
+                    <button>Cancelar</button>
                     <button type="submit">Cadastrar</button>
-                    {/* </Link> */}
                 </section>
             </form>
         </main>

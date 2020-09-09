@@ -113,10 +113,11 @@
 }
 
 .gender-types input[type=radio] {
-    border: 0px;
-    width: 100%;
+    border: none;
+    width: 1em;
     height: 1em;
     margin-left: 0px;
+    -webkit-appearance: radio;
 }
 
 /**/
@@ -139,10 +140,11 @@
 }
 
 .adress-types input[type=radio] {
-    border: 0px;
-    width: 100%;
+    border: none;
+    width: 1em;
     height: 1em;
     margin-left: 0px;
+    -webkit-appearance: radio;
 }
 
 .add-actions {
@@ -167,8 +169,9 @@
     letter-spacing: 0.05em;
     line-height: 20px;
     height: 30px;
-    width: 205px;
-    margin: 0 20px;
+    width: 250px;
+    /* topo | direita | inferior | esquerda */
+    margin: 0px 5px 5px 5px;
 }   
 
 .add-actions button:hover{
@@ -252,8 +255,8 @@ select {
     }
 
     .gender-types input[type=radio] {
-        border: 0px;
-        width: 100%;
+        border: none;
+        width: 1em;
         height: 1em;
         margin-right: 10px;
     }
@@ -270,10 +273,11 @@ select {
     }
 
     .adress-types input[type=radio] {
-        border: 0px;
-        width: 100%;
+        border: none;
+        width: 1em;
         height: 1em;
         margin-right: 10px;
+        -webkit-appearance: radio;
     }
 
     .adress-types-div{
