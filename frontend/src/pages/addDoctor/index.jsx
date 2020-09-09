@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Geocode from "react-geocode";
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
+import { getLatLong } from './service/geocode';
 import './styles.css';
-require('dotenv').config();
-
 
 function AddDoctor() {
     const [nome, setNome] = useState('');
@@ -44,24 +42,14 @@ function AddDoctor() {
         );
     }, [uf]);
 
-    // getting latitude and longitude with the Google API, using react-geocode
-    Geocode.setApiKey(process.env.REACT_APP_API);
-    Geocode.enableDebug();
-    const fullAdress = `${endereco}, ${cidade}, ${uf}`;
-    // Get latidude & longitude from address.
-    Geocode.fromAddress(fullAdress).then(
-        response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(`${lat}, ${lng}`);
-        },
-        error => {
-        console.error(error);
-        }
-    );
-    
-
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const coordinates = await getLatLong({
+            endereco: endereco,
+            cidade: cidade,
+            uf: uf
+        });
 
         await api.post("/cadastro", {
             nome,
@@ -72,8 +60,8 @@ function AddDoctor() {
             endereco,
             telefone,
             email,
-            latitude: -23.4337991, // Latitude e Longitude is Default to Nova Fátima, but can change
-            longitude: -50.5644485
+            latitude: coordinates.latitude, // Latitude e Longitude is Default to Nova Fátima, but can change
+            longitude: coordinates.longitude
         }).then(
             response => console.log(response.status)
         );
@@ -98,20 +86,20 @@ function AddDoctor() {
                 />
                 <div className="gender-types">
                     <div className="gender-types-div">
-                        <input 
-                            type="radio" 
-                            id="masculino" 
-                            name="genero" 
+                        <input
+                            type="radio"
+                            id="masculino"
+                            name="genero"
                             value={genero}
                             onChange={e => setGenero(e.target.value)}
                         />
                         <label className="masculino">Masculino</label>
                     </div>
                     <div className="gender-types-div">
-                        <input 
-                            type="radio" 
-                            id="feminino" 
-                            name="genero" 
+                        <input
+                            type="radio"
+                            id="feminino"
+                            name="genero"
                             value={genero}
                             // checked={this.set.radio === "feminino"}
                             onChange={e => setGenero(e.target.value)}
@@ -203,42 +191,42 @@ function AddDoctor() {
                     value={endereco}
                     onChange={e => setEndereco(e.target.value)}
                 />
-                 <div className="adress-types">
+                <div className="adress-types">
                     <div className="adress-types-div">
-                        <input 
-                            type="radio" 
-                            id="consultorio" 
-                            name="adress-type" 
+                        <input
+                            type="radio"
+                            id="consultorio"
+                            name="adress-type"
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="consultorio">Consultorio</label>
                     </div>
                     <div className="adress-types-div">
-                        <input 
-                            type="radio" 
-                            id="clinica" 
-                            name="adress-type" 
+                        <input
+                            type="radio"
+                            id="clinica"
+                            name="adress-type"
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="clinica">Clínica</label>
                     </div>
                     <div className="adress-types-div">
-                        <input 
-                            type="radio" 
-                            id="hospital" 
-                            name="adress-type" 
+                        <input
+                            type="radio"
+                            id="hospital"
+                            name="adress-type"
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="hospital">Hospital</label>
                     </div>
                     <div className="adress-types-div">
-                        <input 
-                            type="radio" 
-                            id="laboratorio" 
-                            name="adress-type" 
+                        <input
+                            type="radio"
+                            id="laboratorio"
+                            name="adress-type"
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
