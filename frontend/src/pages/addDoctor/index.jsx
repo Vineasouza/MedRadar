@@ -16,6 +16,8 @@ function AddDoctor() {
     const [endereco, setEndereco] = useState('');
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
+    const [genero, setGenero] = useState('');
+    const [tipoEndereco, setTipoEndereco] = useState('');
 
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
@@ -59,6 +61,7 @@ function AddDoctor() {
         );
     }
 
+
     return (
         <main>
             <header className="main-header">
@@ -80,18 +83,21 @@ function AddDoctor() {
                     <div className="gender-types-div">
                         <input 
                             type="radio" 
-                            name="masculino" 
                             id="masculino" 
-                            // value={}
+                            name="genero" 
+                            value={genero}
+                            onChange={e => setGenero(e.target.value)}
                         />
                         <label className="masculino">Masculino</label>
                     </div>
                     <div className="gender-types-div">
                         <input 
                             type="radio" 
-                            name="feminino" 
                             id="feminino" 
-                            // value={}
+                            name="genero" 
+                            value={genero}
+                            // checked={this.set.radio === "feminino"}
+                            onChange={e => setGenero(e.target.value)}
                         />
                         <label className="feminino">Feminino</label>
                     </div>
@@ -185,8 +191,9 @@ function AddDoctor() {
                         <input 
                             type="radio" 
                             id="consultorio" 
-                            name="consultorio" 
-                            // value={}
+                            name="adress-type" 
+                            value={tipoEndereco}
+                            onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="consultorio">Consultorio</label>
                     </div>
@@ -194,8 +201,9 @@ function AddDoctor() {
                         <input 
                             type="radio" 
                             id="clinica" 
-                            name="clinica" 
-                            // value={}
+                            name="adress-type" 
+                            value={tipoEndereco}
+                            onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="clinica">Clínica</label>
                     </div>
@@ -203,8 +211,9 @@ function AddDoctor() {
                         <input 
                             type="radio" 
                             id="hospital" 
-                            name="hospital" 
-                            // value={}
+                            name="adress-type" 
+                            value={tipoEndereco}
+                            onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="hospital">Hospital</label>
                     </div>
@@ -212,8 +221,9 @@ function AddDoctor() {
                         <input 
                             type="radio" 
                             id="laboratorio" 
-                            name="laboratorio" 
-                            // value={}
+                            name="adress-type" 
+                            value={tipoEndereco}
+                            onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="laboratorio">Laboratório</label>
                     </div>
