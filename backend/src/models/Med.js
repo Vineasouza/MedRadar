@@ -6,11 +6,10 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    /*genero: {
+    genero: {
         type: String,
         require: true,
     },
-    */
     especialidade: {
         type: String,
         require: true,
@@ -32,12 +31,10 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    /*
     tipoEndereco: {
         type: String,
         require: true,
     },
-    */
     telefone: {
         type: String,
         validate: {
