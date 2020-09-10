@@ -52,11 +52,13 @@ function AddDoctor() {
 
         await api.post("/cadastro", {
             nome,
+            genero,
             especialidade,
             convenio,
             uf,
             cidade,
             endereco,
+            tipoEndereco,
             telefone,
             email,
             latitude: coordinates.latitude, // Latitude e Longitude is Default to Nova Fátima, but can change
@@ -89,7 +91,7 @@ function AddDoctor() {
                             type="radio"
                             id="masculino"
                             name="genero"
-                            value={genero}
+                            value="masculino"
                             onChange={e => setGenero(e.target.value)}
                         />
                         <label className="masculino">Masculino</label>
@@ -99,8 +101,7 @@ function AddDoctor() {
                             type="radio"
                             id="feminino"
                             name="genero"
-                            value={genero}
-                            // checked={this.set.radio === "feminino"}
+                            value="feminino"
                             onChange={e => setGenero(e.target.value)}
                         />
                         <label className="feminino">Feminino</label>
@@ -196,7 +197,7 @@ function AddDoctor() {
                             type="radio"
                             id="consultorio"
                             name="adress-type"
-                            value={tipoEndereco}
+                            value="consultorio"
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="consultorio">Consultorio</label>
@@ -206,7 +207,7 @@ function AddDoctor() {
                             type="radio"
                             id="clinica"
                             name="adress-type"
-                            value={tipoEndereco}
+                            value="clinica"
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="clinica">Clínica</label>
@@ -216,7 +217,7 @@ function AddDoctor() {
                             type="radio"
                             id="hospital"
                             name="adress-type"
-                            value={tipoEndereco}
+                            value="hospital"
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="hospital">Hospital</label>
@@ -226,7 +227,7 @@ function AddDoctor() {
                             type="radio"
                             id="laboratorio"
                             name="adress-type"
-                            value={tipoEndereco}
+                            value="laboratorio"
                             onChange={e => setTipoEndereco(e.target.value)}
                         />
                         <label className="laboratorio">Laboratório</label>
