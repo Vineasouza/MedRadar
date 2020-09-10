@@ -14,7 +14,7 @@ import Doctor from './components/doctor';
 import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
 import FilterResult from './components/filterResult';
-import { manDoctor } from './components/icons/doctor';
+import { manDoctor, womanDoctor } from './components/icons/doctor';
 
 function Search() {
 
@@ -290,7 +290,14 @@ function Search() {
                                         name={doctor.nome}
                                         specialty={doctor.especialidade}
                                         distance={radius}
-                                        image="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+
+                                        // This part is only test, in the future it will change and get image from back-end
+                                        image={
+                                            doctor.genero === "masculino" ?
+                                                "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                                : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                        }
+
                                     />
                                 )
                             })
@@ -315,7 +322,7 @@ function Search() {
                                         key={index}
                                         position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
                                         draggable={false}
-                                        icon={manDoctor}>
+                                        icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
                                         <Popup>
                                             <DoctorMarker
                                                 name={doctor.nome}
