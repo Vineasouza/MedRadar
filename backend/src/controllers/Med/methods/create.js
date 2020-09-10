@@ -9,6 +9,8 @@ module.exports = async function create(request, response) {
         nome,
         especialidade,
         convenio,
+        genero,
+        tipoEndereco,
         uf,
         cidade,
         endereço,
@@ -36,7 +38,9 @@ module.exports = async function create(request, response) {
         endereço,
         telefone,
         email,
-        location
+        location,
+        genero,
+        tipoEndereco
     }).catch((e) => {
         // Caso de erro
         console.log(e);
