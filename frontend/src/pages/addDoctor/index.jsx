@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
@@ -41,6 +42,11 @@ function AddDoctor() {
         );
     }, [uf]);
 
+    let history = useHistory();
+    function handleClick() {
+        history.push("/main-initial");
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -66,6 +72,7 @@ function AddDoctor() {
         }).then(
             response => console.log(response.status)
         );
+        history.push("/success");
     }
 
     return (
@@ -259,8 +266,8 @@ function AddDoctor() {
                     onChange={e => setEmail(e.target.value)}
                 />
                 <section className="add-actions">
-                    <button>Cancelar</button>
-                    <button type="submit">Cadastrar</button>
+                    <button onClick={handleClick}>Cancelar</button>
+                    <button type="submit" >Cadastrar</button>
                 </section>
             </form>
         </main>
