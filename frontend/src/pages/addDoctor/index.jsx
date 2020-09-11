@@ -44,7 +44,7 @@ function AddDoctor() {
 
     let history = useHistory();
     function handleClick() {
-        history.push("/main-initial");
+        history.push("/");
     }
 
     async function handleSubmit(e) {
