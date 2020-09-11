@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { FiArrowLeft, FiSearch } from 'react-icons/fi';
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
-import { FaMinus, FaPlus } from 'react-icons/fa';
+import { FaMinus, FaPlus, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 
 import './styles.css';
@@ -159,7 +159,10 @@ function Search() {
                 </section>
 
                 <section className="search-actions">
-                    <button>Pesquisar <FiSearch /></button>
+                    <div className="search-box">
+                        <input type="text" />
+                        <FaSearch />
+                    </div>
 
                     <div className="search-filters-results">
                         {

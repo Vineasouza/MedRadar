@@ -54,42 +54,64 @@
 .search-actions {
     display: flex;
     justify-content: space-between;
-}
-
-.search-actions  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 285px;
     height: 30px;
-    border-radius: 8px;
-    border-color: #08082D;
-    border-width: 2px;
+}
+
+.search-actions svg{
     color: #08082D;
+}
+
+.search-actions .search-box{
+    width: 284.5px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-actions .search-box svg{
+    margin-right: 10px;
+    height: 22px;
+}
+
+.search-actions .search-box input{
+    border-style: none;
+    margin-left: 10px;
+}
+
+.search-actions .search-filters  > button, .search-actions .search-box{
     background-color: whitesmoke;
-    font-size: 18px;
-    font-family: Archivo, sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    margin-left: 0px;
-}
-
-.search-actions  button:hover{
-    opacity: 75%;
-}
-
-.search-actions svg {
     color: #08082D;
-    margin-left: 5px;
-    margin-top: 2px
+    border-radius: 8px;
+    border: 2px solid #08082D;
+}
+
+.search-actions .search-filters  button,.search-actions .search-box input{
+    font: normal 18px Archivo;
+    letter-spacing: 0.05em;
 }
 
 .search-actions .search-filters {
     position: relative;
     display: flex;
+}
+
+.search-actions .search-filters svg {
+    margin-left: 5px;
+    margin-top: 2px
+}
+
+.search-actions .search-filters > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 285px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-actions .search-filters button:hover{
+    opacity: 75%;
 }
 
 .search-filters-results{
@@ -168,6 +190,7 @@
 }
 
 #filters-container > button{
+    height: 30px;
     background-color: #08082D;
     border:0;
     border-radius: 0;
@@ -251,6 +274,7 @@
     width: 70%;
 }
 
+/* Config to others devices */
 @media(max-width: 700px){
     
     #search-main{
@@ -282,15 +306,18 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        height: auto;
     }
     .search-actions div, button{
         margin-top: 4px;
+    }
+    .search-actions .search-filters{
+        height: 30px;
     }
     .search-filters-results{
         justify-content: center;
         flex-wrap: wrap;
     }
-
     .leaflet-top{
         top: 350px;
     }
