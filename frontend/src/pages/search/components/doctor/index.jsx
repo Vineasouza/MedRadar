@@ -1,10 +1,8 @@
 import React from 'react';
-import { manDoctor, womanDoctor } from '../icons/doctor'
 
 import './styles.css';
 
-const Doctor = ({ name, specialty, distance, image, genderDefault }) => {
-
+const Doctor = ({ name, specialty, distance, image }) => {
 
     return (
         <div id="doctor-container">
