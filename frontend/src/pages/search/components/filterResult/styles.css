@@ -10,14 +10,10 @@
 
 #filter-result-container button{
     margin-left: 2px;
-    border-radius: 50%;
-    width: 30px;
+    border-radius: 5px;
     border: 0;
     outline: 0;
     transition: opacity 0.2s;
-}
-#filter-result-container button svg{
-    margin: 0;
 }
 
 #filter-result-container button:hover{
@@ -33,5 +29,8 @@
 @media(max-width: 700px){
     #filter-result-container{
         margin-top: 5px;
+    }
+    #filter-result-container p{
+        margin-bottom: 2px;
     }
 }
