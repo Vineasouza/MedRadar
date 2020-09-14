@@ -7,7 +7,7 @@ const Doctor = ({ name, specialty, distance, image }) => {
     return (
         <div id="doctor-container">
             <section className="doctor-image">
-                <img src={image} alt="Image do doutor" />
+                <img src={image} alt="doutor" />
             </section>
             <section className="doctor-info">
                 <h1>{name}</h1>

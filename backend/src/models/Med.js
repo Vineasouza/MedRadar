@@ -9,6 +9,7 @@ const MedSchema = new mongoose.Schema({
     genero: {
         type: String,
         require: true,
+        lowercase: true,
     },
     especialidade: {
         type: String,
@@ -34,6 +35,7 @@ const MedSchema = new mongoose.Schema({
     tipoEndereco: {
         type: String,
         require: true,
+        lowercase: true,
     },
     telefone: {
         type: String,
