@@ -3,7 +3,6 @@ const Med = require('../../../models/Med');
 module.exports = async function find(request, response) {
 
     let resultSearch;
-    console.log(request.query)
     const {
         latitude,
         longitude,
@@ -73,13 +72,11 @@ module.exports = async function find(request, response) {
         resultSearch = await Med.find(query);
     }
 
-    if (!resultSearch) {
+    if (resultSearch.length === 0) {
         return response.status(404).json({
             msg: "Data not found, try again!!"
         })
     }
 
     return response.status(200).json(resultSearch);
-
-
 }

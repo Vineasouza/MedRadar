@@ -25,3 +25,5 @@ app.use(routes);
 
 
 app.listen(8080);
+
+module.exports = app;
