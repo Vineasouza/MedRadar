@@ -61,11 +61,23 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
                 done();
             });
     })
+
+    it("Only with radius", (done) => {
+
+        var latitude = -23.4444548;
+        var longitude = -50.5653303;
+        var radius = 10;
+        query = `${radius}&${latitude}&${longitude}`;
+
+        chai.request(server)
+            .get(`/procurar?${query}`)
+            .end((err, response) => {
+                response.should.have.status(200);
+                response.body.should.be.a("Array");
+                done();
+            })
+    })
 })
-
-
-
-
 
 
 describe("GET:// PROCURAR --> METHOD FIND CASES OF ERROR OR SYSTEM DIDN'T FIND DATAS", () => {
