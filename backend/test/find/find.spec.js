@@ -5,13 +5,15 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 var query;
+var specialty;
 
 describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
 
 
     it("Only with specialty", (done) => {
 
-        query = "specialty=psiquiatra";
+        specialty = "psiquiatra"
+        query = `specialty=${specialty}`;
 
         chai.request(server)
             .get(`/procurar?${query}`)
@@ -19,14 +21,18 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
                 response.should.have.status(200);
                 response.body.should.be.a("Array");
                 response.body.forEach(element => {
-                    element.should.have.property("especialidade", "psiquiatra");
+                    element.should.have.property("especialidade", specialty);
                 });
                 done();
             })
     });
 
     it("Specialty with city", (done) => {
-        query = "specialty=psiquiatra&city=Nova%20F%C3%A1tima";
+
+        specialty = "psiquiatra";
+        var city = "Nova%20F%C3%A1tima";
+
+        query = `specialty=${specialty}&city=${city}`;
 
         chai.request(server)
             .get(`/procurar?${query}`)
@@ -34,25 +40,56 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
                 response.should.have.status(200);
                 response.body.should.be.a("Array");
                 response.body.forEach(element => {
-                    element.should.have.property("especialidade", "psiquiatra");
+                    element.should.have.property("especialidade", specialty);
                     element.should.have.property("cidade", "Nova Fátima");
                 });
                 done();
             })
     });
+
+    it("Only with city", (done) => {
+
+        query = "city=S%C3%A3o%20Jos%C3%A9%20dos%20Campos";
+        chai.request(server)
+            .get(`/procurar?${query}`)
+            .end((err, response) => {
+                response.should.have.status(200);
+                response.body.should.be.a("Array");
+                response.body.forEach(element => {
+                    element.should.have.property("cidade", "São José dos Campos");
+                })
+                done();
+            });
+    })
 })
+
+
+
+
+
 
 describe("GET:// PROCURAR --> METHOD FIND CASES OF ERROR OR SYSTEM DIDN'T FIND DATAS", () => {
 
     it("Dont't have doctors with the specialty", (done) => {
 
-        query = "specialty=oncologista";
+        specialty = "oncologista";
+        query = `specialty=o${specialty}`;
 
         chai.request(server)
             .get(`/procurar?${query}`)
             .end((err, response) => {
                 response.should.have.status(404);
                 done();
-            })
+            });
     });
+
+    it("Calling the route whitout querys to filter", (done) => {
+
+        chai.request(server)
+            .get('/procurar')
+            .end((err, response) => {
+                response.should.have.status(406);
+                done();
+            });
+    })
 })
