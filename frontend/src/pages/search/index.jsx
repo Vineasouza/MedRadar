@@ -102,7 +102,7 @@ function Search() {
             })
         }
 
-    }, [isApplyFilter, city, specialty]);
+    }, [isApplyFilter, city, specialty, initialPosition]);
 
     function handleRadius(operation) {
 

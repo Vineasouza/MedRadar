@@ -268,12 +268,13 @@ select {
     }
 
     .adress-types {
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
 
     .adress-types input[type=radio] {
-        border: none;
+        border: 2px;
         width: 1em;
         height: 1em;
         margin-right: 10px;
@@ -281,11 +282,12 @@ select {
     }
 
     .adress-types-div{
-        margin-right: 100%;
+        display: flex;
+        flex-direction: row;
     }
 
     .adress-types label {
-        text-align: cente;
+        text-align: center;
     }
 
     .add-actions {
