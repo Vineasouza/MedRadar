@@ -2,6 +2,11 @@ const Med = require('../../../models/Med');
 
 module.exports = async function find(request, response) {
 
+
+    if (Object.keys(request.query).length === 0) {
+        return response.status(406).send();
+    }
+
     let resultSearch;
     const {
         latitude,
@@ -11,6 +16,7 @@ module.exports = async function find(request, response) {
     } = request.query;
 
     let query = {};
+
     if (specialty != undefined) {
         query.especialidade = specialty;
     }
