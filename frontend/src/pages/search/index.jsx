@@ -94,13 +94,15 @@ function Search() {
         }
 
         // Calling API to get datas with FILTER
-        api.get("/procurar", {
-            params: query
-        }).then((response) => {
-            setDoctors(response.data);
-        })
+        if (Object.keys(query).length !== 0) {
+            api.get("/procurar", {
+                params: query
+            }).then((response) => {
+                setDoctors(response.data);
+            })
+        }
 
-    }, [isApplyFilter, city, specialty, initialPosition]);
+    }, [isApplyFilter, city, specialty]);
 
     function handleRadius(operation) {
 
@@ -142,6 +144,7 @@ function Search() {
 
     function handleClickToDoFilter() {
         setIsFilter(!isFilter);
+        setIsApplyFilter(false);
         setUf("");
     }
     return (
@@ -166,7 +169,7 @@ function Search() {
 
                     <div className="search-filters-results">
                         {
-                            isApplyFilter && radius !== 10 && <FilterResult
+                            radius !== 10 && <FilterResult
                                 data={
                                     {
                                         type: "radius",
@@ -177,7 +180,7 @@ function Search() {
                             />
                         }
                         {
-                            isApplyFilter && specialty !== "" && < FilterResult
+                            specialty !== "" && < FilterResult
                                 data={
                                     {
                                         type: "specialty",
@@ -188,7 +191,7 @@ function Search() {
                             />
                         }
                         {
-                            isApplyFilter && city !== "" && < FilterResult
+                            city !== "" && < FilterResult
                                 data={
                                     {
                                         type: "city",
