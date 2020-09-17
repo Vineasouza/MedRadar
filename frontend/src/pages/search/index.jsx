@@ -22,6 +22,7 @@ function Search() {
     const [initialPosition, setInitialPosition] = useState([0, 0]);
     const [centerMap, setCenterMap] = useState([0, 0]); // Center position of Map
     const [isFilter, setIsFilter] = useState(false);
+    const [isApllyFilter, setIsApplyFilter] = useState(false);
 
     const [radius, setRadius] = useState(10);
     const [isUseRadius, setIsUseRadius] = useState(false);
@@ -80,10 +81,12 @@ function Search() {
 
     useEffect(() => {
         async function updateFilter() {
-            await handleDoingFilter();
+            await callAPI();
         }
-        updateFilter();
-    }, [isUseCity, isUseSpecialty, isUseRadius])
+        if (isApllyFilter) {
+            updateFilter();
+        }
+    }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter]);
 
 
     function handleRadius(operation) {
@@ -93,9 +96,7 @@ function Search() {
         } else {
             newRadius = radius - 1;
         }
-
         setRadius(newRadius);
-        setIsUseRadius(true);
     }
 
     function handleSpecialty(event) {
@@ -115,7 +116,10 @@ function Search() {
 
     async function handleDoingFilter() {
         setIsFilter(false);
-        await callAPI();
+        if (radius !== 10) {
+            setIsUseRadius(true);
+        }
+        setIsApplyFilter(true);
     }
 
 
@@ -148,10 +152,6 @@ function Search() {
             setCenterMap([initialPosition[0], initialPosition[1]]);
         } else {
 
-            if (isUseRadius) {
-                newQuery.radius = radius;
-            }
-
             if (isUseCity) {
                 newQuery.city = city;
                 newQuery.uf = uf;
@@ -160,6 +160,14 @@ function Search() {
             if (isUseSpecialty) {
                 newQuery.specialty = specialty;
             }
+
+            // CASE IF THE USER CHOOSE ONLY RADIUS
+            if (Object.keys(newQuery).length === 0) {
+                newQuery.radius = radius;
+                newQuery.latitude = initialPosition[0];
+                newQuery.longitude = initialPosition[1];
+            }
+
         }
 
         return newQuery;
