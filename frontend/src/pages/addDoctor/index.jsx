@@ -4,7 +4,7 @@ import axios from 'axios';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
-import { getLatLong } from './services/geocode';
+import { getLatLong } from '../../services/geocode';
 import './styles.css';
 
 function AddDoctor() {
@@ -50,11 +50,8 @@ function AddDoctor() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const coordinates = await getLatLong({
-            endereco: endereco,
-            cidade: cidade,
-            uf: uf
-        });
+        const adress = `${endereco}, ${cidade}, ${uf}`;
+        const coordinates = await getLatLong(adress);
 
         await api.post("/cadastro", {
             nome,

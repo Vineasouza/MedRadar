@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { FiArrowLeft } from 'react-icons/fi';
-import { FaFilter } from 'react-icons/fa'
+import { FaFilter, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { FaMinus, FaPlus, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
@@ -15,16 +15,23 @@ import FilterOption from './components/filterOption'
 import DoctorMarker from './components/doctorMarker';
 import FilterResult from './components/filterResult';
 import { manDoctor, womanDoctor } from './components/icons/doctor';
+import { getLatLong } from '../../services/geocode';
 
 function Search() {
 
     const [initialPosition, setInitialPosition] = useState([0, 0]);
     const [centerMap, setCenterMap] = useState([0, 0]); // Center position of Map
     const [isFilter, setIsFilter] = useState(false);
-    const [isApplyFilter, setIsApplyFilter] = useState(false);
+
     const [radius, setRadius] = useState(10);
+    const [isUseRadius, setIsUseRadius] = useState(false);
+
     const [specialty, setSpecialty] = useState("");
+    const [isUseSpecialty, setIsUseSpecialty] = useState(false);
+
     const [city, setCity] = useState("");
+    const [isUseCity, setIsUseCity] = useState(false);
+
     const [uf, setUf] = useState("");
     const [doctors, setDoctors] = useState([]);
 
@@ -72,40 +79,14 @@ function Search() {
     }, [uf])
 
     useEffect(() => {
-
-        var query = {};
-
-        if (city === "" && specialty === "") {
-            setIsApplyFilter(false);
-            query.latitude = initialPosition[0];
-            query.longitude = initialPosition[1];
+        async function updateFilter() {
+            await handleDoingFilter();
         }
+        updateFilter();
+    }, [isUseCity, isUseSpecialty, isUseRadius])
 
-        if (isApplyFilter) {
-
-            if (specialty !== "") {
-                query.specialty = specialty;
-            }
-
-            if (city !== "") {
-                query.city = city;
-            }
-
-        }
-
-        // Calling API to get datas with FILTER
-        if (Object.keys(query).length !== 0) {
-            api.get("/procurar", {
-                params: query
-            }).then((response) => {
-                setDoctors(response.data);
-            })
-        }
-
-    }, [isApplyFilter, city, specialty, initialPosition]);
 
     function handleRadius(operation) {
-
         let newRadius;
         if (operation === "sum") {
             newRadius = radius + 1;
@@ -114,39 +95,76 @@ function Search() {
         }
 
         setRadius(newRadius);
+        setIsUseRadius(true);
     }
 
-    function hanleApplyFilter() {
-
-        setIsFilter(false);
-        if (radius === 10 && specialty === "" && city === "") {
-            return;
-        }
-
-        setIsApplyFilter(true);
+    function handleSpecialty(event) {
+        setSpecialty(event.target.value);
+        setIsUseSpecialty(true);
     }
 
-    function handleDeleleFilterOption(type) {
-        switch (type) {
-            case "radius":
-                setRadius(10);
-                break;
-            case "specialty":
-                setSpecialty("");
-                break;
-            case "city":
-                setCity("");
-                break;
-            default:
-                return;
-        }
+    function handleCity(event) {
+        setCity(event.target.value);
+        setIsUseCity(true);
     }
 
     function handleClickToDoFilter() {
         setIsFilter(!isFilter);
-        setIsApplyFilter(false);
         setUf("");
     }
+
+    async function handleDoingFilter() {
+        setIsFilter(false);
+        await callAPI();
+    }
+
+
+    async function callAPI() {
+
+        var query = buildQuery();
+
+        if (query.hasOwnProperty("city")) {
+            const adress = `${query.city}, ${query.uf}`;
+            const coordinates = await getLatLong(adress);
+            delete query.uf;
+            query.latitude = coordinates.latitude;
+            query.longitude = coordinates.longitude;
+            setCenterMap([coordinates.latitude, coordinates.longitude]);
+        }
+
+        const doctorsResult = await api.get("/procurar", {
+            params: query
+        });
+
+        setDoctors(doctorsResult.data);
+    }
+
+    function buildQuery() {
+
+        var newQuery = {};
+        if (!isUseCity && !isUseRadius && !isUseSpecialty) {
+            newQuery.latitude = initialPosition[0];
+            newQuery.longitude = initialPosition[1];
+            setCenterMap([initialPosition[0], initialPosition[1]]);
+        } else {
+
+            if (isUseRadius) {
+                newQuery.radius = radius;
+            }
+
+            if (isUseCity) {
+                newQuery.city = city;
+                newQuery.uf = uf;
+            }
+
+            if (isUseSpecialty) {
+                newQuery.specialty = specialty;
+            }
+        }
+
+        return newQuery;
+    }
+
     return (
         <div id="search-page">
 
@@ -169,37 +187,46 @@ function Search() {
 
                     <div className="search-filters-results">
                         {
-                            radius !== 10 && <FilterResult
+                            isUseRadius && <FilterResult
                                 data={
                                     {
                                         type: "radius",
                                         value: radius
                                     }
                                 }
-                                handleClick={handleDeleleFilterOption}
-                            />
+                            >
+                                <button onClick={async () => { setIsUseRadius(false); }}>
+                                    <FaTimes />
+                                </button>
+                            </FilterResult>
                         }
                         {
-                            specialty !== "" && < FilterResult
+                            isUseSpecialty && < FilterResult
                                 data={
                                     {
                                         type: "specialty",
                                         value: specialty
                                     }
                                 }
-                                handleClick={handleDeleleFilterOption}
-                            />
+                            >
+                                <button onClick={() => { setIsUseSpecialty(false); }}>
+                                    <FaTimes />
+                                </button>
+                            </ FilterResult>
                         }
                         {
-                            city !== "" && < FilterResult
+                            isUseCity && < FilterResult
                                 data={
                                     {
                                         type: "city",
                                         value: city
                                     }
                                 }
-                                handleClick={handleDeleleFilterOption}
-                            />
+                            >
+                                <button onClick={() => { setIsUseCity(false); }}>
+                                    <FaTimes />
+                                </button>
+                            </ FilterResult>
                         }
                     </div>
 
@@ -221,7 +248,7 @@ function Search() {
                                         <select
                                             id="specialty"
                                             defaultValue=" "
-                                            onChange={(e) => { setSpecialty(e.target.value) }}
+                                            onChange={handleSpecialty}
                                         >
                                             <option value=" " disabled hidden > Selecione uma especialidade</option>
                                             <option value="Dermatologista"> Dermatologista</option>
@@ -255,7 +282,7 @@ function Search() {
                                         <select
                                             id="city"
                                             defaultValue=" "
-                                            onChange={(e) => { setCity(e.target.value) }}
+                                            onChange={handleCity}
                                         >
                                             <option value=" " disabled hidden >Cidade</option>
                                             {
@@ -275,7 +302,7 @@ function Search() {
                                         </select>
                                     </div>
                                 </FilterOption>
-                                <button onClick={hanleApplyFilter}>Aplicar filtro</button>
+                                <button onClick={handleDoingFilter}>Aplicar filtro</button>
                             </div>
                         }
                     </div>
