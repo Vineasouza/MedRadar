@@ -125,16 +125,7 @@ function Search() {
 
     async function callAPI() {
 
-        var query = buildQuery();
-
-        if (query.hasOwnProperty("city")) {
-            const adress = `${query.city}, ${query.uf}`;
-            const coordinates = await getLatLong(adress);
-            delete query.uf;
-            query.latitude = coordinates.latitude;
-            query.longitude = coordinates.longitude;
-            setCenterMap([coordinates.latitude, coordinates.longitude]);
-        }
+        var query = await buildQuery();
 
         const doctorsResult = await api.get("/procurar", {
             params: query
@@ -143,7 +134,7 @@ function Search() {
         setDoctors(doctorsResult.data);
     }
 
-    function buildQuery() {
+    async function buildQuery() {
 
         var newQuery = {};
         if (!isUseCity && !isUseRadius && !isUseSpecialty) {
@@ -154,18 +145,22 @@ function Search() {
 
             if (isUseCity) {
                 newQuery.city = city;
-                newQuery.uf = uf;
+                const adress = `${city}, ${uf}`;
+                const coordinates = await getLatLong(adress);
+                newQuery.latitude = coordinates.latitude;
+                newQuery.longitude = coordinates.longitude;
+                setCenterMap([coordinates.latitude, coordinates.longitude]);
+            } else {
+                newQuery.latitude = initialPosition[0];
+                newQuery.longitude = initialPosition[1];
             }
 
             if (isUseSpecialty) {
                 newQuery.specialty = specialty;
             }
 
-            // CASE IF THE USER CHOOSE ONLY RADIUS
-            if (Object.keys(newQuery).length === 0) {
+            if (isUseRadius) {
                 newQuery.radius = radius;
-                newQuery.latitude = initialPosition[0];
-                newQuery.longitude = initialPosition[1];
             }
 
         }
@@ -203,7 +198,10 @@ function Search() {
                                     }
                                 }
                             >
-                                <button onClick={async () => { setIsUseRadius(false); }}>
+                                <button onClick={() => {
+                                    setIsUseRadius(false);
+                                    setRadius(10);
+                                }}>
                                     <FaTimes />
                                 </button>
                             </FilterResult>
@@ -217,7 +215,10 @@ function Search() {
                                     }
                                 }
                             >
-                                <button onClick={() => { setIsUseSpecialty(false); }}>
+                                <button onClick={() => {
+                                    setIsUseSpecialty(false);
+                                    setSpecialty("")
+                                }}>
                                     <FaTimes />
                                 </button>
                             </ FilterResult>
@@ -231,7 +232,10 @@ function Search() {
                                     }
                                 }
                             >
-                                <button onClick={() => { setIsUseCity(false); }}>
+                                <button onClick={() => {
+                                    setIsUseCity(false);
+                                    setCity("");
+                                }}>
                                     <FaTimes />
                                 </button>
                             </ FilterResult>
