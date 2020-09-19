@@ -12,7 +12,7 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
 
     it("Only with specialty", (done) => {
 
-        specialty = "psiquiatra"
+        specialty = "psiquiatra";
         query = `specialty=${specialty}`;
 
         chai.request(server)
@@ -62,12 +62,16 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
             });
     })
 
+    var longitude;
+    var latitude;
+    var radius;
+
     it("Only with radius", (done) => {
 
-        var latitude = -23.4444548;
-        var longitude = -50.5653303;
-        var radius = 10;
-        query = `${radius}&${latitude}&${longitude}`;
+        latitude = -23.4444548;
+        longitude = -50.5653303;
+        radius = 10;
+        query = `radius=${radius}&latitude=${latitude}&longitude=${longitude}`;
 
         chai.request(server)
             .get(`/procurar?${query}`)
@@ -77,6 +81,36 @@ describe("GET:// PROCURAR --> METHOD FIND CASES OF SUCESS", () => {
                 done();
             })
     })
+
+    it("Latitude and Longitude only", (done) => {
+
+        latitude = -23.4444548;
+        longitude = -50.5653303;
+        query = `latitude=${latitude}&longitude=${longitude}`;
+
+        chai.request(server)
+            .get(`/procurar?${query}`)
+            .end((err, response) => {
+                response.should.have.status(200);
+                done();
+            });
+
+    });
+
+    it("Latitude, Longitude with city", (done) => {
+
+        latitude = -23.4444548;
+        longitude = -50.5653303;
+        query = `latitude=${latitude}&longitude=${longitude}&specialty=Dermatologista`;
+
+        chai.request(server)
+            .get(`/procurar?${query}`)
+            .end((err, response) => {
+                response.should.have.status(200);
+                done();
+            });
+
+    });
 })
 
 

@@ -35,7 +35,7 @@ module.exports = async function find(request, response) {
         if (request.query.radius === undefined) radius = 10; // Default to radius!
         else radius = request.query.radius
 
-        if (query == {}) {
+        if (Object.keys(query).length === 0) {
             resultSearch = await Med.find({
                 location: {
                     $near: {
@@ -53,7 +53,6 @@ module.exports = async function find(request, response) {
                 doctors only by Radius, city or specialty
             */
         } else {
-
             resultSearch = await Med.find({
                 ...query
                 ,
