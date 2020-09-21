@@ -34,7 +34,11 @@ function Search() {
     const [isUseCity, setIsUseCity] = useState(false);
 
     const [uf, setUf] = useState("");
+
+    //Datas about doctors
     const [doctors, setDoctors] = useState([]);
+    //Doctor in the view
+    const [doctorsInView, setDoctorsInView] = useState([]);
 
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
@@ -70,6 +74,10 @@ function Search() {
             setDoctors(resp.data);
         });
     }, [initialPosition])
+
+    useEffect(() => {
+        setDoctorsInView(doctors);
+    }, [doctors])
 
     useEffect(() => {
         axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`).then(
@@ -109,6 +117,20 @@ function Search() {
         setIsUseCity(true);
     }
 
+    function handleNameDoctor(event) {
+
+        console.log(event.target.value);
+        const regex = new RegExp(`(Dr(a)?.)?${event.target.value}.*`);
+
+        const doctorsNew = doctors.filter((doctor) => {
+            if (regex.test(doctor.nome)) {
+                return doctor;
+            }
+        });
+
+        setDoctorsInView(doctorsNew);
+    }
+
     function handleClickToDoFilter() {
         setIsFilter(!isFilter);
         setUf("");
@@ -121,7 +143,6 @@ function Search() {
         }
         setIsApplyFilter(true);
     }
-
 
     async function callAPI() {
 
@@ -184,7 +205,7 @@ function Search() {
 
                 <section className="search-actions">
                     <div className="search-box">
-                        <input type="text" />
+                        <input type="text" onChange={handleNameDoctor} />
                         <FaSearch />
                     </div>
 
@@ -328,7 +349,7 @@ function Search() {
                     {/* Part of resutlts */}
                     <div>
                         {
-                            doctors.map((doctor, index) => {
+                            doctorsInView.map((doctor, index) => {
                                 return (
                                     <Doctor
                                         key={index}
@@ -358,7 +379,7 @@ function Search() {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         {
-                            doctors.map((doctor, index) => {
+                            doctorsInView.map((doctor, index) => {
 
                                 const positionDoctorInMap = doctor.location.coordinates;
 
