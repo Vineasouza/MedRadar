@@ -16,6 +16,7 @@ import DoctorMarker from './components/doctorMarker';
 import FilterResult from './components/filterResult';
 import { manDoctor, womanDoctor } from './components/icons/doctor';
 import { getLatLong } from '../../services/geocode';
+import arraySpecialties from './utils/specialties';
 
 function Search() {
 
@@ -285,7 +286,13 @@ function Search() {
                                         >
                                             <option value=" " disabled hidden > Selecione uma especialidade</option>
                                             <option value="Dermatologista"> Dermatologista</option>
-                                            <option value="Cardiologista"> Cardiologista</option>
+                                            {
+                                                arraySpecialties.map((specialty) => {
+                                                    return (
+                                                        <option key={specialty} value={specialty}> {specialty}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </FilterOption>
