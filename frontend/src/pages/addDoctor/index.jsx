@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import NumberFormat from 'react-number-format';
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
@@ -237,8 +238,8 @@ function AddDoctor() {
                         <label className="laboratorio">Laboratório</label>
                     </div>
                 </div>
-                <label className="telefone">Telefone</label>
-                <input
+                <label className="telefone">Celular</label>
+                {/* <input
                     type="number"
                     name="telefone"
                     id="telefone"
@@ -248,7 +249,21 @@ function AddDoctor() {
                     placeholder="(xxx)xxxxx-xxxx"
                     value={telefone}
                     onChange={e => setTelefone(e.target.value)}
-                />
+                /> */}
+
+                <NumberFormat
+                    name="telefone"
+                    id="telefone"
+                    required
+                    pattern="\(\d{2}\) [9]?\d{4}-\d{4}"
+                    title="Preencha este campo." 
+                    format="(##) #####-####" 
+                    // allowEmptyFormatting 
+                    mask="_"
+                    placeholder="(##) #####-####"
+                    value={telefone}
+                    onChange={e => setTelefone(e.target.value)}
+                />      
 
                 <label className="email">E-mail</label>
                 <input
