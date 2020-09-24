@@ -121,7 +121,7 @@ function Search() {
     function handleNameDoctor(event) {
 
         console.log(event.target.value);
-        const regex = new RegExp(`(Dr(a)?.)?${event.target.value}.*`);
+        const regex = new RegExp(`(Dr(a)?(.)?)?${event.target.value}`, 'i');
 
         const doctorsNew = doctors.filter((doctor) => {
             if (regex.test(doctor.nome)) {
