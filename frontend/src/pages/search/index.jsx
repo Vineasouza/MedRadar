@@ -87,7 +87,7 @@ function Search() {
             }
         );
     }, [uf])
-
+    
     useEffect(() => {
         async function updateFilter() {
             await callAPI();
@@ -95,6 +95,7 @@ function Search() {
         if (isApllyFilter) {
             updateFilter();
         }
+        // eslint-disable-next-line
     }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter]);
 
 
@@ -117,12 +118,12 @@ function Search() {
         setCity(event.target.value);
         setIsUseCity(true);
     }
-
+    
     function handleNameDoctor(event) {
 
         console.log(event.target.value);
         const regex = new RegExp(`(Dr(a)?(.)?)?${event.target.value}`, 'i');
-
+         // eslint-disable-next-line
         const doctorsNew = doctors.filter((doctor) => {
             if (regex.test(doctor.nome)) {
                 return doctor;
@@ -285,7 +286,7 @@ function Search() {
                                             onChange={handleSpecialty}
                                         >
                                             <option value=" " disabled hidden > Selecione uma especialidade</option>
-                                            <option value="Dermatologista"> Dermatologista</option>
+                                            {/* <option value="Dermatologista"> Dermatologista</option> */}
                                             {
                                                 arraySpecialties.map((specialty) => {
                                                     return (
@@ -400,7 +401,11 @@ function Search() {
                                             <DoctorMarker
                                                 name={doctor.nome}
                                                 specialty={doctor.especialidade}
-                                                image="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                                image={
+                                                    doctor.genero === "masculino" ?
+                                                        "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                                        : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                                }
                                             />
                                         </Popup>
                                     </Marker>

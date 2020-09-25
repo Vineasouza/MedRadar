@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import NumberFormat from 'react-number-format';
+
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import { getLatLong } from '../../services/geocode';
+import arraySpecialties from '../search/utils/specialties';
 import './styles.css';
 
 function AddDoctor() {
@@ -114,7 +116,7 @@ function AddDoctor() {
                 </div>
 
                 <label className="especialidade">Especialidade</label>
-                <input
+                {/* <input
                     type="text"
                     name="especialidade"
                     id="especialidade"
@@ -122,7 +124,24 @@ function AddDoctor() {
                     placeholder="Especialidade"
                     value={especialidade}
                     onChange={e => setEspecialidade(e.target.value)}
-                />
+                /> */}
+                <select
+                    defaultValue=" "
+                    name="especialidade"
+                    id="especialidade"
+                    required
+                    value={especialidade}
+                    onChange={e => setEspecialidade(e.target.value)}
+                >
+                    <option value=" " disabled hidden > Selecione uma especialidade</option>
+                    {
+                        arraySpecialties.map((specialty) => {
+                            return (
+                                <option key={specialty} value={specialty}> {specialty}</option>
+                            )
+                        })
+                    }
+                </select>
 
                 <label className="convenio">Convênio</label>
                 <input

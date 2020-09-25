@@ -62,11 +62,12 @@
 }
 
 .search-actions .search-box{
-    width: 284.5px;
+    width: 280.5px;
     height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: aliceblue;
 }
 
 .search-actions .search-box svg{

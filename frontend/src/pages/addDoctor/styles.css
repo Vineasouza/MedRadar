@@ -41,6 +41,10 @@
     width: 100%;
 }
 
+.forms-block select {
+    width: 100%;
+}
+
 .forms-block label{
     color: #08082D;
     font-family: Archivo, Helvetica, sans-serif;
