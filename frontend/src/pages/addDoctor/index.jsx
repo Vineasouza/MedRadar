@@ -12,6 +12,7 @@ import './styles.css';
 
 function AddDoctor() {
     const [nome, setNome] = useState('');
+    const [idade, setIdade] = useState('');
     const [especialidade, setEspecialidade] = useState('');
     const [registro, setRegistro] = useState('');
     const [convenio, setConvenio] = useState('');
@@ -20,6 +21,7 @@ function AddDoctor() {
     const [endereco, setEndereco] = useState('');
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
+    const [bio, setBio] = useState('');
     const [genero, setGenero] = useState('');
     const [tipoEndereco, setTipoEndereco] = useState('');
 
@@ -59,6 +61,7 @@ function AddDoctor() {
 
         await api.post("/cadastro", {
             nome,
+            idade,
             genero,
             especialidade,
             registro,
@@ -69,6 +72,7 @@ function AddDoctor() {
             tipoEndereco,
             telefone,
             email,
+            bio,
             latitude: coordinates.latitude, // Latitude e Longitude is Default to Nova Fátima, but can change
             longitude: coordinates.longitude
         }).then(
@@ -95,6 +99,16 @@ function AddDoctor() {
                     onChange={e => setNome(e.target.value)}
                 />
                 <div className="gender-types">
+                    <label className="idade">Idade</label>
+                    <input
+                        type="number"
+                        name="idade"
+                        id="idade"
+                        required
+                        placeholder=" "
+                        value={idade}
+                        onChange={e => setIdade(e.target.value)}
+                    /> 
                     <div className="gender-types-div">
                         <input
                             type="radio"
@@ -135,7 +149,7 @@ function AddDoctor() {
                         })
                     }
                 </select>
-                <label className="convenio">Número de Registro</label>
+                <label className="registro">Número de Registro</label>
                 <input
                     type="number"
                     name="registro"
@@ -285,6 +299,15 @@ function AddDoctor() {
                     placeholder="email@email.com.br"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                />
+                <label className="bio">Informações adicionais</label>
+                <input
+                    type="text"
+                    name="bio"
+                    id="bio"
+                    placeholder="Informações adicionais"
+                    value={bio}
+                    onChange={e => setBio(e.target.value)}
                 />
                 <section className="add-actions">
                     <button onClick={handleClick}>Cancelar</button>

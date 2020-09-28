@@ -100,7 +100,7 @@
 }
 
 .gender-types {
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -114,6 +114,7 @@
 .gender-types-div {
     display: flex;
     flex-direction: row;
+    margin-right: 10px;
 }
 
 .gender-types input[type=radio] {
@@ -122,6 +123,17 @@
     height: 1em;
     margin-left: 0px;
     -webkit-appearance: radio;
+}
+
+.gender-types input[type=number] {
+    width: 15%;
+    margin-right: 20px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.gender-types .idade {
+    font-size: 20px;
 }
 
 /**/
@@ -255,7 +267,7 @@ select {
     .gender-types{
         width: 100%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .gender-types input[type=radio] {
@@ -263,6 +275,11 @@ select {
         width: 1em;
         height: 1em;
         margin-right: 10px;
+    }
+
+    .gender-types input[type=number] {
+        width: 100%;
+        margin-left: 0px;
     }
 
     .gender-types-div{
