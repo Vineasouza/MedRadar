@@ -7,9 +7,10 @@ module.exports = async function create(request, response) {
 
     const {
         nome,
-        especialidade,
-        convenio,
         genero,
+        especialidade,
+        registro,
+        convenio,
         tipoEndereco,
         uf,
         cidade,
@@ -31,7 +32,9 @@ module.exports = async function create(request, response) {
     /* Criando novo médico */
     const newMed = await Med.create({
         nome,
+        genero,
         especialidade,
+        registro,
         convenio: convArray,
         uf,
         cidade,
@@ -39,7 +42,6 @@ module.exports = async function create(request, response) {
         telefone,
         email,
         location,
-        genero,
         tipoEndereco
     }).catch((e) => {
         // Caso de erro

@@ -16,6 +16,11 @@ const MedSchema = new mongoose.Schema({
         require: true,
         lowercase: true,
     },
+    registro: {
+        type: String,
+        require: true,
+        lowercase: true,
+    },
     convenio: {
         type: [String],
         require: true
