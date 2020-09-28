@@ -118,15 +118,6 @@ function AddDoctor() {
                 </div>
 
                 <label className="especialidade">Especialidade</label>
-                {/* <input
-                    type="text"
-                    name="especialidade"
-                    id="especialidade"
-                    required
-                    placeholder="Especialidade"
-                    value={especialidade}
-                    onChange={e => setEspecialidade(e.target.value)}
-                /> */}
                 <select
                     defaultValue=" "
                     name="especialidade"
@@ -269,18 +260,6 @@ function AddDoctor() {
                     </div>
                 </div>
                 <label className="telefone">Celular</label>
-                {/* <input
-                    type="number"
-                    name="telefone"
-                    id="telefone"
-                    required
-                    pattern="\(?[0]?\d{2}\)?[9]?\d{4}-?\d{4}"
-                    title="Preencha este campo."
-                    placeholder="(xxx)xxxxx-xxxx"
-                    value={telefone}
-                    onChange={e => setTelefone(e.target.value)}
-                /> */}
-
                 <NumberFormat
                     name="telefone"
                     id="telefone"
