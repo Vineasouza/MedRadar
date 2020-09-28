@@ -6,6 +6,12 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    idade: {
+        type: Number,
+        require: true,
+        min: 1,
+        max: 100,
+    },
     genero: {
         type: String,
         require: true,
@@ -19,7 +25,6 @@ const MedSchema = new mongoose.Schema({
     registro: {
         type: String,
         require: true,
-        lowercase: true,
     },
     convenio: {
         type: [String],
@@ -63,6 +68,9 @@ const MedSchema = new mongoose.Schema({
         unique: true,
         required: [true, 'User email required'],
         lowercase: true,
+    },
+    bio: {
+        type: String,
     },
     location: {
         type: PointSchema,

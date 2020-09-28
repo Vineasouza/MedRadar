@@ -7,6 +7,7 @@ module.exports = async function create(request, response) {
 
     const {
         nome,
+        idade,
         genero,
         especialidade,
         registro,
@@ -17,6 +18,7 @@ module.exports = async function create(request, response) {
         endereço,
         telefone,
         email,
+        bio,
         latitude,
         longitude
     } = request.body;
@@ -32,6 +34,7 @@ module.exports = async function create(request, response) {
     /* Criando novo médico */
     const newMed = await Med.create({
         nome,
+        idade,
         genero,
         especialidade,
         registro,
@@ -41,6 +44,7 @@ module.exports = async function create(request, response) {
         endereço,
         telefone,
         email,
+        bio,
         location,
         tipoEndereco
     }).catch((e) => {
