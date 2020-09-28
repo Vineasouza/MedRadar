@@ -13,6 +13,7 @@ import './styles.css';
 function AddDoctor() {
     const [nome, setNome] = useState('');
     const [especialidade, setEspecialidade] = useState('');
+    const [registro, setRegistro] = useState('');
     const [convenio, setConvenio] = useState('');
     const [uf, setUf] = useState('');
     const [cidade, setCidade] = useState('');
@@ -60,6 +61,7 @@ function AddDoctor() {
             nome,
             genero,
             especialidade,
+            registro,
             convenio,
             uf,
             cidade,
@@ -142,7 +144,16 @@ function AddDoctor() {
                         })
                     }
                 </select>
-
+                <label className="convenio">Número de Registro</label>
+                <input
+                    type="number"
+                    name="registro"
+                    id="registro"
+                    required
+                    placeholder="N°de Registro"
+                    value={registro}
+                    onChange={e => setRegistro(e.target.value)}
+                />
                 <label className="convenio">Convênio</label>
                 <input
                     type="text"
