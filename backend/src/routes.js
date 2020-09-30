@@ -1,7 +1,11 @@
 const { Router } = require('express');
+const multer = require('multer');
 
 const MedController = require('./controllers/Med/controller');
 const SearchController = require('./controllers/Search/controller');
+const multerConfig = require('./config/multer');
+const Med = require('./models/Med');
+
 const routes = Router();
 
 routes.get('/', (request, response) => {
@@ -9,7 +13,30 @@ routes.get('/', (request, response) => {
 });
 
 routes.get('/cadastro', MedController.list);
-routes.post('/cadastro', MedController.create);
+routes.post('/cadastro',  MedController.create);
+routes.post('/test', multer(multerConfig).single('file'), async (req, res) => {
+    const { originalname: name, size, key, location: url = '' } = req.file;
+
+    const post = await Med.create({
+        email: 'emaileees221121231a212@email.com',
+        telefone: '(12) 98186-2033',
+        file: {
+            name,
+            size,
+            key,
+            url,
+        }
+    });
+     
+    return res.send(post);
+});
+routes.delete('/test/:id', async (req, res) => {
+    const med = await Med.findById(req.params.id);
+
+    await med.remove();
+
+    return res.send();
+})
 
 routes.get('/procurar', SearchController.find)
 module.exports = routes;

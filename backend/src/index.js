@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
-require('dotenv').config();
+const morgan = require('morgan');
+const path = require('path');
 
 const app = express();
 
@@ -19,8 +21,14 @@ mongoose.connect(
   .catch(error => console.log('error ->', error.message));
 
 app.use(cors());
-// json deve vir antes de routes
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use(
+  "/files",
+  express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+);
+
 app.use(routes);
 
 

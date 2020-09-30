@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const FileSchema = require('./utils/FileSchema');
 const PointSchema = require('./utils/PointSchema');
 
 const MedSchema = new mongoose.Schema({
@@ -71,6 +72,9 @@ const MedSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
+    },
+    file: {
+        type: FileSchema,
     },
     location: {
         type: PointSchema,
