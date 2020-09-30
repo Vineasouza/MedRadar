@@ -14,14 +14,8 @@ routes.get('/', (request, response) => {
 
 routes.get('/cadastro', MedController.list);
 routes.post('/cadastro',  multer(multerConfig).single('file'), MedController.create);
+routes.delete('/cadastro/:id', MedController.delete);
 
-routes.delete('/test/:id', async (req, res) => {
-    const med = await Med.findById(req.params.id);
-
-    await med.remove();
-
-    return res.send();
-})
 
 routes.get('/procurar', SearchController.find)
 module.exports = routes;
