@@ -5,27 +5,27 @@ const PointSchema = require('./utils/PointSchema');
 const MedSchema = new mongoose.Schema({
     nome: {
         type: String,
-        require: true,
+        // require: true,
     },
     idade: {
         type: Number,
-        require: true,
+        // require: true,
         min: 1,
         max: 100,
     },
     genero: {
         type: String,
-        require: true,
+        // require: true,
         lowercase: true,
     },
     especialidade: {
         type: String,
-        require: true,
+        // require: true,
         lowercase: true,
     },
     registro: {
         type: String,
-        require: true,
+        // require: true,
     },
     convenio: {
         type: [String],
@@ -33,11 +33,11 @@ const MedSchema = new mongoose.Schema({
     },
     uf: {
         type: String,
-        require: true
+        // require: true
     },
     cidade: {
         type: String,
-        require: true
+        // require: true
     },
     endereço: {
         type: String,

@@ -13,23 +13,8 @@ routes.get('/', (request, response) => {
 });
 
 routes.get('/cadastro', MedController.list);
-routes.post('/cadastro',  MedController.create);
-routes.post('/test', multer(multerConfig).single('file'), async (req, res) => {
-    const { originalname: name, size, key, location: url = '' } = req.file;
+routes.post('/cadastro',  multer(multerConfig).single('file'), MedController.create);
 
-    const post = await Med.create({
-        email: 'emaileees221121231a212@email.com',
-        telefone: '(12) 98186-2033',
-        file: {
-            name,
-            size,
-            key,
-            url,
-        }
-    });
-     
-    return res.send(post);
-});
 routes.delete('/test/:id', async (req, res) => {
     const med = await Med.findById(req.params.id);
 
