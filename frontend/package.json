@@ -8,16 +8,21 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
+    "filesize": "^6.1.0",
     "leaflet": "^1.6.0",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
+    "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.0",
     "react-geocode": "^0.2.1",
     "react-icons": "^3.11.0",
     "react-leaflet": "^2.7.0",
     "react-number-format": "^4.4.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
