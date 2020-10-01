@@ -1,3 +1,4 @@
+const { Query } = require('mongoose');
 const Med = require('../../../models/Med');
 
 module.exports = async function find(request, response) {
@@ -13,6 +14,7 @@ module.exports = async function find(request, response) {
         longitude,
         specialty,
         city,
+        age,
     } = request.query;
 
     let query = {};
@@ -23,58 +25,51 @@ module.exports = async function find(request, response) {
     if (city != undefined) {
         query.cidade = city
     }
+    if (age != undefined) {
+        query.idade = { $gte: age };
+    }
 
 
-    if (latitude != undefined && longitude != undefined) {
+    /* 
+        Option where the user are looking for
+        doctors only by Radius
+    */
+    let radius;
+    if (request.query.radius === undefined) radius = 10; // Default to radius!
+    else radius = request.query.radius
+
+    if (Object.keys(query).length === 0) {
+        resultSearch = await Med.find({
+            location: {
+                $near: {
+                    $geometry: {
+                        type: 'Point',
+                        coordinates: [longitude, latitude],
+                    },
+                    $maxDistance: radius * 1000, // Converting from km to m
+                },
+            }
+        });
 
         /* 
             Option where the user are looking for
-            doctors only by Radius
+            doctors only by Radius, city or specialty
         */
-        let radius;
-        if (request.query.radius === undefined) radius = 10; // Default to radius!
-        else radius = request.query.radius
-
-        if (Object.keys(query).length === 0) {
-            resultSearch = await Med.find({
-                location: {
-                    $near: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: [longitude, latitude],
-                        },
-                        $maxDistance: radius * 1000, // Converting from km to m
-                    },
-                }
-            });
-
-            /* 
-                Option where the user are looking for
-                doctors only by Radius, city or specialty
-            */
-        } else {
-            resultSearch = await Med.find({
-                ...query
-                ,
-                location: {
-                    $near: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: [longitude, latitude],
-                        },
-                        $maxDistance: radius * 1000,
-                    },
-                }
-            });
-        }
-
-
     } else {
-        /* 
-            Here, the User are looking for doctors using
-            specialty, city, or two together  
-        */
-        resultSearch = await Med.find(query);
+        console.log(query);
+        resultSearch = await Med.find({
+            ...query
+            ,
+            location: {
+                $near: {
+                    $geometry: {
+                        type: 'Point',
+                        coordinates: [longitude, latitude],
+                    },
+                    $maxDistance: radius * 1000,
+                },
+            }
+        });
     }
 
     if (resultSearch.length === 0) {
