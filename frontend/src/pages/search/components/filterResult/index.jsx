@@ -10,7 +10,9 @@ const FilterResult = ({ data, children }) => {
                 {
                     data.type === "radius"
                         ? `${data.value} km`
-                        : data.value
+                        : data.type === "age"
+                            ? `${data.value} anos`
+                            : data.value
                 }
             </p>
         </div>

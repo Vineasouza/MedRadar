@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import { FiArrowLeft } from 'react-icons/fi';
-import { FaFilter, FaTimes } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
-import { FaMinus, FaPlus, FaSearch } from 'react-icons/fa';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { FiArrowLeft } from "react-icons/fi";
+import { FaFilter, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaMinus, FaPlus, FaSearch } from "react-icons/fa";
+import axios from "axios";
 
-import './styles.css';
-import api from '../../services/api';
-import logo from '../../assets/images/simple-only-logo.png';
-import healthTeam from '../../assets/images/health-team-bro.png';
-import Doctor from './components/doctor';
-import FilterOption from './components/filterOption'
-import DoctorMarker from './components/doctorMarker';
-import FilterResult from './components/filterResult';
-import { manDoctor, womanDoctor } from './components/icons/doctor';
-import { getLatLong } from '../../services/geocode';
-import arraySpecialties from './utils/specialties';
+import "./styles.css";
+import api from "../../services/api";
+import logo from "../../assets/images/simple-only-logo.png";
+import healthTeam from "../../assets/images/health-team-bro.png";
+import Doctor from "./components/doctor";
+import FilterOption from "./components/filterOption";
+import DoctorMarker from "./components/doctorMarker";
+import FilterResult from "./components/filterResult";
+import { manDoctor, womanDoctor } from "./components/icons/doctor";
+import { getLatLong } from "../../services/geocode";
+import arraySpecialties from "./utils/specialties";
 
 function Search() {
-
     const [initialPosition, setInitialPosition] = useState([0, 0]);
     const [centerMap, setCenterMap] = useState([0, 0]); // Center position of Map
     const [isFilter, setIsFilter] = useState(false);
@@ -34,6 +33,9 @@ function Search() {
     const [city, setCity] = useState("");
     const [isUseCity, setIsUseCity] = useState(false);
 
+    const [age, setAge] = useState(25);
+    const [isUseAge, setIsUseAge] = useState(false);
+
     const [uf, setUf] = useState("");
 
     //Datas about doctors
@@ -46,18 +48,17 @@ function Search() {
     const [cities, setCities] = useState([]);
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(position => {
+        navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
             setInitialPosition([latitude, longitude]);
             setCenterMap([latitude, longitude]);
         });
 
-        axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados").then(
-            (resp) => {
+        axios
+            .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+            .then((resp) => {
                 setUfs([...resp.data]);
-            }
-        );
-
+            });
     }, []);
 
     /* 
@@ -68,26 +69,27 @@ function Search() {
         api.get("/procurar", {
             params: {
                 latitude: initialPosition[0],
-                longitude: initialPosition[1]
-            }
-        }
-        ).then(resp => {
+                longitude: initialPosition[1],
+            },
+        }).then((resp) => {
             setDoctors(resp.data);
         });
-    }, [initialPosition])
+    }, [initialPosition]);
 
     useEffect(() => {
         setDoctorsInView(doctors);
-    }, [doctors])
+    }, [doctors]);
 
     useEffect(() => {
-        axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`).then(
-            (resp) => {
+        axios
+            .get(
+                `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
+            )
+            .then((resp) => {
                 setCities([...resp.data]);
-            }
-        );
-    }, [uf])
-    
+            });
+    }, [uf]);
+
     useEffect(() => {
         async function updateFilter() {
             await callAPI();
@@ -96,17 +98,19 @@ function Search() {
             updateFilter();
         }
         // eslint-disable-next-line
-    }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter]);
+    }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter, isUseAge]);
 
+    function handleRange(operation) {
+        const operations = {
+            sum: function (value) {
+                return value + 1;
+            },
+            sub: function (value) {
+                return value - 1;
+            },
+        };
 
-    function handleRadius(operation) {
-        let newRadius;
-        if (operation === "sum") {
-            newRadius = radius + 1;
-        } else {
-            newRadius = radius - 1;
-        }
-        setRadius(newRadius);
+        return operations[operation];
     }
 
     function handleSpecialty(event) {
@@ -118,12 +122,11 @@ function Search() {
         setCity(event.target.value);
         setIsUseCity(true);
     }
-    
-    function handleNameDoctor(event) {
 
+    function handleNameDoctor(event) {
         console.log(event.target.value);
-        const regex = new RegExp(`(Dr(a)?(.)?)?${event.target.value}`, 'i');
-         // eslint-disable-next-line
+        const regex = new RegExp(`(Dr(a)?(.)?)?${event.target.value}`, "i");
+        // eslint-disable-next-line
         const doctorsNew = doctors.filter((doctor) => {
             if (regex.test(doctor.nome)) {
                 return doctor;
@@ -140,27 +143,29 @@ function Search() {
 
     async function handleDoingFilter() {
         setIsFilter(false);
+
         if (radius !== 10) {
             setIsUseRadius(true);
+        }
+        if (age !== 25) {
+            setIsUseAge(true);
         }
         setIsApplyFilter(true);
     }
 
     async function callAPI() {
-
         var query = await buildQuery();
 
         const doctorsResult = await api.get("/procurar", {
-            params: query
+            params: query,
         });
 
         setDoctors(doctorsResult.data);
     }
 
     async function buildQuery() {
-
         var newQuery = {};
-        if (!isUseCity && !isUseRadius && !isUseSpecialty) {
+        if (!isUseCity && !isUseRadius && !isUseSpecialty && !isUseAge) {
             newQuery.latitude = initialPosition[0];
             newQuery.longitude = initialPosition[1];
             setCenterMap([initialPosition[0], initialPosition[1]]);
@@ -186,6 +191,9 @@ function Search() {
                 newQuery.radius = radius;
             }
 
+            if (isUseAge) {
+                newQuery.age = age;
+            }
         }
 
         return newQuery;
@@ -193,7 +201,6 @@ function Search() {
 
     return (
         <div id="search-page">
-
             <header>
                 <section className="search-intro">
                     <div>
@@ -212,212 +219,302 @@ function Search() {
                     </div>
 
                     <div className="search-filters-results">
-                        {
-                            isUseRadius && <FilterResult
-                                data={
-                                    {
-                                        type: "radius",
-                                        value: radius
-                                    }
-                                }
+                        {isUseRadius && (
+                            <FilterResult
+                                data={{
+                                    type: "radius",
+                                    value: radius,
+                                }}
                             >
-                                <button onClick={() => {
-                                    setIsUseRadius(false);
-                                    setRadius(10);
-                                }}>
+                                <button
+                                    onClick={() => {
+                                        setIsUseRadius(false);
+                                        setRadius(10);
+                                    }}
+                                >
                                     <FaTimes />
                                 </button>
                             </FilterResult>
-                        }
-                        {
-                            isUseSpecialty && < FilterResult
-                                data={
-                                    {
-                                        type: "specialty",
-                                        value: specialty
-                                    }
-                                }
+                        )}
+                        {isUseSpecialty && (
+                            <FilterResult
+                                data={{
+                                    type: "specialty",
+                                    value: specialty,
+                                }}
                             >
-                                <button onClick={() => {
-                                    setIsUseSpecialty(false);
-                                    setSpecialty("")
-                                }}>
+                                <button
+                                    onClick={() => {
+                                        setIsUseSpecialty(false);
+                                        setSpecialty("");
+                                    }}
+                                >
                                     <FaTimes />
                                 </button>
-                            </ FilterResult>
-                        }
-                        {
-                            isUseCity && < FilterResult
-                                data={
-                                    {
-                                        type: "city",
-                                        value: city
-                                    }
-                                }
+                            </FilterResult>
+                        )}
+                        {isUseCity && (
+                            <FilterResult
+                                data={{
+                                    type: "city",
+                                    value: city,
+                                }}
                             >
-                                <button onClick={() => {
-                                    setIsUseCity(false);
-                                    setCity("");
-                                }}>
+                                <button
+                                    onClick={() => {
+                                        setIsUseCity(false);
+                                        setCity("");
+                                    }}
+                                >
                                     <FaTimes />
                                 </button>
-                            </ FilterResult>
-                        }
+                            </FilterResult>
+                        )}
+                        {isUseAge && (
+                            <FilterResult
+                                data={{
+                                    type: "age",
+                                    value: age
+                                }}
+                            >
+                                <button
+                                    onClick={() => {
+                                        setIsUseAge(false);
+                                        setAge(25);
+                                    }}
+                                >
+                                    <FaTimes />
+                                </button>
+                            </FilterResult>
+                        )}
                     </div>
 
                     <div className="search-filters">
-                        <button onClick={handleClickToDoFilter}>Filtrar busca<FaFilter /> </button>
+                        <button onClick={handleClickToDoFilter}>
+                            Filtrar busca
+                            <FaFilter />{" "}
+                        </button>
                         {
                             // Starting the filter
-                            isFilter &&
-                            <div id="filters-container">
-                                <FilterOption title="Raio">
-                                    <div className="input-radius">
-                                        <button name="sum" onClick={() => { handleRadius('sub') }}><FaMinus /></button>
-                                        <p>{radius} Km</p>
-                                        <button name="sub" onClick={() => { handleRadius('sum') }}><FaPlus /></button>
-                                    </div>
-                                </FilterOption>
-                                <FilterOption title="Especialidade">
-                                    <div id="input-specialty">
-                                        <select
-                                            id="specialty"
-                                            defaultValue=" "
-                                            onChange={handleSpecialty}
-                                        >
-                                            <option value=" " disabled hidden > Selecione uma especialidade</option>
-                                            {/* <option value="Dermatologista"> Dermatologista</option> */}
-                                            {
-                                                arraySpecialties.map((specialty) => {
+                            isFilter && (
+                                <div id="filters-container">
+                                    <FilterOption title="Raio">
+                                        <div className="input-range">
+                                            <button
+                                                name="sub"
+                                                onClick={() => {
+                                                    const doOperation = handleRange("sub");
+
+                                                    const newRadius = doOperation(radius);
+                                                    setRadius(newRadius);
+                                                }}
+                                            >
+                                                <FaMinus />
+                                            </button>
+                                            <p>{radius} Km</p>
+                                            <button
+                                                name="sum"
+                                                onClick={() => {
+                                                    const doOperation = handleRange("sum");
+
+                                                    const newRadius = doOperation(radius);
+                                                    setRadius(newRadius);
+                                                }}
+                                            >
+                                                <FaPlus />
+                                            </button>
+                                        </div>
+                                    </FilterOption>
+                                    <FilterOption title="Especialidade">
+                                        <div id="input-specialty">
+                                            <select
+                                                id="specialty"
+                                                defaultValue=" "
+                                                onChange={handleSpecialty}
+                                            >
+                                                <option
+                                                    value=" "
+                                                    disabled
+                                                    hidden
+                                                >
+                                                    {" "}
+                                                    Selecione uma especialidade
+                                                </option>
+                                                {/* <option value="Dermatologista"> Dermatologista</option> */}
+                                                {arraySpecialties.map(
+                                                    (specialty) => {
+                                                        return (
+                                                            <option
+                                                                key={specialty}
+                                                                value={
+                                                                    specialty
+                                                                }
+                                                            >
+                                                                {" "}
+                                                                {specialty}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
+                                            </select>
+                                        </div>
+                                    </FilterOption>
+                                    <FilterOption title="Cidade">
+                                        <div id="input-city">
+                                            <select
+                                                id="uf"
+                                                defaultValue=" "
+                                                onChange={(e) => {
+                                                    setUf(e.target.value);
+                                                }}
+                                            >
+                                                <option
+                                                    value=" "
+                                                    disabled
+                                                    hidden
+                                                >
+                                                    UF
+                                                </option>
+                                                {ufs.map((uf) => {
                                                     return (
-                                                        <option key={specialty} value={specialty}> {specialty}</option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
-                                    </div>
-                                </FilterOption>
-                                <FilterOption title="Cidade" >
-                                    <div id="input-city">
-                                        <select
-                                            id="uf"
-                                            defaultValue=" "
-                                            onChange={(e) => { setUf(e.target.value) }}
-                                        >
-                                            <option value=" " disabled hidden >UF</option>
-                                            {
-                                                ufs.map(
-                                                    (uf) => {
-                                                        return (
-                                                            <option
-                                                                key={uf.id}
-                                                                value={uf.sigla}
-                                                            >
-                                                                {uf.sigla}
-                                                            </option>
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        </select>
-                                        <select
-                                            id="city"
-                                            defaultValue=" "
-                                            onChange={handleCity}
-                                        >
-                                            <option value=" " disabled hidden >Cidade</option>
-                                            {
-                                                cities.map(
-                                                    (city) => {
-                                                        return (
-                                                            <option
-                                                                key={city.id}
-                                                                value={city.nome}
-                                                            >
-                                                                {city.nome}
-                                                            </option>
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        </select>
-                                    </div>
-                                </FilterOption>
-                                <button onClick={handleDoingFilter}>Aplicar filtro</button>
-                            </div>
+                                                        <option
+                                                            key={uf.id}
+                                                            value={uf.sigla}
+                                                        >
+                                                            {uf.sigla}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                            <select
+                                                id="city"
+                                                defaultValue=" "
+                                                onChange={handleCity}
+                                            >
+                                                <option
+                                                    value=" "
+                                                    disabled
+                                                    hidden
+                                                >
+                                                    Cidade
+                                                </option>
+                                                {cities.map((city) => {
+                                                    return (
+                                                        <option
+                                                            key={city.id}
+                                                            value={city.nome}
+                                                        >
+                                                            {city.nome}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+                                    </FilterOption>
+                                    <FilterOption title="Idade">
+                                        <div className="input-range">
+                                            <button
+                                                name="sub"
+                                                onClick={() => {
+                                                    const doOperation = handleRange("sub");
+
+                                                    const newAge = doOperation(age);
+                                                    setAge(newAge);
+                                                }}
+                                            >
+                                                <FaMinus />
+                                            </button>
+                                            <p>{age}</p>
+                                            <button
+                                                name="sum"
+                                                onClick={() => {
+                                                    const doOperation = handleRange("sum");
+
+                                                    const newAge = doOperation(age);
+                                                    setAge(newAge);
+                                                }}
+                                            >
+                                                <FaPlus />
+                                            </button>
+                                        </div>
+                                    </FilterOption>
+                                    <button onClick={handleDoingFilter}>
+                                        Aplicar filtro
+                                    </button>
+                                </div>
+                            )
                         }
                     </div>
-
                 </section>
             </header>
 
             <main id="search-main">
                 <section className="search-result">
-
                     {/* Part of resutlts */}
                     <div>
-                        {
-                            doctorsInView.map((doctor, index) => {
-                                return (
-                                    <Doctor
-                                        key={index}
-                                        name={doctor.nome}
-                                        specialty={doctor.especialidade}
-                                        distance={radius}
-
-                                        // This part is only test, in the future it will change and get image from back-end
-                                        image={
-                                            doctor.genero === "masculino" ?
-                                                "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                        }
-
-                                    />
-                                )
-                            })
-                        }
+                        {doctorsInView.map((doctor, index) => {
+                            return (
+                                <Doctor
+                                    key={index}
+                                    name={doctor.nome}
+                                    specialty={doctor.especialidade}
+                                    distance={radius}
+                                    // This part is only test, in the future it will change and get image from back-end
+                                    image={
+                                        doctor.genero === "masculino"
+                                            ? "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                            : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                    }
+                                />
+                            );
+                        })}
                     </div>
                 </section>
 
-                { /* Part of MAP*/}
+                {/* Part of MAP*/}
                 <section className="search-map">
                     <Map center={centerMap} zoom={15}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        {
-                            doctorsInView.map((doctor, index) => {
+                        {doctorsInView.map((doctor, index) => {
+                            const positionDoctorInMap =
+                                doctor.location.coordinates;
 
-                                const positionDoctorInMap = doctor.location.coordinates;
-
-                                return (
-                                    <Marker
-                                        key={index}
-                                        position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
-                                        draggable={false}
-                                        icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
-                                        <Popup>
-                                            <DoctorMarker
-                                                name={doctor.nome}
-                                                specialty={doctor.especialidade}
-                                                image={
-                                                    doctor.genero === "masculino" ?
-                                                        "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                        : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                                }
-                                            />
-                                        </Popup>
-                                    </Marker>
-                                );
-                            })
-                        }
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={[
+                                        positionDoctorInMap[1],
+                                        positionDoctorInMap[0],
+                                    ]}
+                                    draggable={false}
+                                    icon={
+                                        doctor.genero === "masculino"
+                                            ? manDoctor
+                                            : womanDoctor
+                                    }
+                                >
+                                    <Popup>
+                                        <DoctorMarker
+                                            name={doctor.nome}
+                                            specialty={doctor.especialidade}
+                                            image={
+                                                doctor.genero === "masculino"
+                                                    ? "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                                    : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                            }
+                                        />
+                                    </Popup>
+                                </Marker>
+                            );
+                        })}
                     </Map>
                 </section>
-
             </main>
-        </div >
-    )
+        </div>
+    );
 }
 
 export default Search;
