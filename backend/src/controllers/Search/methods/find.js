@@ -8,6 +8,7 @@ module.exports = async function find(request, response) {
         return response.status(406).send();
     }
 
+    console.log(request.query);
     let resultSearch;
     const {
         latitude,
@@ -15,6 +16,7 @@ module.exports = async function find(request, response) {
         specialty,
         city,
         age,
+        healthPlan
     } = request.query;
 
     let query = {};
@@ -28,7 +30,9 @@ module.exports = async function find(request, response) {
     if (age != undefined) {
         query.idade = { $gte: age };
     }
-
+    if (healthPlan != undefined) {
+        query.convenio = healthPlan;
+    }
 
     /* 
         Option where the user are looking for
