@@ -102,7 +102,7 @@ function Search() {
             updateFilter();
         }
         // eslint-disable-next-line
-    }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter, isUseAge]);
+    }, [isUseCity, isUseSpecialty, isUseRadius, isApllyFilter, isUseAge, isUseHealthPlan]);
 
     function handleRange(operation) {
         const operations = {
@@ -174,7 +174,7 @@ function Search() {
 
     async function buildQuery() {
         var newQuery = {};
-        if (!isUseCity && !isUseRadius && !isUseSpecialty && !isUseAge) {
+        if (!isUseCity && !isUseRadius && !isUseSpecialty && !isUseAge && !isUseHealthPlan) {
             newQuery.latitude = initialPosition[0];
             newQuery.longitude = initialPosition[1];
             setCenterMap([initialPosition[0], initialPosition[1]]);
@@ -202,6 +202,10 @@ function Search() {
 
             if (isUseAge) {
                 newQuery.age = age;
+            }
+
+            if (isUseHealthPlan) {
+                newQuery.healthPlan = healthPlan;
             }
         }
 
