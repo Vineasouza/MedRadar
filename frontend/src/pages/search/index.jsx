@@ -17,6 +17,7 @@ import FilterResult from "./components/filterResult";
 import { manDoctor, womanDoctor } from "./components/icons/doctor";
 import { getLatLong } from "../../services/geocode";
 import arraySpecialties from "./utils/specialties";
+import arrayHealthPlans from "./utils/healthPlans";
 
 function Search() {
     const [initialPosition, setInitialPosition] = useState([0, 0]);
@@ -35,6 +36,9 @@ function Search() {
 
     const [age, setAge] = useState(25);
     const [isUseAge, setIsUseAge] = useState(false);
+
+    const [healthPlan, setHealthPlan] = useState("");
+    const [isUseHealthPlan, setIsUseHealthPlan] = useState(false);
 
     const [uf, setUf] = useState("");
 
@@ -121,6 +125,11 @@ function Search() {
     function handleCity(event) {
         setCity(event.target.value);
         setIsUseCity(true);
+    }
+
+    function handleHealthPlan(event) {
+        setHealthPlan(event.target.value);
+        setIsUseHealthPlan(true);
     }
 
     function handleNameDoctor(event) {
@@ -287,6 +296,24 @@ function Search() {
                                 </button>
                             </FilterResult>
                         )}
+                        {
+                            isUseHealthPlan && (
+                                <FilterResult
+                                    data={{
+                                        type: "healthPlan",
+                                        value: healthPlan
+                                    }}
+                                >
+                                    <button
+                                        onClick={() => {
+                                            setIsUseHealthPlan(false);
+                                            setHealthPlan("")
+                                        }}
+                                    >
+                                        <FaTimes />
+                                    </button>
+                                </FilterResult>
+                            )}
                     </div>
 
                     <div className="search-filters">
@@ -326,7 +353,7 @@ function Search() {
                                         </div>
                                     </FilterOption>
                                     <FilterOption title="Especialidade">
-                                        <div id="input-specialty">
+                                        <div className="input-select">
                                             <select
                                                 id="specialty"
                                                 defaultValue=" "
@@ -436,6 +463,38 @@ function Search() {
                                             >
                                                 <FaPlus />
                                             </button>
+                                        </div>
+                                    </FilterOption>
+                                    <FilterOption title="Plano de saúde">
+                                        <div className="input-select">
+                                            <select
+                                                id="healthPlans"
+                                                defaultValue=" "
+                                                onChange={handleHealthPlan}
+                                            >
+                                                <option
+                                                    value=" "
+                                                    disabled
+                                                    hidden
+                                                >
+                                                    {" "}
+                                                    Selecione um plano de saúde
+                                                </option>
+                                                {
+                                                    arrayHealthPlans.map(
+                                                        (healthPlan) => {
+                                                            return (
+                                                                <option
+                                                                    key={healthPlan}
+                                                                    value={healthPlan}
+                                                                >
+                                                                    {healthPlan}
+                                                                </option>
+                                                            )
+                                                        }
+                                                    )
+                                                }
+                                            </select>
                                         </div>
                                     </FilterOption>
                                     <button onClick={handleDoingFilter}>

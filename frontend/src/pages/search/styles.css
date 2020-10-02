@@ -117,10 +117,12 @@
 
 .search-filters-results{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #search-main{
-    margin-top: 25px;
+    margin-top: 40px;
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 90vh;
@@ -230,7 +232,7 @@
     opacity: 70%;
 }
 
-#input-specialty{
+.input-select{
     border-bottom: 1px solid #08082D;
     height: 50px;
     padding-right: 10px;
@@ -239,15 +241,16 @@
     padding-bottom: 5px;
 }
 
-#input-specialty select{
+.input-select select{
     border: 1px solid rgba(8,8,45,0.65) ;
     border-radius: 10px;
     width: 100%;
     height: 80%;
     outline: 0;
+    z-index: 1;
 }
 
-#input-specialty select option{
+.input-select select option{
     font: 500 16px Archivo;
 }
 
@@ -273,6 +276,10 @@
 #input-city select + select{
     margin-left: 8px;
     width: 70%;
+}
+
+.leaflet-container .leaflet-control-attribution{
+    display: none;
 }
 
 /* Config to others devices */
