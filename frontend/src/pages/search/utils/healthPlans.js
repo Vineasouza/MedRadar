@@ -1,6 +1,16 @@
 export default [
-    "Unimed",
-    "SUS",
+    "Amil",
+    "Assim Saúde",
+    "Bradesco Saúde",
+    "Golden Cross",
+    "GreenLine",
+    "Hapvida",
+    "Medial Saúde",
+    "NotreDame Intermédica",
     "Particular",
-    "SulAmerica"
+    "Prevent Senior",
+    "São Francisco Saúde",
+    "SulAmerica",
+    "SUS",
+    "Unimed",
 ]

@@ -8,6 +8,7 @@ import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import { getLatLong } from '../../services/geocode';
 import arraySpecialties from '../search/utils/specialties';
+import arrayHealthPlans from '../search/utils/healthPlans';
 import './styles.css';
 
 function AddDoctor() {
@@ -160,7 +161,7 @@ function AddDoctor() {
                     onChange={e => setRegistro(e.target.value)}
                 />
                 <label className="convenio">Convênio</label>
-                <input
+                {/* <input
                     type="text"
                     name="convenio"
                     id="convenio"
@@ -168,7 +169,24 @@ function AddDoctor() {
                     placeholder="sulAmerica, Unimed"
                     value={convenio}
                     onChange={e => setConvenio(e.target.value)}
-                />
+                /> */}
+                <select
+                    defaultValue=" "
+                    name="convenio"
+                    id="convenio"
+                    required
+                    value={convenio}
+                    onChange={e => setConvenio(e.target.value)}
+                >
+                    <option value=" " disabled hidden> Selecione um convênio </option>
+                    {
+                        arrayHealthPlans.map((healthPlan) => {
+                            return (
+                                <option key={healthPlan} value={healthPlan}> {healthPlan}</option>
+                            )
+                        })
+                    }
+                </select>
 
                 <div className="forms-city">
                     <label className="uf">
