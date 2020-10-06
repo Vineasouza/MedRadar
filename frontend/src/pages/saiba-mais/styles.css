@@ -1,0 +1,66 @@
+.healthTeam {
+    width: 18%;
+    position: absolute;
+    left: 0px;
+    bottom: 10px;
+}
+
+.back-button{
+    padding: 5px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+
+.back-button a svg{
+    color: #08082D;
+    height: 100%;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+.container {
+    width: 500px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.container img {
+    padding: 20px;
+    width: 60%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    height: 100%;
+    border-radius: 3px;
+    background-color: #F4F4F4;
+}
+
+/* https://material-ui.com/pt/api/rating/ */
+.MuiRating-iconFilled{
+    color: #08082D;
+}
+
+@media(max-width: 700px){
+    .healthTeam {
+        width: 0px;
+        height: 0px;
+        left: 0px;
+    }
+
+    .back-button{
+        padding: 5px;
+        position: absolute;
+        width: 30px;
+        height: 30px;
+    }
+
+    .container {
+        width: 400px;
+        height: 100%;
+        margin: 0 auto;
+    }
+}
