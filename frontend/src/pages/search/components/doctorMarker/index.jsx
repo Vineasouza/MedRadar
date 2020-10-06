@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom"
 import './styles.css';
 
 const DoctorMarker = ({ name, specialty, image }) => {
@@ -9,7 +9,9 @@ const DoctorMarker = ({ name, specialty, image }) => {
             <section>
                 <p>{name}</p>
                 <p>{specialty}</p>
-                <button>Saiba mais</button>
+                <button>
+                    <Link to="/saiba-mais">Saiba mais</Link>
+                </button>
             </section>
         </div>
     )
