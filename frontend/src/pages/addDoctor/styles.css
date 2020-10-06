@@ -37,7 +37,7 @@
     display: inline-block;
 }
 
-.forms-block input {
+.forms-block input, textarea {
     width: 100%;
 }
 
@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-.forms-block label{
+.forms-block label {
     color: #08082D;
     font-family: Archivo, Helvetica, sans-serif;
     font-weight: normal;
@@ -57,7 +57,7 @@
     text-align: left;
 }
 
-.forms-block input,select,option {
+.forms-block input,select,option, textarea {
     border-color: #08082D;
     background-color: #F4F4F4;
     border: 2px solid #08082D;

@@ -319,10 +319,19 @@ function AddDoctor() {
                     onChange={e => setEmail(e.target.value)}
                 />
                 <label className="bio">Informações adicionais</label>
-                <input
+                {/* <input
                     type="text"
                     name="bio"
                     id="bio"
+                    placeholder="Informações adicionais"
+                    value={bio}
+                    onChange={e => setBio(e.target.value)}
+                /> */}
+                <textarea 
+                    id="bio" 
+                    name="bio" 
+                    rows="3" 
+                    maxlength={140}
                     placeholder="Informações adicionais"
                     value={bio}
                     onChange={e => setBio(e.target.value)}
