@@ -1,3 +1,7 @@
+main {
+    height: auto;
+}
+
 .healthTeam {
     width: 18%;
     position: absolute;
@@ -22,7 +26,7 @@
 .container {
     width: 500px;
     height: 100%;
-    margin: 0 auto;
+    margin: 0 auto 40px;
 }
 
 .container img {
@@ -42,6 +46,63 @@
 /* https://material-ui.com/pt/api/rating/ */
 .MuiRating-iconFilled{
     color: #08082D;
+}
+
+.content header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content header img{
+    width: 165px;
+    height: 165px;
+    border-radius: 50%;
+}
+
+.content main {
+    display: flex;
+    flex-direction: column;
+    padding: 0 58px;
+}
+
+.content main .doctor-informations{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.doctor-informations span{
+    font: 400 20px "Archivo";
+}
+
+.doctor-informations span + span{
+    margin: 10px 0;
+}
+
+.content main .doctor-location{
+    margin-top: 10px;
+    height: 200px;
+}
+
+.content main .doctor-location .leaflet-container{
+    border: 0;
+    border-radius: 15px;
+}
+
+.content main .doctor-contact{
+    margin: 18px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content main .doctor-contact span{
+    font: normal 20px "Archivo";
+}
+
+.content main .doctor-contact span + span{
+    margin-top: 10px;
 }
 
 @media(max-width: 700px){
