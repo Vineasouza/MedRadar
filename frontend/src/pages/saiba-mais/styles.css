@@ -4,9 +4,10 @@ main {
 
 .healthTeam {
     width: 18%;
-    position: absolute;
     left: 0px;
     bottom: 10px;
+    position: fixed;
+    z-index: -10000;
 }
 
 .back-button{
@@ -75,6 +76,11 @@ main {
 
 .doctor-informations span{
     font: 400 20px "Archivo";
+    color: #08082D;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
 }
 
 .doctor-informations span + span{
@@ -99,6 +105,11 @@ main {
 
 .content main .doctor-contact span{
     font: normal 20px "Archivo";
+    color: #08082D;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
 }
 
 .content main .doctor-contact span + span{
@@ -108,8 +119,6 @@ main {
 @media(max-width: 700px){
     .healthTeam {
         width: 0px;
-        height: 0px;
-        left: 0px;
     }
 
     .back-button{
