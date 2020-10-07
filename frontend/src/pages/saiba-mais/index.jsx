@@ -23,6 +23,7 @@ function SaibaMais() {
             const positionDoctor = response.data.location.coordinates;
             setCenterMap([positionDoctor[1], positionDoctor[0]]);
         });
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -37,7 +38,7 @@ function SaibaMais() {
                 <img src={MedRadarLogo} className="medradarlogo" alt="MedRadar Logo" />
                 <div className="content">
                     <header>
-                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" />
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="doctor"/>
                         <div className="rating">
                             {/* https://material-ui.com/pt/components/rating/ */}
                             <Box component="fieldset" mb={3} borderColor="transparent">
@@ -49,11 +50,11 @@ function SaibaMais() {
                         <section className="doctor-informations">
                             <span className="doctor-field">Nome: {`${doctor.nome}`}</span>
                             <span className="doctor-field">Idade: {`${doctor.idade}`}</span>
-                            <span className="doctor-field">Especialidadde: {`${doctor.especialidade}`}</span>
+                            <span className="doctor-field">Especialidade: {`${doctor.especialidade}`}</span>
                             <span className="doctor-field">NºRegistro: {`${doctor.registro}`}</span>
                             <span className="doctor-field">Convênios: {`${doctor.convenio}`}</span>
                             <span className="doctor-field"> Endereço: {
-                                `${doctor.endereço}, ${doctor.cidade} - ${doctor.uf}`
+                                `${doctor.endereco}, ${doctor.cidade} - ${doctor.uf}`
                             }</span>
                         </section>
                         <section className="doctor-location">
@@ -71,6 +72,7 @@ function SaibaMais() {
                         <footer className="doctor-contact">
                             <span className="phone">Telefone: {`${doctor.telefone}`}</span>
                             <span className="e-mail">Email: {`${doctor.email}`}</span>
+                            <span className="doctor-field">Info: {`${doctor.bio}`}</span>
                         </footer>
                     </main>
                 </div>

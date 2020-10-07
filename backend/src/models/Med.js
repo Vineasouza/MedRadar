@@ -39,7 +39,7 @@ const MedSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    endereço: {
+    endereco: {
         type: String,
         require: true
     },

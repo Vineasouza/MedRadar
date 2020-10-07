@@ -5,7 +5,7 @@ module.exports = async function create(request, response) {
 
     console.log(request.body);
 
-    const { originalname: name, size, key, location: url = '' } = request.file;
+    // const { originalname: name, size, key, location: url = '' } = request.file;
 
     const {
         nome,
@@ -17,7 +17,7 @@ module.exports = async function create(request, response) {
         tipoEndereco,
         uf,
         cidade,
-        endereço,
+        endereco,
         telefone,
         email,
         bio,
@@ -43,17 +43,17 @@ module.exports = async function create(request, response) {
         convenio: convArray,
         uf,
         cidade,
-        endereço,
+        endereco,
         telefone,
         email,
         bio,
         location,
-        file: {
-            name,
-            size,
-            key,
-            url,
-        },
+        // file: {
+        //     name,
+        //     size,
+        //     key,
+        //     url,
+        // },
         tipoEndereco,
     }).catch((e) => {
         // Caso de erro
