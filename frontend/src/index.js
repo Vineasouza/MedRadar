@@ -12,12 +12,12 @@ import Success from './pages/success/index';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={Main} exact/>
-      <Route path="/main-initial" component={MainInitial}/>
+      <Route path="/" component={Main} exact />
+      <Route path="/main-initial" component={MainInitial} />
       <Route path="/search" component={Search} />
       <Route path="/add" component={AddDoctor} />
       <Route path="/success" component={Success} />
-      <Route path="/saiba-mais" component={SaibaMais} />
+      <Route path="/saiba-mais/:id" component={SaibaMais} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

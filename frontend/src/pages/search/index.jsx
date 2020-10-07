@@ -561,6 +561,7 @@ function Search() {
                                 >
                                     <Popup>
                                         <DoctorMarker
+                                            id={doctor._id}
                                             name={doctor.nome}
                                             specialty={doctor.especialidade}
                                             image={

@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { Map, TileLayer, Marker } from "react-leaflet";
+import { useParams } from "react-router-dom";
+import api from "../../services/api";
 
+import './styles.css';
 import MedRadarLogo from '../../assets/images/simple-only-logo.png';
 import healthTeam from '../../assets/images/health-team-2.png';
 
-
-
-import './styles.css';
-
-
 function SaibaMais() {
 
-    const [centerMap, setCenterMap] = useState([-23.4444548, -50.5653303]);
+    const { id } = useParams();
+    const [centerMap, setCenterMap] = useState([0, 0]);
+    const [doctor, setDoctor] = useState({});
+
+    useEffect(() => {
+        api.get(`doutor/${id}`).then((response) => {
+            setDoctor(response.data);
+            const positionDoctor = response.data.location.coordinates;
+            setCenterMap([positionDoctor[1], positionDoctor[0]]);
+        });
+    }, []);
 
     return (
         <main>
@@ -39,12 +47,14 @@ function SaibaMais() {
                     </header>
                     <main>
                         <section className="doctor-informations">
-                            <span className="doctor-field">Nome:</span>
-                            <span className="doctor-field">Idade:</span>
-                            <span className="doctor-field">Especialidadde:</span>
-                            <span className="doctor-field">NºRegistro:</span>
-                            <span className="doctor-field">Convênios:</span>
-                            <span className="doctor-field"> Endereço:</span>
+                            <span className="doctor-field">Nome: {`${doctor.nome}`}</span>
+                            <span className="doctor-field">Idade: {`${doctor.idade}`}</span>
+                            <span className="doctor-field">Especialidadde: {`${doctor.especialidade}`}</span>
+                            <span className="doctor-field">NºRegistro: {`${doctor.registro}`}</span>
+                            <span className="doctor-field">Convênios: {`${doctor.convenio}`}</span>
+                            <span className="doctor-field"> Endereço: {
+                                `${doctor.endereço}, ${doctor.cidade} - ${doctor.uf}`
+                            }</span>
                         </section>
                         <section className="doctor-location">
                             <Map zoom={15} center={centerMap}>
@@ -52,11 +62,15 @@ function SaibaMais() {
                                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
+                                <Marker
+                                    position={centerMap}
+                                />
                             </Map>
+
                         </section>
                         <footer className="doctor-contact">
-                            <span className="phone">Telefone:</span>
-                            <span className="e-mail">Email:</span>
+                            <span className="phone">Telefone: {`${doctor.telefone}`}</span>
+                            <span className="e-mail">Email: {`${doctor.email}`}</span>
                         </footer>
                     </main>
                 </div>
