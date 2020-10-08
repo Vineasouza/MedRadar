@@ -519,6 +519,7 @@ function Search() {
                             return (
                                 <Doctor
                                     key={index}
+                                    id={doctor._id}
                                     name={doctor.nome}
                                     specialty={doctor.especialidade}
                                     distance={radius}

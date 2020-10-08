@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 
 import './styles.css';
 
-const Doctor = ({ name, specialty, distance, image }) => {
+const Doctor = ({ id, name, specialty, distance, image }) => {
 
     return (
         <div id="doctor-container">
@@ -13,6 +14,11 @@ const Doctor = ({ name, specialty, distance, image }) => {
                 <h1>{name}</h1>
                 <p>{specialty}</p>
                 <p>{distance} km</p>
+                <button>
+                    <Link to={`/saiba-mais/${id}`}>
+                        Saiba mais
+                    </Link>
+                </button>
             </section>
         </div>
     );

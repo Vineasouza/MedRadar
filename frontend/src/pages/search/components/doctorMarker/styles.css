@@ -41,9 +41,14 @@
     border-radius: 8px;
     border-style: none;
     transition: opacity 0.2s;
+    cursor: pointer;
 }
 
 #doctor-marker-container section button:hover{
     opacity: 85%;
-    cursor: pointer;
+}
+
+#doctor-marker-container section button a{
+    text-decoration: none;
+    color: white;
 }
