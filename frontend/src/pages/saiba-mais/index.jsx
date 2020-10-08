@@ -24,7 +24,7 @@ function SaibaMais() {
             const positionDoctor = response.data.location.coordinates;
             setCenterMap([positionDoctor[1], positionDoctor[0]]);
         });
-    }, []);
+    }, [id]);
 
     return (
         <main>
@@ -38,7 +38,7 @@ function SaibaMais() {
                 <img src={MedRadarLogo} className="medradarlogo" alt="MedRadar Logo" />
                 <div className="content">
                     <header>
-                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" />
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="doctor avatar"/>
                         <div className="rating">
                             {/* https://material-ui.com/pt/components/rating/ */}
                             <Box component="fieldset" mb={3} borderColor="transparent">
@@ -74,6 +74,7 @@ function SaibaMais() {
                             <a
                                 className="phone"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 href={`https://wa.me/${doctor.telefone}`}
                             >
                                 <FiPhoneCall /> {`${doctor.telefone}`}
