@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { Map, TileLayer, Marker } from "react-leaflet";
 import { useParams } from "react-router-dom";
+import { FiMail, FiPhoneCall } from "react-icons/fi";
 import api from "../../services/api";
 
 import './styles.css';
@@ -53,7 +54,7 @@ function SaibaMais() {
                             <span className="doctor-field">NºRegistro: {`${doctor.registro}`}</span>
                             <span className="doctor-field">Convênios: {`${doctor.convenio}`}</span>
                             <span className="doctor-field"> Endereço: {
-                                `${doctor.endereco}, ${doctor.cidade} - ${doctor.uf}`
+                                `${doctor.endereo}, ${doctor.cidade} - ${doctor.uf}`
                             }</span>
                             <span className="doctor-field">{`${doctor.bio}`}</span>
                         </section>
@@ -70,8 +71,19 @@ function SaibaMais() {
 
                         </section>
                         <footer className="doctor-contact">
-                            <span className="phone">Telefone: {`${doctor.telefone}`}</span>
-                            <span className="e-mail">Email: {`${doctor.email}`}</span>
+                            <a
+                                className="phone"
+                                target="_blank"
+                                href={`https://wa.me/${doctor.telefone}`}
+                            >
+                                <FiPhoneCall /> {`${doctor.telefone}`}
+                            </a>
+                            <a
+                                className="e-mail"
+                                href="#"
+                            >
+                                <FiMail /> {`${doctor.email}`}
+                            </a>
                         </footer>
                     </main>
                 </div>

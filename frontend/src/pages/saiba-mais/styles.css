@@ -103,17 +103,31 @@ main {
     flex-direction: column;
 }
 
-.content main .doctor-contact span{
-    font: normal 20px "Archivo";
-    color: #08082D;
-    font-family: Archivo, Helvetica, sans-serif;
-    font-weight: normal;
-    font-style: normal;
+.content main .doctor-contact a{
+    width: 100%;
+    height: 40px;
+    font: normal 22px "Archivo";
+    color: white;
+    background: #08082D;
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.content main .doctor-contact span + span{
+.content main .doctor-contact a + a{
     margin-top: 10px;
+}
+
+.content main .doctor-contact a svg{
+    margin-right: 10px;
+}
+
+.content main .doctor-contact a:hover{
+    opacity: 0.85;
 }
 
 @media(max-width: 700px){
