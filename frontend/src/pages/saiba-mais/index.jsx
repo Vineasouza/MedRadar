@@ -54,7 +54,7 @@ function SaibaMais() {
                             <span className="doctor-field">NºRegistro: {`${doctor.registro}`}</span>
                             <span className="doctor-field">Convênios: {`${doctor.convenio}`}</span>
                             <span className="doctor-field"> Endereço: {
-                                `${doctor.endereo}, ${doctor.cidade} - ${doctor.uf}`
+                                `${doctor.endereco}, ${doctor.cidade} - ${doctor.uf}`
                             }</span>
                             <span className="doctor-field">{`${doctor.bio}`}</span>
                         </section>
