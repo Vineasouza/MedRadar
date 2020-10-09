@@ -35,6 +35,8 @@ function AddDoctor() {
     const [ufs, setUfs] = useState([]);
     const [cities, setCities] = useState([]);
 
+    const [file, setFile] = useState([]);
+
 
     useEffect(() => {
         axios.get(
@@ -61,6 +63,9 @@ function AddDoctor() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("file", file);
 
         const adress = `${endereco}, ${cidade}, ${uf}`;
         const coordinates = await getLatLong(adress);
@@ -143,6 +148,11 @@ function AddDoctor() {
                 error: true
             });
         });
+    }
+
+    function onFileUpload(e) {
+        setFile([...file, e.target.files[0]]);
+        console.log(setFile);        
     }
 
     return (
@@ -381,6 +391,16 @@ function AddDoctor() {
                             <FileList files={uploadedFiles}/>
                         ) }
                     </div>
+                </div>
+                
+                <div className="upload--button">
+                <input
+                    id="file" 
+                    name="file" 
+                    type="file"
+                    accept=".jpeg, .jpg, .png"
+                    onChange={onFileUpload}
+                />
                 </div>
 
                 <section className="add-actions">
