@@ -75,13 +75,13 @@ function SaibaMais() {
                                 className="phone"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                href={`https://wa.me/${doctor.telefone}`}
+                                href={`https://wa.me/+55${doctor.telefone}`}
                             >
                                 <FiPhoneCall /> {`${doctor.telefone}`}
                             </a>
                             <a
                                 className="e-mail"
-                                href="#"
+                                href={`mailto:${doctor.email}`}
                             >
                                 <FiMail /> {`${doctor.email}`}
                             </a>

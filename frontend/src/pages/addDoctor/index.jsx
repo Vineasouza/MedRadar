@@ -81,6 +81,35 @@ function AddDoctor() {
         );
         history.push("/success");
     }
+    
+    var expanded = false;
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+
+    function handleCheck(event) {
+        if(!null) {
+            if(event.target.checked) {
+                if(!convenio.includes(event.target.value)){
+                    let newChecked = event.target.value;
+                    setConvenio(checked => [...checked, newChecked] )
+                    console.log(convenio);
+                }
+            }else {
+                if (convenio.indexOf(event.target.value) > -1) {
+                    convenio.splice(convenio.indexOf(event.target.value), 1);
+                    console.log(convenio);
+                }
+            }
+        }
+    }
 
     return (
         <main>
@@ -170,7 +199,7 @@ function AddDoctor() {
                     value={convenio}
                     onChange={e => setConvenio(e.target.value)}
                 /> */}
-                <select
+                {/* <select
                     defaultValue=" "
                     name="convenio"
                     id="convenio"
@@ -186,7 +215,24 @@ function AddDoctor() {
                             )
                         })
                     }
-                </select>
+                </select> */}
+                <div class="multiselect">
+                    <div class="selectBox" onClick={showCheckboxes}>
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                        {
+                            arrayHealthPlans.map((healthPlan) => {
+                                return (
+                                    <label><input type="checkbox" key={healthPlan} value={healthPlan} onChange={handleCheck}/>{healthPlan}</label>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
 
                 <div className="forms-city">
                     <label className="uf">
