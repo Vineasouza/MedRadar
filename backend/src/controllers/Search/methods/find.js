@@ -1,87 +1,85 @@
-const Med = require('../../../models/Med');
+const Med = require("../../../models/Med");
 
 module.exports = async function find(request, response) {
+  if (Object.keys(request.query).length === 0) {
+    return response.status(406).send();
+  }
 
+  let resultSearch;
+  const { latitude, longitude, specialty, city } = request.query;
 
-    if (Object.keys(request.query).length === 0) {
-        return response.status(406).send();
-    }
+  let query = {};
 
-    let resultSearch;
-    const {
-        latitude,
-        longitude,
-        specialty,
-        city,
-    } = request.query;
+  if (specialty != undefined) {
+    query.especialidade = specialty;
+  }
+  if (city != undefined) {
+    query.cidade = city;
+  }
 
-    let query = {};
-
-    if (specialty != undefined) {
-        query.especialidade = specialty;
-    }
-    if (city != undefined) {
-        query.cidade = city
-    }
-
-
-    if (latitude != undefined && longitude != undefined) {
-
-        /* 
+  if (latitude != undefined && longitude != undefined) {
+    /* 
             Option where the user are looking for
             doctors only by Radius
         */
-        let radius;
-        if (request.query.radius === undefined) radius = 10; // Default to radius!
-        else radius = request.query.radius
+    let radius;
+    if (request.query.radius === undefined) radius = 10;
+    // Default to radius!
+    else radius = request.query.radius;
 
-        if (Object.keys(query).length === 0) {
-            resultSearch = await Med.find({
-                location: {
-                    $near: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: [longitude, latitude],
-                        },
-                        $maxDistance: radius * 1000, // Converting from km to m
-                    },
-                }
-            });
+    if (Object.keys(query).length === 0) {
+      resultSearch = await Med.find({
+        location: {
+          $near: {
+            $geometry: {
+              type: "Point",
+              coordinates: [longitude, latitude],
+            },
+            $maxDistance: radius * 1000, // Converting from km to m
+          },
+        },
+      });
 
-            /* 
+      /* 
                 Option where the user are looking for
                 doctors only by Radius, city or specialty
             */
-        } else {
-            resultSearch = await Med.find({
-                ...query
-                ,
-                location: {
-                    $near: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: [longitude, latitude],
-                        },
-                        $maxDistance: radius * 1000,
-                    },
-                }
-            });
-        }
-
-
     } else {
-        /* 
+      resultSearch = await Med.find({
+        ...query,
+        location: {
+          $near: {
+            $geometry: {
+              type: "Point",
+              coordinates: [longitude, latitude],
+            },
+            $maxDistance: radius * 1000,
+          },
+        },
+      });
+    }
+  } else {
+    /* 
             Here, the User are looking for doctors using
             specialty, city, or two together  
         */
-        resultSearch = await Med.find(query);
-    }
+    resultSearch = await Med.find(query);
+  }
 
-    if (resultSearch.length === 0) {
-        return response.status(404).json({
-            msg: "Data not found, try again!!"
-        })
-    }
+  if (resultSearch.length === 0) {
+    return response.status(404).json({
+      msg: "Data not found, try again!!",
+    });
+  }
 
-    return response.status(200).json(resultSearch);
-}
+  const doctors = resultSearch.map((doctor) => {
+    const newDoctor = {
+      ...doctor._doc,
+      image_url: `http://${process.env.IP_LOCALHOST}:8080/uploads/${doctor.image}`, // URL to acess the image
+    };
+
+    return newDoctor;
+  });
+
+  return response.status(200).json(doctors);
+};

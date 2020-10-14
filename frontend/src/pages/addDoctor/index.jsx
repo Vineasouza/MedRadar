@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import NumberFormat from 'react-number-format';
-import { uniqueId} from 'lodash';
-import filesize from 'filesize';
 
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import { getLatLong } from '../../services/geocode';
 import arraySpecialties from '../search/utils/specialties';
-import Dropzone from './components/upload';
-import FileList from './components/FileList';
+import Dropzone from './components/Dropzone';
 import './styles.css';
 
 function AddDoctor() {
@@ -28,15 +25,11 @@ function AddDoctor() {
     const [bio, setBio] = useState('');
     const [genero, setGenero] = useState('');
     const [tipoEndereco, setTipoEndereco] = useState('');
-    const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [fileInfo, setFileInfo] = useState([]);
+    const [selectedFile, setSelectedFile] = useState();
 
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
     const [cities, setCities] = useState([]);
-
-    const [file, setFile] = useState([]);
-
 
     useEffect(() => {
         axios.get(
@@ -65,94 +58,30 @@ function AddDoctor() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("nome", nome);
+        formData.append("idade", idade);
+        formData.append("genero", genero);
+        formData.append("especialidade", especialidade );
+        formData.append("registro", registro)
+        formData.append("convenio", convenio);
+        formData.append("uf", uf);
+        formData.append("cidade", cidade);
+        formData.append("endereco", endereco);
+        formData.append("tipoEndereco", tipoEndereco);
+        formData.append("telefone", telefone);
+        formData.append("email", email);
+        formData.append("bio", bio);
 
         const adress = `${endereco}, ${cidade}, ${uf}`;
         const coordinates = await getLatLong(adress);
+        formData.append("latitude", coordinates.latitude);
+        formData.append("longitude", coordinates.longitude);
+        formData.append("image", selectedFile);
 
-        await api.post("/cadastro", {
-            nome,
-            idade,
-            genero,
-            especialidade,
-            registro,
-            convenio,
-            uf,
-            cidade,
-            endereco,
-            tipoEndereco,
-            telefone,
-            email,
-            bio,
-            latitude: coordinates.latitude, // Latitude e Longitude is Default to Nova Fátima, but can change
-            longitude: coordinates.longitude
-        }).then(
+        await api.post("/cadastro", formData).then(
             response => console.log(response.status)
         );
         history.push("/success");
-    }
-
-    const handleUpload = (files) => {
-
-        const newUploadedFiles = files.map(file => ({
-            file,
-            id: uniqueId(),
-            name: file.name,
-            readableSize: filesize(file.size),
-            preview: URL.createObjectURL(file),
-            progress: 0,
-            uploaded: false,
-            error: false,
-            url: null
-        }));
-        
-        setFileInfo(newUploadedFiles)
-        setUploadedFiles(prevFiles => [...prevFiles, ...newUploadedFiles]);
-          
-    };
-    
-    useEffect(()=> {
-        fileInfo[0]?.progress === 0 ?
-        fileInfo.forEach(processUpload) :
-        console.log(uploadedFiles)
-        // eslint-disable-next-line
-    },[uploadedFiles])
-    
-    const updateFile = (id, data) => {
-        setUploadedFiles(uploadedFiles.map(uploadedFile => id === uploadedFile.id ? { ...uploadedFile, ...data }
-            : uploadedFile ));    
-    }
-
-    const processUpload = (newUploadedFile) => {
-        const data = new FormData();
-        data.append('file', newUploadedFile.file, newUploadedFile.name);
-        
-        api.post('/file', data, {
-            onUploadProgress: e => {
-                const progress = parseInt(Math.round((e.loaded * 100) / e.total));
-                               
-                updateFile(newUploadedFile.id, {
-                    progress,
-                })
-            }
-        }).then(response => {
-            console.log('resolveu')
-            updateFile(newUploadedFile.id, {
-                uploaded: true,
-                id: response.data._id,
-                url: response.data.url
-            });
-        }).catch(erro => {
-            console.log('erro',erro)
-            updateFile(newUploadedFile.id, {
-                error: true
-            });
-        });
-    }
-
-    function onFileUpload(e) {
-        setFile([...file, e.target.files[0]]);
-        console.log(setFile);        
     }
 
     return (
@@ -162,6 +91,7 @@ function AddDoctor() {
                 <img src={mainDoctor} className="main-doctor" alt="doctor" />
             </header>
             <form className="forms-block" onSubmit={handleSubmit}>
+                <Dropzone onFileUploaded={setSelectedFile}/>
                 <label className="nome">Nome</label>
                 <input
                     type="text"
@@ -383,25 +313,6 @@ function AddDoctor() {
                     value={bio}
                     onChange={e => setBio(e.target.value)}
                 />
-
-                <div className="dropzone">
-                    <div className="dropzone-content">
-                        <Dropzone onUpload={handleUpload} length={uploadedFiles.length}/>
-                        { !!uploadedFiles.length && (
-                            <FileList files={uploadedFiles}/>
-                        ) }
-                    </div>
-                </div>
-                
-                <div className="upload--button">
-                <input
-                    id="file" 
-                    name="file" 
-                    type="file"
-                    accept=".jpeg, .jpg, .png"
-                    onChange={onFileUpload}
-                />
-                </div>
 
                 <section className="add-actions">
                     <button onClick={handleClick}>Cancelar</button>

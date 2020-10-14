@@ -366,12 +366,7 @@ function Search() {
                                         distance={radius}
 
                                         // This part is only test, in the future it will change and get image from back-end
-                                        image={
-                                            doctor.genero === "masculino" ?
-                                                "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                        }
-
+                                        image={doctor.image_url}
                                     />
                                 )
                             })
@@ -401,11 +396,7 @@ function Search() {
                                             <DoctorMarker
                                                 name={doctor.nome}
                                                 specialty={doctor.especialidade}
-                                                image={
-                                                    doctor.genero === "masculino" ?
-                                                        "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                        : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                                }
+                                                image={doctor.image_url}
                                             />
                                         </Popup>
                                     </Marker>
