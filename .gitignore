@@ -3,3 +3,4 @@ yarn-error.log
 .env
 .prettierrc
 .nyc_output
+.editorconfig
