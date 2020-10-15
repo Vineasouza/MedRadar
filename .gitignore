@@ -1,6 +1,6 @@
 node_modules
 yarn-error.log
 .env
-.prettierrc
-.nyc_output
 .editorconfig
+.nyc_output
+

@@ -515,23 +515,21 @@ function Search() {
                 <section className="search-result">
                     {/* Part of resutlts */}
                     <div>
-                        {doctorsInView.map((doctor, index) => {
-                            return (
-                                <Doctor
-                                    key={index}
-                                    id={doctor._id}
-                                    name={doctor.nome}
-                                    specialty={doctor.especialidade}
-                                    distance={radius}
-                                    // This part is only test, in the future it will change and get image from back-end
-                                    image={
-                                        doctor.genero === "masculino"
-                                            ? "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                            : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                    }
-                                />
-                            );
-                        })}
+                        {
+                            doctorsInView.map((doctor, index) => {
+                                return (
+                                    <Doctor
+                                        key={index}
+                                        name={doctor.nome}
+                                        specialty={doctor.especialidade}
+                                        distance={radius}
+
+                                        // This part is only test, in the future it will change and get image from back-end
+                                        image={doctor.image}
+                                    />
+                                )
+                            })
+                        }
                     </div>
                 </section>
 
@@ -542,39 +540,28 @@ function Search() {
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        {doctorsInView.map((doctor, index) => {
-                            const positionDoctorInMap =
-                                doctor.location.coordinates;
+                        {
+                            doctorsInView.map((doctor, index) => {
 
-                            return (
-                                <Marker
-                                    key={index}
-                                    position={[
-                                        positionDoctorInMap[1],
-                                        positionDoctorInMap[0],
-                                    ]}
-                                    draggable={false}
-                                    icon={
-                                        doctor.genero === "masculino"
-                                            ? manDoctor
-                                            : womanDoctor
-                                    }
-                                >
-                                    <Popup>
-                                        <DoctorMarker
-                                            id={doctor._id}
-                                            name={doctor.nome}
-                                            specialty={doctor.especialidade}
-                                            image={
-                                                doctor.genero === "masculino"
-                                                    ? "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                    : "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                            }
-                                        />
-                                    </Popup>
-                                </Marker>
-                            );
-                        })}
+                                const positionDoctorInMap = doctor.location.coordinates;
+
+                                return (
+                                    <Marker
+                                        key={index}
+                                        position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
+                                        draggable={false}
+                                        icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
+                                        <Popup>
+                                            <DoctorMarker
+                                                name={doctor.nome}
+                                                specialty={doctor.especialidade}
+                                                image={doctor.image}
+                                            />
+                                        </Popup>
+                                    </Marker>
+                                );
+                            })
+                        }
                     </Map>
                 </section>
             </main>

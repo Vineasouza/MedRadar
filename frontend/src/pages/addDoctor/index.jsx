@@ -8,7 +8,9 @@ import mainDoctor from '../../assets/images/Online Doctor-bro.png';
 import api from '../../services/api';
 import { getLatLong } from '../../services/geocode';
 import arraySpecialties from '../search/utils/specialties';
+import Dropzone from './components/Dropzone';
 import arrayHealthPlans from '../search/utils/healthPlans';
+
 import './styles.css';
 
 function AddDoctor() {
@@ -25,11 +27,11 @@ function AddDoctor() {
     const [bio, setBio] = useState('');
     const [genero, setGenero] = useState('');
     const [tipoEndereco, setTipoEndereco] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
 
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
     const [cities, setCities] = useState([]);
-
 
     useEffect(() => {
         axios.get(
@@ -57,26 +59,28 @@ function AddDoctor() {
     async function handleSubmit(e) {
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append("nome", nome);
+        formData.append("idade", idade);
+        formData.append("genero", genero);
+        formData.append("especialidade", especialidade );
+        formData.append("registro", registro)
+        formData.append("convenio", convenio);
+        formData.append("uf", uf);
+        formData.append("cidade", cidade);
+        formData.append("endereco", endereco);
+        formData.append("tipoEndereco", tipoEndereco);
+        formData.append("telefone", telefone);
+        formData.append("email", email);
+        formData.append("bio", bio);
+
         const adress = `${endereco}, ${cidade}, ${uf}`;
         const coordinates = await getLatLong(adress);
+        formData.append("latitude", coordinates.latitude);
+        formData.append("longitude", coordinates.longitude);
+        formData.append("image", selectedFile);
 
-        await api.post("/cadastro", {
-            nome,
-            idade,
-            genero,
-            especialidade,
-            registro,
-            convenio,
-            uf,
-            cidade,
-            endereco,
-            tipoEndereco,
-            telefone,
-            email,
-            bio,
-            latitude: coordinates.latitude, // Latitude e Longitude is Default to Nova Fátima, but can change
-            longitude: coordinates.longitude
-        }).then(
+        await api.post("/cadastro", formData).then(
             response => console.log(response.status)
         );
         history.push("/success");
@@ -118,6 +122,7 @@ function AddDoctor() {
                 <img src={mainDoctor} className="main-doctor" alt="doctor" />
             </header>
             <form className="forms-block" onSubmit={handleSubmit}>
+                <Dropzone onFileUploaded={setSelectedFile}/>
                 <label className="nome">Nome</label>
                 <input
                     type="text"
@@ -382,6 +387,7 @@ function AddDoctor() {
                     value={bio}
                     onChange={e => setBio(e.target.value)}
                 />
+
                 <section className="add-actions">
                     <button onClick={handleClick}>Cancelar</button>
                     <button type="submit" >Cadastrar</button>

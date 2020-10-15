@@ -1,8 +1,12 @@
-const { Query } = require('mongoose');
-const Med = require('../../../models/Med');
+const Med = require("../../../models/Med");
 
 module.exports = async function find(request, response) {
+  if (Object.keys(request.query).length === 0) {
+    return response.status(406).send();
+  }
 
+  let resultSearch;
+  const { latitude, longitude, specialty, city } = request.query;
 
     if (Object.keys(request.query).length === 0) {
         return response.status(406).send();
@@ -55,10 +59,9 @@ module.exports = async function find(request, response) {
             }
         });
 
-        /* 
-            Option where the user are looking for
+        /*  Option where the user are looking for
             doctors only by Radius, city or specialty
-        */
+        */    
     } else {
         console.log(query);
         resultSearch = await Med.find({
@@ -76,11 +79,11 @@ module.exports = async function find(request, response) {
         });
     }
 
-    if (resultSearch.length === 0) {
-        return response.status(404).json({
-            msg: "Data not found, try again!!"
-        })
-    }
+  if (resultSearch.length === 0) {
+    return response.status(404).json({
+      msg: "Data not found, try again!!",
+    });
+  }
 
-    return response.status(200).json(resultSearch);
-}
+  return response.status(200).json(resultSearch);
+};
