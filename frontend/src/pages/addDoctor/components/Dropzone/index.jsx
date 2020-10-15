@@ -20,8 +20,8 @@ const Dropzone = ({onFileUploaded}) => {
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'image/*'
-        });
+        accept: 'image/jpg, image/jpeg, image/png',
+    });
 
     return (
         <div className="dropzone" {...getRootProps()}>
@@ -31,7 +31,7 @@ const Dropzone = ({onFileUploaded}) => {
             ? <img src={selectedFileUrl} alt="PointImage"/> 
             :    <p>
                     <FiUpload/>
-                    Imagem do estabelecimento
+                    Selecione um avatar
                 </p>
         }
         </div>
