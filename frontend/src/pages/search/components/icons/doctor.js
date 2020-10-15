@@ -5,7 +5,7 @@ export const manDoctor = new Leaflet.Icon({
     iconRetinaUrl: require('../../../../assets/images/male-doctor.jpg'),
     iconAnchor: [5, 55],
     popupAnchor: [60, -44],
-    iconSize: [50, 50],
+    iconSize: [60, 60],
     className: 'leaflet-div-icon'
 });
 
@@ -14,6 +14,6 @@ export const womanDoctor = new Leaflet.Icon({
     iconRetinaUrl: require('../../../../assets/images/female-doctor.jpg'),
     iconAnchor: [5, 55],
     popupAnchor: [60, -44],
-    iconSize: [50, 50],
+    iconSize: [60, 60],
     className: 'leaflet-div-icon'
 });
