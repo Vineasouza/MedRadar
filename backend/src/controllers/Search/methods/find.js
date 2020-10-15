@@ -72,14 +72,5 @@ module.exports = async function find(request, response) {
     });
   }
 
-  const doctors = resultSearch.map((doctor) => {
-    const newDoctor = {
-      ...doctor._doc,
-      image_url: `http://${process.env.IP_LOCALHOST}:8080/uploads/${doctor.image}`, // URL to acess the image
-    };
-
-    return newDoctor;
-  });
-
-  return response.status(200).json(doctors);
+  return response.status(200).json(resultSearch);
 };

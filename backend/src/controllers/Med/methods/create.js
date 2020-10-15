@@ -28,6 +28,8 @@ module.exports = async function create(request, response) {
     coordinates: [longitude, latitude],
   };
 
+  const { location: image_url = " " } = request.file;
+
   /* Criando novo médico */
   const newMed = await Med.create({
     nome,
@@ -44,7 +46,7 @@ module.exports = async function create(request, response) {
     bio,
     location,
     tipoEndereco,
-    image: request.file.filename,
+    image: image_url,
   })
     .catch((e) => {
       // Caso de erro
