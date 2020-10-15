@@ -28,6 +28,6 @@ app.use(
   express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
 );
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
 
 module.exports = app;

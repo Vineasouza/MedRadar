@@ -1,15 +1,18 @@
 import React from 'react';
-
+import { Link } from "react-router-dom"
 import './styles.css';
 
-const DoctorMarker = ({ name, specialty, image }) => {
+const DoctorMarker = ({ id, name, specialty, image }) => {
     return (
         <div id="doctor-marker-container">
             <img src={image} alt="Imagem do médico" />
             <section>
                 <p>{name}</p>
                 <p>{specialty}</p>
-                <button>Saiba mais</button>
+                <button>
+
+                    <Link to={`/saiba-mais/${id}`}>Saiba mais</Link>
+                </button>
             </section>
         </div>
     )

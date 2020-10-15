@@ -37,7 +37,7 @@
     display: inline-block;
 }
 
-.forms-block input {
+.forms-block input, textarea {
     width: 100%;
 }
 
@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-.forms-block label{
+.forms-block label {
     color: #08082D;
     font-family: Archivo, Helvetica, sans-serif;
     font-weight: normal;
@@ -57,7 +57,7 @@
     text-align: left;
 }
 
-.forms-block input,select,option {
+.forms-block input,select,option, textarea {
     border-color: #08082D;
     background-color: #F4F4F4;
     border: 2px solid #08082D;
@@ -250,6 +250,54 @@ select {
     font-size: 16px;
     text-align: center;
     color: #5c5c5c;
+}
+
+/* Multiselect */
+
+.multiselect {
+    width: 100%;
+}
+  
+.selectBox {
+position: relative;
+}
+  
+.selectBox select {
+    width: 100%;
+}
+  
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+  
+#checkboxes {
+    background-color: #F4F4F4;
+    display: none;
+    border: 2px #08082D solid;
+    z-index: -1000;
+}
+  
+#checkboxes label {
+    display: list-item;
+    list-style-type: none;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+#checkboxes input[type=checkbox] {
+    border: 2px;
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+    -webkit-appearance: checkbox;
+}
+  
+#checkboxes label:hover {
+    background-color: #F4F4F4;
 }
 
 @media screen and (max-width: 830px) {

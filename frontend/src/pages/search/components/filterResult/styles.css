@@ -8,6 +8,10 @@
     background-color: whitesmoke;
 }
 
+#filter-result-container:nth-child(n+5){
+    margin-top: 2px;
+}  
+
 #filter-result-container button{
     margin-left: 2px;
     border-radius: 5px;

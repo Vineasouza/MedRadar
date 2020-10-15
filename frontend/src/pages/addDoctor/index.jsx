@@ -9,6 +9,8 @@ import api from '../../services/api';
 import { getLatLong } from '../../services/geocode';
 import arraySpecialties from '../search/utils/specialties';
 import Dropzone from './components/Dropzone';
+import arrayHealthPlans from '../search/utils/healthPlans';
+
 import './styles.css';
 
 function AddDoctor() {
@@ -82,6 +84,35 @@ function AddDoctor() {
             response => console.log(response.status)
         );
         history.push("/success");
+    }
+    
+    var expanded = false;
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+
+    function handleCheck(event) {
+        if(!null) {
+            if(event.target.checked) {
+                if(!convenio.includes(event.target.value)){
+                    let newChecked = event.target.value;
+                    setConvenio(checked => [...checked, newChecked] )
+                    console.log(convenio);
+                }
+            }else {
+                if (convenio.indexOf(event.target.value) > -1) {
+                    convenio.splice(convenio.indexOf(event.target.value), 1);
+                    console.log(convenio);
+                }
+            }
+        }
     }
 
     return (
@@ -164,7 +195,7 @@ function AddDoctor() {
                     onChange={e => setRegistro(e.target.value)}
                 />
                 <label className="convenio">Convênio</label>
-                <input
+                {/* <input
                     type="text"
                     name="convenio"
                     id="convenio"
@@ -172,7 +203,41 @@ function AddDoctor() {
                     placeholder="sulAmerica, Unimed"
                     value={convenio}
                     onChange={e => setConvenio(e.target.value)}
-                />
+                /> */}
+                {/* <select
+                    defaultValue=" "
+                    name="convenio"
+                    id="convenio"
+                    required
+                    value={convenio}
+                    onChange={e => setConvenio(e.target.value)}
+                >
+                    <option value=" " disabled hidden> Selecione um convênio </option>
+                    {
+                        arrayHealthPlans.map((healthPlan) => {
+                            return (
+                                <option key={healthPlan} value={healthPlan}> {healthPlan}</option>
+                            )
+                        })
+                    }
+                </select> */}
+                <div class="multiselect">
+                    <div class="selectBox" onClick={showCheckboxes}>
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                        {
+                            arrayHealthPlans.map((healthPlan) => {
+                                return (
+                                    <label><input type="checkbox" key={healthPlan} value={healthPlan} onChange={handleCheck}/>{healthPlan}</label>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
 
                 <div className="forms-city">
                     <label className="uf">
@@ -305,10 +370,19 @@ function AddDoctor() {
                     onChange={e => setEmail(e.target.value)}
                 />
                 <label className="bio">Informações adicionais</label>
-                <input
+                {/* <input
                     type="text"
                     name="bio"
                     id="bio"
+                    placeholder="Informações adicionais"
+                    value={bio}
+                    onChange={e => setBio(e.target.value)}
+                /> */}
+                <textarea 
+                    id="bio" 
+                    name="bio" 
+                    rows="3" 
+                    maxlength={140}
                     placeholder="Informações adicionais"
                     value={bio}
                     onChange={e => setBio(e.target.value)}

@@ -64,7 +64,7 @@ const MedSchema = new mongoose.Schema({
       validator: function (v) {
         return /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(v);
       },
-      message: "{VALUE} is not a valid email!",
+      message: "{VALUE} is not a valid email!",   
     },
     unique: true,
     required: [true, "User email required"],
