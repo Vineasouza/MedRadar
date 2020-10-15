@@ -366,7 +366,7 @@ function Search() {
                                         distance={radius}
 
                                         // This part is only test, in the future it will change and get image from back-end
-                                        image={doctor.image_url}
+                                        image={doctor.image}
                                     />
                                 )
                             })
@@ -396,7 +396,7 @@ function Search() {
                                             <DoctorMarker
                                                 name={doctor.nome}
                                                 specialty={doctor.especialidade}
-                                                image={doctor.image_url}
+                                                image={doctor.image}
                                             />
                                         </Popup>
                                     </Marker>
