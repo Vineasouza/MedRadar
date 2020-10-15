@@ -12,6 +12,7 @@ routes.get("/", (request, response) => {
   return response.send("API no AR!!");
 });
 
+routes.get("/doutor/:id", MedController.show);
 routes.get("/cadastro", MedController.list);
 routes.post(
   "/cadastro",

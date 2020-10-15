@@ -519,12 +519,11 @@ function Search() {
                             doctorsInView.map((doctor, index) => {
                                 return (
                                     <Doctor
+                                        id={doctor._id}
                                         key={index}
                                         name={doctor.nome}
                                         specialty={doctor.especialidade}
                                         distance={radius}
-
-                                        // This part is only test, in the future it will change and get image from back-end
                                         image={doctor.image}
                                     />
                                 )
@@ -553,6 +552,7 @@ function Search() {
                                         icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
                                         <Popup>
                                             <DoctorMarker
+                                                id={doctor._id}
                                                 name={doctor.nome}
                                                 specialty={doctor.especialidade}
                                                 image={doctor.image}
