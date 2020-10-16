@@ -26,6 +26,17 @@ function SaibaMais() {
         });
     }, [id]);
 
+    const [value, setValue] = useState('');
+    const [hover, setHover] = useState('');
+
+    const labels = {
+        1: 'Muito Ruim 😡',
+        2: 'Ruim 😠',
+        3: 'Intermediário 🙂',
+        4: 'Bom 😊',
+        5: 'Muito Bom 🤩',
+    };
+
     return (
         <main>
             <div className="back-button">
@@ -43,7 +54,17 @@ function SaibaMais() {
                         <div className="rating">
                             {/* https://material-ui.com/pt/components/rating/ */}
                             <Box component="fieldset" mb={3} borderColor="transparent">
-                                <Rating name="rating" defaultValue={2.5} precision={0.5} size="medium" />
+                                <Rating 
+                                    name="rating" 
+                                    defaultValue={3} 
+                                    precision={1} 
+                                    size="medium"  
+                                    onChange={e => setValue(e.target.value)}
+                                    onChangeActive={(event, newHover) => {
+                                        setHover(newHover);
+                                    }}
+                                />
+                                {value !== null && <Box color="grey"  mt={2} ml={1}>{labels[hover !== -1 ? hover : value]}</Box>}
                             </Box>
                         </div>
                     </header>

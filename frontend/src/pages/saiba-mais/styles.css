@@ -47,6 +47,16 @@ main {
 /* https://material-ui.com/pt/api/rating/ */
 .MuiRating-iconFilled{
     color: #08082D;
+    padding: 1.2px;
+}
+
+.MuiBox-root {
+    color: #08082D;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .content header{
