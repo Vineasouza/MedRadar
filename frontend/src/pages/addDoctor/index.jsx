@@ -198,7 +198,7 @@ function AddDoctor() {
                 <div class="multiselect">
                     <div class="selectBox" onClick={showCheckboxes}>
                         <select>
-                            <option>Select an option</option>
+                            <option>Selecione os convênios</option>
                         </select>
                         <div class="overSelect"></div>
                     </div>
