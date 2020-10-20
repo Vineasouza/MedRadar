@@ -25,9 +25,9 @@
     margin-bottom: 1px;
     width: 20%;
     transition: opactity 0.2s;
+    cursor: pointer;
 }
 
 .option button:hover{
-    background-color: #79A0B7;
     opacity: 70%;
 }
