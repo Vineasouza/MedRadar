@@ -37,10 +37,10 @@
     justify-content: center;
 }
 
-#main-initial main .link:hover{
+/* #main-initial main .link:hover{
     opacity: 70%;
     color: #102751;
-}
+} */
 
 .main-content{
     display: flex;
