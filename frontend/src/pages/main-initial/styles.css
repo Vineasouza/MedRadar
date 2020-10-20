@@ -59,6 +59,16 @@
     height: 126px;
 }
 
+.field-info p {
+    color: #08082D;
+    margin-top: 6px;
+    font-size: 14px;
+    font-family: Archivo, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.05em;
+}
+
 @media(max-width: 700px){
 
     #main-initial{

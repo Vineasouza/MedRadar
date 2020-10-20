@@ -123,22 +123,25 @@ function AddDoctor() {
             </header>
             <form className="forms-block" onSubmit={handleSubmit}>
                 <Dropzone onFileUploaded={setSelectedFile}/>
-                <label className="nome">Nome</label>
+                <label className="nome">Nome*</label>
                 <input
                     type="text"
                     name="nome"
                     id="nome"
+                    maxLength={40}
                     required
                     placeholder="Nome completo"
                     value={nome}
                     onChange={e => setNome(e.target.value)}
                 />
                 <div className="gender-types">
-                    <label className="idade">Idade</label>
+                    <label className="idade">Idade*</label>
                     <input
                         type="number"
                         name="idade"
                         id="idade"
+                        min="0"
+                        max="100"
                         required
                         placeholder=" "
                         value={idade}
@@ -166,7 +169,7 @@ function AddDoctor() {
                     </div>
                 </div>
 
-                <label className="especialidade">Especialidade</label>
+                <label className="especialidade">Especialidade*</label>
                 <select
                     defaultValue=" "
                     name="especialidade"
@@ -175,7 +178,7 @@ function AddDoctor() {
                     value={especialidade}
                     onChange={e => setEspecialidade(e.target.value)}
                 >
-                    <option value=" " disabled hidden > Selecione uma especialidade</option>
+                    <option value=" " hidden > Selecione uma especialidade</option>
                     {
                         arraySpecialties.map((specialty) => {
                             return (
@@ -184,17 +187,18 @@ function AddDoctor() {
                         })
                     }
                 </select>
-                <label className="registro">Número de Registro</label>
+                <label className="registro">Número de Registro*</label>
                 <input
-                    type="number"
+                    type="text"
                     name="registro"
                     id="registro"
+                    maxLength={20}
                     required
                     placeholder="N°de Registro"
                     value={registro}
                     onChange={e => setRegistro(e.target.value)}
                 />
-                <label className="convenio">Convênio</label>
+                <label className="convenio">Convênio*</label>
                 <div class="multiselect">
                     <div class="selectBox" onClick={showCheckboxes}>
                         <select>
@@ -215,7 +219,7 @@ function AddDoctor() {
 
                 <div className="forms-city">
                     <label className="uf">
-                        UF
+                        UF*
                     <select
                             name="estados-brasil"
                             id="uf"
@@ -240,9 +244,10 @@ function AddDoctor() {
                             }
                         </select>
                     </label>
-                    <label className="cidade">Cidade
+                    <label className="cidade">Cidade*
                     <select
                             id="city"
+                            required
                             defaultValue=" "
                             onChange={(e) => { setCidade(e.target.value) }}
                         >
@@ -264,11 +269,12 @@ function AddDoctor() {
                         </select>
                     </label>
                 </div>
-                <label className="endereco">Endereço</label>
+                <label className="endereco">Endereço*</label>
                 <input
                     type="text"
                     name="endereco"
                     id="endereco"
+                    maxLength={45}
                     required
                     placeholder="Rua/Av., N°, Comp, Bairro"
                     value={endereco}
@@ -316,7 +322,7 @@ function AddDoctor() {
                         <label className="laboratorio">Laboratório</label>
                     </div>
                 </div>
-                <label className="telefone">Celular</label>
+                <label className="telefone">Celular*</label>
                 <NumberFormat
                     name="telefone"
                     id="telefone"
@@ -331,7 +337,7 @@ function AddDoctor() {
                     onChange={e => setTelefone(e.target.value)}
                 />      
 
-                <label className="email">E-mail</label>
+                <label className="email">E-mail*</label>
                 <input
                     type="email"
                     name="email"
@@ -344,23 +350,20 @@ function AddDoctor() {
                     onChange={e => setEmail(e.target.value)}
                 />
                 <label className="bio">Informações adicionais</label>
-                {/* <input
-                    type="text"
-                    name="bio"
-                    id="bio"
-                    placeholder="Informações adicionais"
-                    value={bio}
-                    onChange={e => setBio(e.target.value)}
-                /> */}
                 <textarea 
                     id="bio" 
                     name="bio" 
                     rows="3" 
-                    maxlength={140}
+                    
+                    maxlength={25}
                     placeholder="Informações adicionais"
                     value={bio}
                     onChange={e => setBio(e.target.value)}
                 />
+
+                <div className="field-info">
+                    <p>Campos Requeridos*</p>
+                </div>
 
                 <section className="add-actions">
                     <button onClick={handleClick}>Cancelar</button>
