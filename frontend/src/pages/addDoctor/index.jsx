@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import NumberFormat from 'react-number-format';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
 
 import logo from '../../assets/images/simple-only-logo.png';
 import mainDoctor from '../../assets/images/Online Doctor-bro.png';
@@ -28,6 +30,7 @@ function AddDoctor() {
     const [genero, setGenero] = useState('');
     const [tipoEndereco, setTipoEndereco] = useState('');
     const [selectedFile, setSelectedFile] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     // Datas from IBGE
     const [ufs, setUfs] = useState([]);
@@ -58,6 +61,8 @@ function AddDoctor() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        setIsLoading(true);
 
         const formData = new FormData();
         formData.append("nome", nome);
@@ -360,15 +365,23 @@ function AddDoctor() {
                     value={bio}
                     onChange={e => setBio(e.target.value)}
                 />
-
                 <div className="field-info">
                     <p>Campos Requeridos*</p>
                 </div>
+                {
+                    isLoading 
+                    ?   <section className="add-actions">
+                            <Box display="flex" alignSelf="center">
+                                <CircularProgress/>
+                            </Box>
+                            <button onClick={handleClick}>Cancelar</button>
+                        </section>  
 
-                <section className="add-actions">
-                    <button onClick={handleClick}>Cancelar</button>
-                    <button type="submit" >Cadastrar</button>
-                </section>
+                    :   <section className="add-actions">
+                            <button onClick={handleClick}>Cancelar</button>
+                            <button type="submit" >Cadastrar</button>
+                        </section>
+                }
             </form>
         </main>
     );

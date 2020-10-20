@@ -300,6 +300,14 @@ position: relative;
     background-color: #F4F4F4;
 }
 
+.MuiCircularProgress-root { 
+    margin-right: 25px;
+}
+
+.MuiCircularProgress-colorPrimary {
+    color: #08082D !important;
+}
+
 @media screen and (max-width: 830px) {
     .main-doctor {
         /* Online Doctor-bro 1 */
@@ -389,5 +397,8 @@ position: relative;
     .add-actions button {
         width: 260px;
         margin: 5px 0px;
+    }
+    .MuiCircularProgress-root { 
+        margin-bottom: 10px;
     } 
 }
