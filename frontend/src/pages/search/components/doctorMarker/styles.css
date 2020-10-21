@@ -45,7 +45,7 @@
 }
 
 #doctor-marker-container section button:hover{
-    opacity: 85%;
+    opacity: 0.85;
 }
 
 #doctor-marker-container section button a{

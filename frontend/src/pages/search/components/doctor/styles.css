@@ -65,7 +65,7 @@
 }
 
 .doctor-info button:hover{
-    opacity: 85%;
+    opacity: 0.85;
 }
 
 .doctor-info button a{
