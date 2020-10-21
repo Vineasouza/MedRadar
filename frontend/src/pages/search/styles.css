@@ -37,7 +37,7 @@
 }
 
 .search-intro div a svg:hover{
-    opacity: 40%;
+    opacity: 0.4;
 }
 
 .search-intro div img{
@@ -226,7 +226,7 @@
 
 .input-range button:hover{
     background-color: #79A0B7;
-    opacity: 70%;
+    opacity: 0.7;
 }
 
 .input-select{
