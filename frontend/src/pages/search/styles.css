@@ -106,7 +106,7 @@
 }
 
 .search-actions .search-filters > button:hover{
-    opacity: 75%;
+    opacity: 0.75;
 }
 
 .search-filters-results{
