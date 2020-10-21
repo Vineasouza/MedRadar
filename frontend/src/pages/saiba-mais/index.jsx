@@ -40,7 +40,7 @@ function SaibaMais() {
     return (
         <main>
             <div className="back-button">
-                <Link to="/main-initial">
+                <Link to="/search">
                     <FiArrowLeft />
                 </Link>
             </div>
@@ -50,21 +50,21 @@ function SaibaMais() {
                 <div className="content">
                     <header>
                         {console.log(doctor)}
-                        <img src={doctor.image} alt="Imagem Doutor(a)"/>
+                        <img src={doctor.image} alt="Imagem Doutor(a)" />
                         <div className="rating">
                             {/* https://material-ui.com/pt/components/rating/ */}
                             <Box component="fieldset" mb={3} borderColor="transparent">
-                                <Rating 
-                                    name="rating" 
-                                    defaultValue={3} 
-                                    precision={1} 
-                                    size="medium"  
+                                <Rating
+                                    name="rating"
+                                    defaultValue={3}
+                                    precision={1}
+                                    size="medium"
                                     onChange={e => setValue(e.target.value)}
                                     onChangeActive={(event, newHover) => {
                                         setHover(newHover);
                                     }}
                                 />
-                                {value !== null && <Box color="grey"  mt={2} ml={1}>{labels[hover !== -1 ? hover : value]}</Box>}
+                                {value !== null && <Box color="grey" mt={2} ml={1}>{labels[hover !== -1 ? hover : value]}</Box>}
                             </Box>
                         </div>
                     </header>

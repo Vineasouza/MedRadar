@@ -1,4 +1,5 @@
 main {
+    position: relative;
     height: auto;
 }
 
@@ -15,6 +16,8 @@ main {
     position: absolute;
     width: 30px;
     height: 30px;
+    left: 420px;
+    top: 10px
 }
 
 .back-button a svg{
@@ -102,6 +105,10 @@ main {
     height: 200px;
 }
 
+.doctor-field{
+    text-transform: capitalize;
+}
+
 .content main .doctor-location .leaflet-container{
     border: 0;
     border-radius: 15px;
@@ -123,6 +130,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
@@ -146,10 +154,8 @@ main {
     }
 
     .back-button{
-        padding: 5px;
-        position: absolute;
-        width: 30px;
-        height: 30px;
+        left: 10px;
+        top: 10px;
     }
 
     .container {
