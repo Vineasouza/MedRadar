@@ -6,6 +6,7 @@
 .option{
     margin-top: 5px;
     display: flex;
+    align-items: center;
     border-bottom: #08082D solid 1px;
 }
 
@@ -18,16 +19,16 @@
 }
 
 .option button{
-    outline: 0;
-    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
+    outline: 0;
     border: 0;
-    margin-bottom: 1px;
-    width: 20%;
-    transition: opactity 0.2s;
+    width: 15%;
     cursor: pointer;
 }
 
 .option button:hover{
-    opacity: 70%;
+    background: #79A0B7;
 }

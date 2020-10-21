@@ -57,7 +57,7 @@
     height: 30px;
 }
 
-.search-actions svg{
+.search-actions  > svg{
     color: #08082D;
 }
 
@@ -97,21 +97,15 @@
     display: flex;
 }
 
-.search-actions .search-filters svg {
-    margin-left: 5px;
-    margin-top: 2px
-}
-
 .search-actions .search-filters > button {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 285px;
     cursor: pointer;
-    transition: opacity 0.2s;
 }
 
-.search-actions .search-filters button:hover{
+.search-actions .search-filters > button:hover{
     opacity: 75%;
 }
 
@@ -200,11 +194,13 @@
     color: whitesmoke;
     font: bold 20px Archivo;
     transition: opacity 0.2s;
+    cursor: pointer;
 }
 
 #filters-container > button:hover{
     opacity: 70%;
 }
+
 .input-range{
     height: 50px;
     display: flex;
