@@ -1,0 +1,19 @@
+#not-found-container{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#not-found-container > h1{
+    font: bold  42px "Ubuntu";
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+}
+
+#not-found-container > h1 > svg {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}

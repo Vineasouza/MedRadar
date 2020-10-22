@@ -14,13 +14,17 @@ import Doctor from "./components/doctor";
 import FilterOption from "./components/filterOption";
 import DoctorMarker from "./components/doctorMarker";
 import FilterResult from "./components/filterResult";
+import NotFound from "./components/notFound";
 import { manDoctor, womanDoctor } from "./components/icons/doctor";
 import { getLatLong } from "../../services/geocode";
 import arraySpecialties from "./utils/specialties";
 import arrayHealthPlans from "./utils/healthPlans";
 
 function Search() {
+
+    const [isNotFound, setIsNotFound] = useState(false);
     const [initialPosition, setInitialPosition] = useState([0, 0]);
+
     const [centerMap, setCenterMap] = useState([0, 0]); // Center position of Map
     const [isFilter, setIsFilter] = useState(false);
     const [isApllyFilter, setIsApplyFilter] = useState(false);
@@ -165,11 +169,17 @@ function Search() {
     async function callAPI() {
         var query = await buildQuery();
 
-        const doctorsResult = await api.get("/procurar", {
-            params: query,
-        });
-
-        setDoctors(doctorsResult.data);
+        try {
+            const doctorsResult = await api.get("/procurar", {
+                params: query,
+            });
+            if (isNotFound) {
+                setIsNotFound(false);
+            }
+            setDoctors(doctorsResult.data);
+        } catch (error) {
+            setIsNotFound(true);
+        }
     }
 
     async function buildQuery() {
@@ -475,60 +485,65 @@ function Search() {
                 </section>
             </header>
 
-            <main id="search-main">
-                <section className="search-result">
-                    {/* Part of resutlts */}
-                    <div>
-                        {
-                            doctorsInView.map((doctor, index) => {
-                                return (
-                                    <Doctor
-                                        id={doctor._id}
-                                        key={index}
-                                        name={doctor.nome}
-                                        specialty={doctor.especialidade}
-                                        distance={radius}
-                                        image={doctor.image}
-                                    />
-                                )
-                            })
-                        }
-                    </div>
-                </section>
 
-                {/* Part of MAP*/}
-                <section className="search-map">
-                    <Map center={centerMap} zoom={15}>
-                        <TileLayer
-                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {
-                            doctorsInView.map((doctor, index) => {
-
-                                const positionDoctorInMap = doctor.location.coordinates;
-
-                                return (
-                                    <Marker
-                                        key={index}
-                                        position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
-                                        draggable={false}
-                                        icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
-                                        <Popup>
-                                            <DoctorMarker
+            {
+                isNotFound ?
+                    <NotFound />
+                    : <main id="search-main">
+                        <section className="search-result">
+                            {/* Part of resutlts */}
+                            <div>
+                                {
+                                    doctorsInView.map((doctor, index) => {
+                                        return (
+                                            <Doctor
                                                 id={doctor._id}
+                                                key={index}
                                                 name={doctor.nome}
                                                 specialty={doctor.especialidade}
+                                                distance={radius}
                                                 image={doctor.image}
                                             />
-                                        </Popup>
-                                    </Marker>
-                                );
-                            })
-                        }
-                    </Map>
-                </section>
-            </main>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </section>
+
+                        {/* Part of MAP*/}
+                        <section className="search-map">
+                            <Map center={centerMap} zoom={15}>
+                                <TileLayer
+                                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                {
+                                    doctorsInView.map((doctor, index) => {
+
+                                        const positionDoctorInMap = doctor.location.coordinates;
+
+                                        return (
+                                            <Marker
+                                                key={index}
+                                                position={[positionDoctorInMap[1], positionDoctorInMap[0]]}
+                                                draggable={false}
+                                                icon={doctor.genero === "masculino" ? manDoctor : womanDoctor}>
+                                                <Popup>
+                                                    <DoctorMarker
+                                                        id={doctor._id}
+                                                        name={doctor.nome}
+                                                        specialty={doctor.especialidade}
+                                                        image={doctor.image}
+                                                    />
+                                                </Popup>
+                                            </Marker>
+                                        );
+                                    })
+                                }
+                            </Map>
+                        </section>
+                    </main>
+            }
         </div>
     );
 }
