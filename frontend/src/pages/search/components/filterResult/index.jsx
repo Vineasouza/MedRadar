@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.css';
+import { FaTimes } from "react-icons/fa";
 
-const FilterResult = ({ data, children }) => {
+const FilterResult = ({ data, onSetUse, onSetValue }) => {
 
     return (
         <div id="filter-result-container">
-            {children}
             <p>
                 {
                     data.type === "radius"
@@ -15,7 +15,22 @@ const FilterResult = ({ data, children }) => {
                             : data.value
                 }
             </p>
-        </div>
+            <button onClick={() => {
+                onSetUse(false)
+                if (isNaN(data.value)) {
+                    onSetValue("");
+                } else {
+                    if (data.type === "radius") {
+                        onSetValue(10);
+                    } else {
+                        // Default to field AGE
+                        onSetValue(25)
+                    }
+                }
+            }}>
+                <FaTimes />
+            </button>
+        </div >
     )
 }
 

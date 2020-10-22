@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { FiArrowLeft } from "react-icons/fi";
-import { FaFilter, FaTimes } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaMinus, FaPlus, FaSearch } from "react-icons/fa";
 import axios from "axios";
@@ -238,16 +238,9 @@ function Search() {
                                     type: "radius",
                                     value: radius,
                                 }}
-                            >
-                                <button
-                                    onClick={() => {
-                                        setIsUseRadius(false);
-                                        setRadius(10);
-                                    }}
-                                >
-                                    <FaTimes />
-                                </button>
-                            </FilterResult>
+                                onSetUse={setIsUseRadius}
+                                onSetValue={setRadius}
+                            />
                         )}
                         {isUseSpecialty && (
                             <FilterResult
@@ -255,16 +248,9 @@ function Search() {
                                     type: "specialty",
                                     value: specialty,
                                 }}
-                            >
-                                <button
-                                    onClick={() => {
-                                        setIsUseSpecialty(false);
-                                        setSpecialty("");
-                                    }}
-                                >
-                                    <FaTimes />
-                                </button>
-                            </FilterResult>
+                                onSetUse={setIsUseSpecialty}
+                                onSetValue={setSpecialty}
+                            />
                         )}
                         {isUseCity && (
                             <FilterResult
@@ -272,16 +258,9 @@ function Search() {
                                     type: "city",
                                     value: city,
                                 }}
-                            >
-                                <button
-                                    onClick={() => {
-                                        setIsUseCity(false);
-                                        setCity("");
-                                    }}
-                                >
-                                    <FaTimes />
-                                </button>
-                            </FilterResult>
+                                onSetUse={setIsUseCity}
+                                onSetValue={setCity}
+                            />
                         )}
                         {isUseAge && (
                             <FilterResult
@@ -289,35 +268,20 @@ function Search() {
                                     type: "age",
                                     value: age
                                 }}
-                            >
-                                <button
-                                    onClick={() => {
-                                        setIsUseAge(false);
-                                        setAge(25);
-                                    }}
-                                >
-                                    <FaTimes />
-                                </button>
-                            </FilterResult>
+                                onSetUse={setIsUseAge}
+                                onSetValue={setAge}
+                            />
                         )}
-                        {
-                            isUseHealthPlan && (
-                                <FilterResult
-                                    data={{
-                                        type: "healthPlan",
-                                        value: healthPlan
-                                    }}
-                                >
-                                    <button
-                                        onClick={() => {
-                                            setIsUseHealthPlan(false);
-                                            setHealthPlan("")
-                                        }}
-                                    >
-                                        <FaTimes />
-                                    </button>
-                                </FilterResult>
-                            )}
+                        {isUseHealthPlan && (
+                            <FilterResult
+                                data={{
+                                    type: "healthPlan",
+                                    value: healthPlan
+                                }}
+                                onSetUse={setIsUseHealthPlan}
+                                onSetValue={setHealthPlan}
+                            />
+                        )}
                     </div>
 
                     <div className="search-filters">

@@ -13,12 +13,16 @@
 }  
 
 #filter-result-container button{
-    margin-left: 2px;
+    margin-right: 5px;
     border-radius: 5px;
     border: 0;
     outline: 0;
     transition: opacity 0.2s;
     cursor: pointer;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #filter-result-container button:hover{
