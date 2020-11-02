@@ -127,6 +127,7 @@ function AddDoctor() {
                 <img src={mainDoctor} className="main-doctor" alt="doctor" />
             </header>
             <form className="forms-block" onSubmit={handleSubmit}>
+                <label>Avatar*</label>
                 <Dropzone onFileUploaded={setSelectedFile}/>
                 <label className="nome">Nome*</label>
                 <input
